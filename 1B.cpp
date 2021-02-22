@@ -1,5 +1,4 @@
 #include <cassert>
-#include <cctype>
 #include <cmath>
 #include <cstddef>
 
@@ -8,6 +7,7 @@
 #include <bitset>
 #include <complex>
 #include <deque>
+#include <exception>
 #include <forward_list>
 #include <fstream>
 #include <functional>
@@ -17,17 +17,20 @@
 #include <limits>
 #include <list>
 #include <map>
+#include <new>
 #include <numeric>
 #include <queue>
+#include <random>
 #include <regex>
 #include <set>
 #include <sstream>
 #include <stack>
 #include <string>
-#include <type_traits>
+#include <tuple>
 #include <unordered_map>
 #include <unordered_set>
 #include <utility>
+#include <valarray>
 #include <vector>
 
 using schar  = signed char;
@@ -47,6 +50,10 @@ using namespace std;
 static string transform_numeration(const string &input) noexcept;
 
 int main() {
+    ios_base::sync_with_stdio(false);
+    cerr.tie(nullptr);
+    cin.tie(nullptr);
+
     assert(transform_numeration("A1") == "R1C1");
     assert(transform_numeration("B1") == "R1C2");
     assert(transform_numeration("C1") == "R1C3");
