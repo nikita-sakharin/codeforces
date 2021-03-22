@@ -48,15 +48,15 @@ using ldbl   = long double;
 using namespace std;
 
 int main() {
-    static constexpr size_t FOUR = 4U;
+    static constexpr size_t four = 4U;
 
-    array<uint, FOUR> lengths;
+    array<uint, four> lengths;
     for (uint &length : lengths)
         cin >> length;
     sort(lengths.begin(), lengths.end());
 
     string output = "IMPOSSIBLE";
-    for (size_t i = 2; i < FOUR; ++i)
+    for (size_t i = 2; i < four; ++i)
         if (lengths[i] < lengths[i - 1] + lengths[i - 2]) {
             output = "TRIANGLE";
             break;
