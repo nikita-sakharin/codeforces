@@ -50,7 +50,7 @@ using namespace std;
 int main() {
     string input;
     ullong l = 0, persons = 0;
-    while (cin >> input)
+    while (getline(cin, input))
         if (input.front() == '+')
             ++persons;
         else if (input.front() == '-')
