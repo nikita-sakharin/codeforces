@@ -1,0 +1,81 @@
+#include <cassert>
+#include <cmath>
+#include <cstddef>
+
+#include <algorithm>
+#include <array>
+#include <bitset>
+#include <complex>
+#include <deque>
+#include <exception>
+#include <forward_list>
+#include <fstream>
+#include <functional>
+#include <iomanip>
+#include <iostream>
+#include <iterator>
+#include <limits>
+#include <list>
+#include <map>
+#include <new>
+#include <numeric>
+#include <queue>
+#include <random>
+#include <regex>
+#include <set>
+#include <sstream>
+#include <stack>
+#include <string>
+#include <tuple>
+#include <unordered_map>
+#include <unordered_set>
+#include <utility>
+#include <valarray>
+#include <vector>
+
+using schar  = signed char;
+using uchar  = unsigned char;
+using shrt   = short int;
+using ushrt  = unsigned short int;
+using uint   = unsigned int;
+using ulong  = unsigned long int;
+using llong  = long long int;
+using ullong = unsigned long long int;
+using flt    = float;
+using dbl    = double;
+using ldbl   = long double;
+
+using namespace std;
+
+static ostream &find_king_path(ostream &, int, int);
+
+int main() {
+    char x_s, x_t;
+    int y_s, y_t;
+    cin >> x_s >> y_s >> x_t >> y_t;
+    find_king_path(cout, x_t - x_s, y_t - y_s);
+
+    return 0;
+}
+
+static ostream &find_king_path(ostream &os, int dx, int dy) {
+    os << max(abs(dx), abs(dy)) << '\n';
+    while (dx != 0 || dy != 0) {
+        if (dx < 0) {
+            ++dx;
+            os << 'L';
+        } else if (dx > 0) {
+            --dx;
+            os << 'R';
+        }
+        if (dy < 0) {
+            ++dy;
+            os << 'D';
+        } else if (dy > 0) {
+            --dy;
+            os << 'U';
+        }
+        cout << '\n';
+    }
+    return os;
+}
