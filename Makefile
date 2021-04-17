@@ -19,7 +19,7 @@ all: $(SOURCES) $(EXECUTABLE)
 
 debug: CXXFLAGS+=-Og -g
 debug: all
-release: CXXFLAGS+=-DNDEBUG -O3 -flto
+release: CXXFLAGS+=-DNDEBUG -O3 -flto -s
 release: LDFLAGS+=-O3 -flto -s
 release: all
 
