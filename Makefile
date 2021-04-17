@@ -1,6 +1,6 @@
 CXX=g++
 RM=rm -frd
-CXXFLAGS=-fexceptions -m64 -pedantic-errors -std=c++20 \
+CXXFLAGS=-fexceptions -fstack-reuse=all -m64 -pedantic-errors -std=c++20 \
     -Wall -Wcast-align -Wcast-qual -Wdisabled-optimization -Wdouble-promotion \
     -Weffc++ -Werror -Wextra -Wfatal-errors -Wfloat-equal -Wformat=2 \
     -Wformat-overflow=2 -Wformat-signedness -Wformat-truncation=2 \
