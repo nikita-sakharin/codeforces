@@ -48,6 +48,10 @@ using ldbl   = long double;
 using namespace std;
 
 int main() {
+    ios_base::sync_with_stdio(false);
+    cerr.tie(nullptr);
+    cin.tie(nullptr);
+
     uint w;
     cin >> w;
     if (w % 2 == 0 && w > 2)

@@ -48,6 +48,10 @@ using ldbl   = long double;
 using namespace std;
 
 int main() {
+    ios_base::sync_with_stdio(false);
+    cerr.tie(nullptr);
+    cin.tie(nullptr);
+
     static constexpr size_t four = 4U;
 
     array<uint, four> lengths;

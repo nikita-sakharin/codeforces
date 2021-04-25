@@ -50,6 +50,10 @@ using namespace std;
 static ostream &find_king_path(ostream &, int, int);
 
 int main() {
+    ios_base::sync_with_stdio(false);
+    cerr.tie(nullptr);
+    cin.tie(nullptr);
+
     char x_s, x_t;
     int y_s, y_t;
     cin >> x_s >> y_s >> x_t >> y_t;

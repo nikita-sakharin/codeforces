@@ -48,6 +48,10 @@ using ldbl   = long double;
 using namespace std;
 
 int main() {
+    ios_base::sync_with_stdio(false);
+    cerr.tie(nullptr);
+    cin.tie(nullptr);
+
     string input;
     ullong l = 0, persons = 0;
     while (getline(cin, input))

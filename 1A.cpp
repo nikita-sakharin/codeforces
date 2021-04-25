@@ -44,6 +44,10 @@ using ldbl   = long double;
 using namespace std;
 
 int main() {
+    ios_base::sync_with_stdio(false);
+    cerr.tie(nullptr);
+    cin.tie(nullptr);
+
     ullong n, m, a;
     cin >> n >> m >> a;
     const ullong ceil_n = (n + a - 1) / a, ceil_m = (m + a - 1) / a;
