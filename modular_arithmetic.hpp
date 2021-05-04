@@ -20,13 +20,29 @@ public:
         modular_arithmetic &&) noexcept = default;
     constexpr ~modular_arithmetic() noexcept = default;
 
-    constexpr T value() const noexcept;
-    constexpr void value(T) noexcept;
+    constexpr T val() const noexcept;
+    constexpr void val(T) noexcept;
 
-    template<typename T_, T_ Mod_>
-    friend constexpr modular_arithmetic<T_, Mod_> operator+(
-        const modular_arithmetic<T_, Mod_> &,
-        const modular_arithmetic<T_, Mod_> &
+    template<typename TFriend, TFriend ModFriend>
+    friend constexpr modular_arithmetic<TFriend, ModFriend> operator+(
+        const modular_arithmetic<TFriend, ModFriend> &
+    ) noexcept;
+
+    template<typename TFriend, TFriend ModFriend>
+    friend constexpr modular_arithmetic<TFriend, ModFriend> operator-(
+        const modular_arithmetic<TFriend, ModFriend> &
+    ) noexcept;
+
+    template<typename TFriend, TFriend ModFriend>
+    friend constexpr modular_arithmetic<TFriend, ModFriend> operator+(
+        const modular_arithmetic<TFriend, ModFriend> &,
+        const modular_arithmetic<TFriend, ModFriend> &
+    ) noexcept;
+
+    template<typename TFriend, TFriend ModFriend>
+    friend constexpr modular_arithmetic<TFriend, ModFriend> operator-(
+        const modular_arithmetic<TFriend, ModFriend> &,
+        const modular_arithmetic<TFriend, ModFriend> &
     ) noexcept;
 
 private:
@@ -35,36 +51,36 @@ private:
     static_assert(Mod >= static_cast<T>(2U), "");
     static_assert(numeric_limits<T>::max() / Mod >= Mod, "");
 
-    T value_{};
+    T val_ = 0U;
 };
 
 template<typename T, T Mod>
 constexpr modular_arithmetic<T, Mod>::modular_arithmetic(
-    const T value
-) noexcept : value_(value % Mod) {}
+    const T val
+) noexcept : val_(val % Mod) {}
 
 template<typename T, T Mod>
 constexpr modular_arithmetic<T, Mod> &modular_arithmetic<T, Mod>::operator=(
-    const T value
+    const T val
 ) noexcept {
-    value_ = value % Mod;
+    val_ = val % Mod;
 }
 
 template<typename T, T Mod>
-constexpr T modular_arithmetic<T, Mod>::value() const noexcept {
-    return value_;
+constexpr T modular_arithmetic<T, Mod>::val() const noexcept {
+    return val_;
 }
 
 template<typename T, T Mod>
-constexpr void modular_arithmetic<T, Mod>::value(const T value) noexcept {
-    value_ = value % Mod;
+constexpr void modular_arithmetic<T, Mod>::val(const T val) noexcept {
+    val_ = val % Mod;
 }
 
 template<typename T, T Mod>
 constexpr modular_arithmetic<T, Mod> operator+(
     const modular_arithmetic<T, Mod> &val
 ) noexcept {
-    assert(val.value_ < Mod);
+    assert(val.val_ < Mod);
     return val;
 }
 
@@ -72,8 +88,8 @@ template<typename T, T Mod>
 constexpr modular_arithmetic<T, Mod> operator-(
     const modular_arithmetic<T, Mod> &val
 ) noexcept {
-    assert(val.value_ < Mod);
-    return modular_arithmetic<T, Mod>(Mod - val.value_);
+    assert(val.val_ < Mod);
+    return modular_arithmetic<T, Mod>(Mod - val.val_);
 }
 
 template<typename T, T Mod>
@@ -81,8 +97,8 @@ constexpr modular_arithmetic<T, Mod> operator+(
     const modular_arithmetic<T, Mod> &lhs,
     const modular_arithmetic<T, Mod> &rhs
 ) noexcept {
-    assert(lhs.value_ < Mod && rhs.value_ < Mod);
-    return modular_arithmetic<T, Mod>(lhs.value_ + rhs.value_);
+    assert(lhs.val_ < Mod && rhs.val_ < Mod);
+    return modular_arithmetic<T, Mod>(lhs.val_ + rhs.val_);
 }
 
 template<typename T, T Mod>
@@ -90,8 +106,8 @@ constexpr modular_arithmetic<T, Mod> operator-(
     const modular_arithmetic<T, Mod> &lhs,
     const modular_arithmetic<T, Mod> &rhs
 ) noexcept {
-    assert(lhs.value_ < Mod && rhs.value_ < Mod);
-    return modular_arithmetic<T, Mod>(Mod - rhs.value_ + lhs.value_);
+    assert(lhs.val_ < Mod && rhs.val_ < Mod);
+    return modular_arithmetic<T, Mod>(Mod - rhs.val_ + lhs.val_);
 }
 
 #endif
