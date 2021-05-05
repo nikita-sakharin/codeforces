@@ -47,14 +47,44 @@ using ldbl   = long double;
 
 using namespace std;
 
+static bool string_pair_search(
+    const string &, const string &, const string &
+) noexcept;
+
 int main() {
     ios_base::sync_with_stdio(false);
     cerr.tie(nullptr);
     cin.tie(nullptr);
 
-    string from_a_to_b, first, second;
-    cin >> from_a_to_b >> first >> second;
-    const bool find = from_a_to_b.find(first), from_a_to_b.rfind(second);
+    string flags, first, second;
+    cin >> flags >> first >> second;
+    const bool is_find = string_pair_search(flags, first, second);
+    reverse(flags.begin(), flags.end());
+    const bool is_rfind = string_pair_search(flags, first, second);
+
+    if (is_find && is_rfind)
+        cout << "both";
+    else if (is_find)
+        cout << "forward";
+    else if (is_rfind)
+        cout << "backward";
+    else
+        cout << "fantasy";
+    cout << '\n';
 
     return 0;
+}
+
+static bool string_pair_search(
+    const string &haystack,
+    const string &first_needle,
+    const string &second_needle
+) noexcept {
+    const boyer_moore_horspool_searcher
+        first_searcher(first_needle.cbegin(), first_needle.cend()),
+        second_searcher(second_needle.cbegin(), second_needle.cend());
+    auto citer = search(haystack.cbegin(), haystack.cend(), first_searcher);
+    if (citer != haystack.cend())
+        citer += first_needle.size();
+    return search(citer, haystack.cend(), second_searcher) != haystack.cend();
 }
