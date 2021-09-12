@@ -47,13 +47,10 @@ using ldbl   = long double;
 
 using namespace std;
 
-template<typename V>
-static constexpr size_t bucket(const vector<V> &, const V &) noexcept;
+static constexpr ullong m = 998244353ULL;
 
-static ullong inconvenient_pairs(
-    const vector<ullong> &,
-    const vector<pair<ullong, ullong>> &
-) noexcept;
+static ullong permutations_count(const vector<ullong> &) noexcept;
+static constexpr ullong product(ullong, ullong) noexcept;
 
 int main() {
     ios_base::sync_with_stdio(false);
@@ -63,74 +60,41 @@ int main() {
     ullong t;
     cin >> t;
     for (ullong i = 0; i < t; ++i) {
-        size_t n, m, k;
-        cin >> n >> m >> k;
-        vector<ullong> vertical(n), horizontal(m);
-        for (ullong &x : vertical)
-            cin >> x;
-        for (ullong &y : horizontal)
-            cin >> y;
-        vector<pair<ullong, ullong>> persons(k);
-        for (auto &[x, y] : persons)
-            cin >> x >> y;
-        ullong result = 0U;
-
-        sort(persons.begin(), persons.end());
-        result += inconvenient_pairs(horizontal, persons);
-
-        for (auto &[x, y] : persons)
-            swap(x, y);
-
-        sort(persons.begin(), persons.end());
-        result += inconvenient_pairs(vertical, persons);
-
-        cout << result << '\n';
+        size_t n;
+        cin >> n;
+        vector<ullong> p(n);
+        for (ullong &p_i : p)
+            cin >> p_i;
+        sort(p.begin(), p.end(), greater<ullong>());
+        cout << permutations_count(p) << '\n';
     }
 
     return 0;
 }
 
-template<typename V>
-static constexpr size_t bucket(
-    const vector<V> &container,
-    const V &value
-) noexcept {
-    return lower_bound(container.cbegin(), container.cend(), value) -
-        container.cbegin();
+static ullong permutations_count(const vector<ullong> &p) noexcept {
+    assert(is_sorted(p.cbegin(), p.cend(), greater<ullong>()));
+
+    const ullong diff = p[0] - p[1];
+    if (diff > 1LL)
+        return 0;
+    const size_t size = p.size();
+    if (diff == 0LL)
+        return product(1LL, size);
+    const size_t second_count = count(p.cbegin(), p.cend(), p[1]);
+    ullong returns = second_count;
+    returns *= product(1LL, second_count);
+    returns %= m;
+    returns *= product(second_count + 2LL, size);
+    returns %= m;
+    return returns;
 }
 
-static ullong inconvenient_pairs(
-    const vector<ullong> &streets,
-    const vector<pair<ullong, ullong>> &persons
-) noexcept {
-    const size_t m = streets.size();
-    vector<size_t> buckets(m - 1U);
-    for (const auto [x, y] : persons) {
-        const size_t bucket_index = bucket(streets, y);
-        assert(bucket_index < m);
-        if (y == streets[bucket_index])
-            continue;
-        assert(bucket_index >= 1U);
-        ++buckets[bucket_index - 1U];
+static constexpr ullong product(ullong from, const ullong to) noexcept {
+    ullong returns = 1LL;
+    while (from <= to) {
+        returns *= from++;
+        returns %= m;
     }
-
-    const size_t k = persons.size();
-    ullong returns = 0U;
-    for (size_t i = 0; i < k; ++i) {
-        const auto [x, y] = persons[i];
-        const size_t bucket_index = bucket(streets, y);
-        assert(bucket_index < m);
-        if (y == streets[bucket_index])
-            continue;
-        assert(bucket_index >= 1U);
-        const size_t last = lower_bound(
-            persons.cbegin() + i + 1, persons.cend(),
-            make_pair(x, streets[bucket_index])
-        ) - persons.cbegin();
-        assert(last <= k);
-        returns += buckets[bucket_index - 1U] + i - last;
-        --buckets[bucket_index - 1U];
-    }
-
     return returns;
 }
