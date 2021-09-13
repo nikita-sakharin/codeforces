@@ -7,6 +7,7 @@
 #include <bitset>
 #include <complex>
 #include <deque>
+#include <exception>
 #include <forward_list>
 #include <fstream>
 #include <functional>
@@ -16,16 +17,21 @@
 #include <limits>
 #include <list>
 #include <map>
+#include <memory>
+#include <new>
 #include <numeric>
 #include <queue>
+#include <random>
+#include <regex>
 #include <set>
 #include <sstream>
 #include <stack>
 #include <string>
-#include <type_traits>
+#include <tuple>
 #include <unordered_map>
 #include <unordered_set>
 #include <utility>
+#include <valarray>
 #include <vector>
 
 using schar  = signed char;
