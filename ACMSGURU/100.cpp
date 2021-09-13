@@ -17,6 +17,7 @@
 #include <limits>
 #include <list>
 #include <map>
+#include <memory>
 #include <new>
 #include <numeric>
 #include <queue>
