@@ -63,25 +63,24 @@ int main() {
         name_score[name] += score;
     }
 
-    const llong m = max_element(name_score.cbegin(), name_score.cend(), [](
-        const pair<string, llong> &a,
-        const pair<string, llong> &b
-    ) constexpr noexcept -> bool {
-        return a.second < b.second;
-    })->second;
+    const llong max_score = max_element(name_score.cbegin(), name_score.cend(),
+        [](
+            const pair<string, llong> &a,
+            const pair<string, llong> &b
+        ) constexpr noexcept -> bool {
+            return a.second < b.second;
+        }
+    )->second;
 
     set<string> winner;
-    for_each(name_score.cbegin(), name_score.cend(), [&winner, m](
-        const pair<string, llong> &a
-    ) constexpr noexcept -> void {
-        if (a.second == m)
-            winner.insert(a.first);
-    });
+    for (const auto &[name, score] : name_score)
+        if (score == max_score)
+            winner.insert(name);
 
     name_score.clear();
     for (const auto &[name, score] : game) {
         const llong current_score = name_score[name] += score;
-        if (current_score >= m && winner.find(name) != winner.end()) {
+        if (current_score >= max_score && winner.find(name) != winner.end()) {
             cout << name << '\n';
             break;
         }
