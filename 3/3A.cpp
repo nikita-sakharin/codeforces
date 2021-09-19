@@ -48,7 +48,7 @@ using ldbl   = long double;
 
 using namespace std;
 
-static ostream &find_king_path(ostream &, int, int);
+static ostream &find_king_path(ostream &, llong, llong);
 
 int main() {
     ios_base::sync_with_stdio(false);
@@ -56,14 +56,14 @@ int main() {
     cin.tie(nullptr);
 
     char x_s, x_t;
-    int y_s, y_t;
+    llong y_s, y_t;
     cin >> x_s >> y_s >> x_t >> y_t;
     find_king_path(cout, x_t - x_s, y_t - y_s);
 
     return 0;
 }
 
-static ostream &find_king_path(ostream &os, int dx, int dy) {
+static ostream &find_king_path(ostream &os, llong dx, llong dy) {
     os << max(abs(dx), abs(dy)) << '\n';
     while (dx != 0 || dy != 0) {
         if (dx < 0) {
@@ -80,7 +80,7 @@ static ostream &find_king_path(ostream &os, int dx, int dy) {
             --dy;
             os << 'U';
         }
-        cout << '\n';
+        os << '\n';
     }
     return os;
 }
