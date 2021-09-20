@@ -53,7 +53,7 @@ int main() {
     cerr.tie(nullptr);
     cin.tie(nullptr);
 
-    uint w;
+    ullong w;
     cin >> w;
     if (w % 2 == 0 && w > 2)
         cout << "YES\n";
