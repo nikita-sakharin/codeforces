@@ -53,8 +53,7 @@ int main() {
     cerr.tie(nullptr);
     cin.tie(nullptr);
 
-    static constexpr size_t four = 4U;
-
+    static constexpr size_t four = 4;
     array<uint, four> lengths;
     for (uint &length : lengths)
         cin >> length;
