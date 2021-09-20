@@ -67,6 +67,7 @@ int main() {
     cout << capacity << '\n';
     for (const size_t idx : indexes)
         cout << idx + 1 << ' ';
+    cout << '\n';
 
     return 0;
 }
