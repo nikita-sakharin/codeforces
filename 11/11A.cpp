@@ -48,7 +48,6 @@ using ldbl   = long double;
 
 using namespace std;
 
-
 static ullong operations_count(const vector<ullong> &, ullong) noexcept;
 
 int main() {
