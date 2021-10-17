@@ -59,7 +59,7 @@ int main() {
     cin >> y >> w;
     const ullong numer = denom - max(y, w) + 1,
         numer_denom_gcd = gcd(numer, denom);
-    cout << numer / numer_denom_gcd << '/' << denom / numer_denom_gcd;
+    cout << numer / numer_denom_gcd << '/' << denom / numer_denom_gcd << '\n';
 
     return 0;
 }
