@@ -53,13 +53,21 @@ int main() {
     cerr.tie(nullptr);
     cin.tie(nullptr);
 
-    static constexpr ullong denom = 6;
+    llong n, p1, p2, p3, t1, t2;
+    cin >> n >> p1 >> p2 >> p3 >> t1 >> t2;
 
-    ullong y, w;
-    cin >> y >> w;
-    const ullong numer = denom - max(y, w) + 1,
-        numer_denom_gcd = gcd(numer, denom);
-    cout << numer / numer_denom_gcd << '/' << denom / numer_denom_gcd;
+    llong sum = 0;
+    for (llong i = 0, r, in_p1, in_p2, in_p3; i < n; ++i) {
+        llong l;
+        cin >> l;
+        const llong diff = (i == 0 ? 0 : l - r);
+        cin >> r;
+        in_p1 = min(diff, t1);
+        in_p2 = min(max(diff - in_p1, 0LL), t2);
+        in_p3 = max(diff - in_p1 - in_p2, 0LL);
+        sum += (r - l + in_p1) * p1 + in_p2 * p2 + in_p3 * p3;
+    }
+    cout << sum << '\n';
 
     return 0;
 }
