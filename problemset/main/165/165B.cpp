@@ -49,7 +49,7 @@ using ldbl   = long double;
 using namespace std;
 
 template<typename T, typename Predicate>
-static constexpr T binary_find_if(T, T, Predicate) noexcept;
+static constexpr T binary_search(T, T, Predicate) noexcept;
 
 int main() {
     ios_base::sync_with_stdio(false);
@@ -58,7 +58,7 @@ int main() {
 
     ullong n, k;
     cin >> n >> k;
-    cout << binary_find_if(1ULL, n,
+    cout << ::binary_search(1ULL, n,
         [n, k](const ullong v) constexpr noexcept -> bool {
             ullong sum = 0;
             for (ullong power = 1; v / power != 0; power *= k)
@@ -71,7 +71,7 @@ int main() {
 }
 
 template<typename T, typename Predicate>
-static constexpr T binary_find_if(T a, T b, Predicate predicate) noexcept {
+static constexpr T binary_search(T a, T b, Predicate predicate) noexcept {
     while (a != b) {
         const T middle = midpoint(a, b);
         if (predicate(middle))
