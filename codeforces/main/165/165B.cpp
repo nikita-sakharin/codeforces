@@ -73,7 +73,7 @@ int main() {
 template<typename T, typename Predicate>
 static constexpr T binary_search(T a, T b, Predicate predicate) noexcept {
     while (a != b) {
-        const T middle = midpoint(a, b);
+        const T middle(midpoint(a, b));
         if (predicate(middle))
             b = middle;
         else
