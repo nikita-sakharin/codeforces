@@ -8,15 +8,15 @@ public:
         auto left = nums.front();
         for (size_t i = 1; i < size; ++i)
             if (const auto prev{nums[i - 1]}; nums[i] != prev + 1) {
-                push_back(result, left, prev);
+                pushBack(result, left, prev);
                 left = nums[i];
             }
-        push_back(result, left, nums.back());
+        pushBack(result, left, nums.back());
         return result;
     }
 
 private:
-    static constexpr void push_back(
+    static constexpr void pushBack(
         vector<string> &result,
         const int first,
         const int second
