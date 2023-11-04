@@ -2,9 +2,10 @@ class Solution final {
 public:
     constexpr int poorPigs(
         const int buckets,
-        [[maybe_unused]] const int minutesToDie,
-        [[maybe_unused]] const int minutesToTest
+        const int minutesToDie,
+        const int minutesToTest
     ) const noexcept {
+        const auto count{minutesToTest / minutesToDie};
         return max(1U, bit_width(static_cast<unsigned>(buckets) - 1));
     }
 };

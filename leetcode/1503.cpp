@@ -5,7 +5,7 @@ public:
         const vector<int> &left,
         const vector<int> &right
     ) const noexcept {
-        auto result(0);
+        auto result{0};
         if (!left.empty())
             result = *max_element(left.cbegin(), left.cend());
         if (!right.empty())
