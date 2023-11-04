@@ -66,7 +66,7 @@ int main() {
 
 template<typename T>
 static constexpr pair<T, T> gcd(T a, T b) noexcept {
-    T iter = 0;
+    T iter(0);
     while (b != 0) {
         iter += a / b;
         a %= b;
