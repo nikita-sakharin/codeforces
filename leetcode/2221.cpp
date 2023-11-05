@@ -14,22 +14,22 @@ private:
         for (size_t k{0}, exp2{0}, exp5{0}; k < rowIndex; ++first, ++k) {
             auto multiplier{rowIndex - k}, divider{k + 1};
 
+            const auto multiplierTwos{countr_zero(multiplier)};
+            exp2 += multiplierTwos;
+            multiplier >>= multiplierTwos;
             while (multiplier % 5 == 0) {
                 ++exp5;
                 multiplier /= 5;
             }
-            const auto multiplierTwos{countr_zero(multiplier)};
-            exp2 += multiplierTwos;
-            multiplier >>= multiplierTwos;
             binomial = binomial * multiplier % mod;
 
+            const auto dividerTwos{countr_zero(divider)};
+            exp2 -= dividerTwos;
+            divider >>= dividerTwos;
             while (divider % 5 == 0) {
                 --exp5;
                 divider /= 5;
             }
-            const auto dividerTwos{countr_zero(divider)};
-            exp2 -= dividerTwos;
-            divider >>= dividerTwos;
             binomial = binomial * mod10Inverse[divider % mod] % mod;
 
             if (!exp2 && !exp5)
