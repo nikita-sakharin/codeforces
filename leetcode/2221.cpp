@@ -21,7 +21,7 @@ private:
             const auto multiplierTwos{countr_zero(multiplier)};
             exp2 += multiplierTwos;
             multiplier >>= multiplierTwos;
-            binomial = binomial * divider % mod;
+            binomial = binomial * multiplier % mod;
 
             while (divider % 5 == 0) {
                 --exp5;
