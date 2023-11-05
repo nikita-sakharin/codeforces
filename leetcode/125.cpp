@@ -1,6 +1,7 @@
 class Solution final {
 private:
     static inline const locale utf8{"C.UTF-8"};
+
 public:
     constexpr bool isPalindrome(const string &s) const noexcept {
         ptrdiff_t i{0}, j{static_cast<ptrdiff_t>(s.size()) - 1};
