@@ -36,7 +36,7 @@ private:
                 *first = binomial;
             else if (exp2 && !exp5)
                 *first = binomial * remainders[exp2 & 0X3] % mod;
-            else if (exp2 && !exp5)
+            else if (!exp2 && exp5)
                 *first = binomial * 5 % mod;
             else
                 *first = 0;
