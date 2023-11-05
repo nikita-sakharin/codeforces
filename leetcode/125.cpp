@@ -1,17 +1,17 @@
 class Solution final {
 private:
-    static inline const locale utf8{"C.UTF-8"};
+    static inline const locale &classic{locale::classic()};
 
 public:
     constexpr bool isPalindrome(const string &s) const noexcept {
         ptrdiff_t i{0}, j{static_cast<ptrdiff_t>(s.size()) - 1};
         while (i < j) {
             const auto left{s[i]}, right{s[j]};
-            if (!isalnum(left, utf8))
+            if (!isalnum(left, classic))
                 ++i;
-            else if (!isalnum(right, utf8))
+            else if (!isalnum(right, classic))
                 --j;
-            else if (tolower(left, utf8) == tolower(right, utf8)) {
+            else if (tolower(left, classic) == tolower(right, classic)) {
                 ++i;
                 --j;
             } else
