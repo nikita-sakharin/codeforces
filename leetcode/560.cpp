@@ -1,4 +1,27 @@
 class Solution final {
+    static constexpr int countSubarray(
+        const unordered_map<int, int> &numMap,
+        const int num,
+        const int k
+    ) noexcept {
+        auto result{0};
+        if (num == k)
+            ++result;
+        if (const auto iter{numMap.find(k + num)}; iter != numMap.cend())
+            result += iter->second;
+        return result;
+    }
+
+    static inline void deleteNum(
+        unordered_map<int, int> &numMap,
+        const int num
+    ) noexcept {
+        const auto iter{numMap.find(num)};
+        --iter->second;
+        if (iter->second <= 0)
+            numMap.erase(iter);
+    }
+
 public:
     inline int subarraySum(
         vector<int> &nums,
@@ -12,19 +35,10 @@ public:
         }
 
         auto result{0};
-        const auto end{numMap.cend()};
         for (auto i{0}; i < size; ++i) {
             const auto num{nums[i]};
-            if (num == k)
-                ++result;
-
-            const auto iter{numMap.find(num)};
-            --iter->second;
-            if (iter->second <= 0)
-                numMap.erase(iter);
-
-            if (const auto iter{numMap.find(k + num)}; iter != end)
-                result += iter->second;
+            deleteNum(numMap, num);
+            result += countSubarray(numMap, num, k);
         }
         return result;
     }
