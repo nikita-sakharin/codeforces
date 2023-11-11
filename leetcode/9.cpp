@@ -1,7 +1,4 @@
 class Solution final {
-private:
-    using uint = unsigned;
-
 public:
     inline bool isPalindrome(const int x) const noexcept {
         if (x < 0)
