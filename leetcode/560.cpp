@@ -7,7 +7,7 @@ class Solution final {
         auto result{0};
         if (num == k)
             ++result;
-        if (const auto iter{numMap.find(k + num)}; iter != numMap.cend())
+        if (const auto iter{numMap.find(num + k)}; iter != numMap.cend())
             result += iter->second;
         return result;
     }
