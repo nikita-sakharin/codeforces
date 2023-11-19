@@ -4,14 +4,14 @@ private:
         vector<string> &result,
         const int first,
         const int second
-    ) {
+    ) noexcept {
         result.push_back(to_string(first));
         if (first != second)
             result.back().append("->").append(to_string(second));
     }
 
 public:
-    inline vector<string> summaryRanges(const vector<int> &nums) const {
+    inline vector<string> summaryRanges(const vector<int> &nums) const noexcept {
         const auto size{nums.size()};
         vector<string> result;
         if (size == 0)
