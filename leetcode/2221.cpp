@@ -1,9 +1,24 @@
 class Solution final {
 private:
+    using uint = unsigned;
+
     static constexpr size_t maxLength{1000};
     static constexpr int mod{10};
     static constexpr array<int, mod> mod10Inverse{0, 1, 0, 7, 0, 0, 0, 3, 0, 9};
     static constexpr array<int, 4> remainders{6, 2, 4, 8};
+
+    template<typename T>
+    static constexpr pair<T, uint> factorize(
+        T value,
+        const T divider
+    ) noexcept {
+        auto result{0U};
+        while (value % divider == T{0}) {
+            value /= divider;
+            ++result;
+        };
+        return {value, result};
+    }
 
     template<typename ForwardIter>
     static constexpr void pascalTriangleRow(
@@ -13,23 +28,20 @@ private:
         auto binomial = *first++ = 1;
         for (size_t k{0}, exp2{0}, exp5{0}; k < rowIndex; ++first, ++k) {
             auto multiplier{rowIndex - k}, divider{k + 1};
+            auto diff{0U};
 
             const auto multiplierTwos{countr_zero(multiplier)};
             exp2 += multiplierTwos;
             multiplier >>= multiplierTwos;
-            while (multiplier % 5 == 0) {
-                ++exp5;
-                multiplier /= 5;
-            }
+            tie(multiplier, diff) = factorize<uint>(multiplier, 5);
+            exp5 += diff;
             binomial = binomial * multiplier % mod;
 
             const auto dividerTwos{countr_zero(divider)};
             exp2 -= dividerTwos;
             divider >>= dividerTwos;
-            while (divider % 5 == 0) {
-                --exp5;
-                divider /= 5;
-            }
+            tie(divider, diff) = factorize<uint>(divider, 5);
+            exp5 -= diff;
             binomial = binomial * mod10Inverse[divider % mod] % mod;
 
             if (!exp2 && !exp5)
