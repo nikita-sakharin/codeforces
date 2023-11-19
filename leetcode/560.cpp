@@ -27,15 +27,15 @@ public:
         vector<int> &nums,
         const int k
     ) const noexcept {
-        const auto size{static_cast<int>(nums.size())};
+        const auto size{nums.size()};
         unordered_map<int, int> numMap{{nums[0], 1}};
-        for (auto i{1}; i < size; ++i) {
+        for (size_t i{1}; i < size; ++i) {
             nums[i] += nums[i - 1];
             ++numMap[nums[i]];
         }
 
         auto result{0};
-        for (auto i{0}; i < size; ++i) {
+        for (size_t i{0}; i < size; ++i) {
             const auto num{nums[i]};
             deleteNum(numMap, num);
             result += countSubarray(numMap, num, k);
