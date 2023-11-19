@@ -3,7 +3,7 @@ public:
     inline vector<int> twoSum(
         const vector<int> &nums,
         const int target
-    ) const {
+    ) const noexcept {
         const auto size{static_cast<int>(nums.size())};
         unordered_map<int, int> numMap;
         for (auto i{0}; i < size; ++i)
