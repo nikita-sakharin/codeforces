@@ -13,7 +13,7 @@ private:
         const dbl r,
         const dbl phi
     ) const noexcept {
-        return {cos(phi) * r + xCenter, sin(phi) * r + xCenter};
+        return {cos(phi) * r + xCenter, sin(phi) * r + yCenter};
     }
 
 public:
