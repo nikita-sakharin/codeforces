@@ -25,7 +25,7 @@ public:
     }
 
     inline vector<dbl> randPoint() noexcept {
-        return toCircle(rDist(eng), phiDist(eng));
+        return toCircle(rDist(eng) * radius, phiDist(eng));
     }
 };
 /**
