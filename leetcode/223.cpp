@@ -11,16 +11,8 @@ private:
         const int a1, const int a2,
         const int b1, const int b2
     ) noexcept {
-        if (a1 <= b1 && b2 <= a2)
-            return b2 - b1;
-        if (b1 <= a1 && a2 <= b2)
-            return a2 - a1;
-        if (a1 <= b1 && b1 <= a2 && a2 <= b2)
-            return a2 - b1;
-        if (b1 <= a1 && a1 <= b2 && b2 <= a2)
-            return b2 - a1;
-        // a2 <= b1 || b2 <= a1
-        return 0;
+        const auto left{a1 <= b1 ? b1 : a1};
+        return max(0, min(a2, b2) - left);
     }
 
     static constexpr int intersectionArea(
