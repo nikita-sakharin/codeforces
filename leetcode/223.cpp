@@ -11,8 +11,7 @@ private:
         const int a1, const int a2,
         const int b1, const int b2
     ) noexcept {
-        const auto left{a1 <= b1 ? b1 : a1};
-        return max(0, min(a2, b2) - left);
+        return max(0, min(a2, b2) - max(a1, b1));
     }
 
     static constexpr int intersectionArea(
