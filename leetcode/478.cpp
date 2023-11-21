@@ -2,10 +2,15 @@ class Solution {
 private:
     using dbl = double;
 
-    static constexpr auto i = {0, 1}, w = {0, 2};
+    static inline piecewise_linear_distribution<dbl> radiusDistribution(
+        const dbl radius
+    ) noexcept {
+        const auto i = {0.0, radius}, w = {0.0, 2 / radius};
+        return piecewise_linear_distribution(i.begin(), i.end(), w.begin());
+    }
 
     mt19937_64 eng{random_device{}()};
-    piecewise_linear_distribution<dbl> rDist{i.begin(), i.end(), w.begin()};
+    piecewise_linear_distribution<dbl> rDist{radiusDistribution(radius)};
     uniform_real_distribution<dbl> phiDist{0.0, 2.0 * numbers::pi};
     const dbl radius{}, xCenter{}, yCenter{};
 
@@ -25,7 +30,7 @@ public:
     }
 
     inline vector<dbl> randPoint() noexcept {
-        return toCircle(rDist(eng) * radius, phiDist(eng));
+        return toCircle(rDist(eng), phiDist(eng));
     }
 };
 /**
