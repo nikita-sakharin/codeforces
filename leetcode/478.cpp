@@ -10,9 +10,9 @@ private:
     }
 
     mt19937_64 eng{random_device{}()};
+    const dbl radius{}, xCenter{}, yCenter{};
     piecewise_linear_distribution<dbl> rDist{radiusDistribution(radius)};
     uniform_real_distribution<dbl> phiDist{0.0, 2.0 * numbers::pi};
-    const dbl radius{}, xCenter{}, yCenter{};
 
     inline vector<dbl> toCircle(
         const dbl r,
