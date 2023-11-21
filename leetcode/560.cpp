@@ -1,4 +1,5 @@
 class Solution final {
+private:
     static constexpr int countSubarray(
         const unordered_map<int, int> &numMap,
         const int num,
