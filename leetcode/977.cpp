@@ -1,4 +1,4 @@
-class Solution {
+class Solution final {
 public:
     inline vector<int> sortedSquares(const vector<int> &nums) noexcept {
         const auto size{ssize(nums)};
