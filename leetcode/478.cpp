@@ -1,4 +1,4 @@
-class Solution {
+class Solution final {
 private:
     using dbl = double;
 
