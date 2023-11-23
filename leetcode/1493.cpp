@@ -4,11 +4,13 @@ public:
         const auto numsEnd{nums.cend()};
         size_t result{0}, lastCnt{0};
         for (auto iter{nums.cbegin()}; iter != numsEnd; ) {
-            const auto zeroCnt{count(iter, numsEnd, 0)};
+            const auto zeroCnt{find(iter, numsEnd, 1) - iter};
             iter += zeroCnt;
-            const auto oneCnt{count(iter, numsEnd, 1)};
+            const auto oneCnt{find(iter, numsEnd, 0) - iter};
             iter += oneCnt;
-            if (zeroCnt == 1)
+            if (zeroCnt == 0)
+                result = oneCnt - 1;
+            else if (zeroCnt == 1)
                 result = max(result, lastCnt + oneCnt);
             lastCnt = oneCnt;
         }
