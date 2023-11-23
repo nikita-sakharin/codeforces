@@ -1,6 +1,6 @@
 class Solution final {
 public:
-    inline int maxDistToClosest(const vector<int> &seats) const noexcept {
+    constexpr int maxDistToClosest(const vector<int> &seats) const noexcept {
         const auto size{seats.size()};
         size_t maxDistance{0}, cnt{0};
         while (maxDistance < size && seats[maxDistance] == 0)
