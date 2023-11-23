@@ -12,7 +12,7 @@ public:
                 maxDistance = max(maxDistance, (cnt + 1) >> 1);
                 cnt = 0;
             }
-        maxDistance = max(maxDistance, (cnt + 1) >> 1);
+        maxDistance = max(maxDistance, cnt);
         return static_cast<int>(maxDistance);
     }
 };
