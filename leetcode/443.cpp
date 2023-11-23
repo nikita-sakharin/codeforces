@@ -1,6 +1,6 @@
 class Solution final {
 public:
-    int compress(vector<char> &chars) const noexcept {
+    inline int compress(vector<char> &chars) const noexcept {
         const auto size{chars.size()};
         const auto ptrEnd{chars.data() + size};
         auto ptr{chars.data() + 1};
