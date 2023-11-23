@@ -6,7 +6,7 @@ public:
         while (maxDistance < size && seats[maxDistance] == 0)
             ++maxDistance;
         for (size_t i{maxDistance}; i < size; ++i)
-            if (seat == 0)
+            if (seats[i] == 0)
                 ++cnt;
             else {
                 maxDistance = max(maxDistance, (cnt + 1) >> 1);
