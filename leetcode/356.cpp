@@ -15,7 +15,7 @@ private:
     };
 
 public:
-    inline bool isReflected(const vector<vector<int>> &points) const {
+    inline bool isReflected(const vector<vector<int>> &points) const noexcept {
         auto minX{numeric_limits<int>::max()}, maxX{numeric_limits<int>::min()};
         unordered_set<pair<int, int>, Hash> pointSet;
         for (const auto &point : points) {
