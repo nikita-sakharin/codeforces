@@ -4,7 +4,7 @@ public:
         const auto size{ssize(nums)};
         vector<int> result(size);
         ptrdiff_t i{0}, j{size - 1}, index{size};
-        while (i <= j) {
+        while (i <= j)
             if (nums[i] * nums[i] < nums[j] * nums[j]) {
                 result[--index] = nums[j] * nums[j];
                 --j;
@@ -12,7 +12,6 @@ public:
                 result[--index] = nums[i] * nums[i];
                 ++i;
             }
-        }
         return result;
     }
 };
