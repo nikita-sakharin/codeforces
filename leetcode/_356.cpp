@@ -1,17 +1,16 @@
 class Solution final {
 private:
     struct Hash final {
-    private:
-        using uint = unsigned;
-        using llong = long long;
-
-        static constexpr hash<llong> hash{};
-
     public:
-        inline size_t operator()(const pair<int, int> &key) const noexcept {
-            const auto high{static_cast<llong>(key.first)},
-                low{static_cast<llong>(key.second)};
-            return hash((high << numeric_limits<uint>::digits) + low);
+        constexpr size_t operator()(const pair<int, int> &key) const noexcept {
+            using llong = long long;
+
+            static constexpr auto intWidth{numeric_limits<int>::digits + 1},
+                llongWidth{numeric_limits<llong>::digits + 1},
+                shift{min(intWidth, llongWidth - intWidth)};
+            static constexpr hash<llong> hash{};
+
+            return hash(llong{key.first} << shift ^ key.second);
         }
     };
 
