@@ -10,7 +10,7 @@ private:
     }
 
     default_random_engine eng{random_device{}()};
-    const dbl radius{}, xCenter{}, yCenter{};
+    const dbl radius{0.0}, xCenter{0.0}, yCenter{0.0};
     piecewise_linear_distribution<dbl> rDist{radiusDistribution(radius)};
     uniform_real_distribution<dbl> phiDist{0.0, 2.0 * numbers::pi};
 
