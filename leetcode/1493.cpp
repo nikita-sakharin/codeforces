@@ -1,8 +1,8 @@
 class Solution final {
 private:
-    template<class InputIt, class T>
-    static constexpr pair<InputIt, ptrdiff_t> adjacent_count(
-        const InputIt first, const InputIt last,
+    template<class InputIter, class T>
+    static constexpr pair<InputIter, ptrdiff_t> adjacent_count(
+        const InputIter first, const InputIter last,
         const T &value
     ) noexcept {
         const auto iter{find(first, last, value)};
