@@ -10,14 +10,13 @@ public:
         if (sSize - tSize > 1)
             return false;
 
-        const auto notEqual{sSize != tSize};
-        auto carry{false};
         for (size_t i{0}; i < tSize; ++i)
-            if (s[i + (carry && notEqual)] != t[i]) {
-                if (carry)
-                    return false;
-                carry = true;
+            if (s[i] != t[i]) {
+                return equal(
+                    s.cbegin() + i + 1, s.cend(),
+                    t.cbegin() + i + (sSize == tSize), t.cend()
+                );
             }
-        return carry || notEqual;
+        return sSize != tSize;
     }
 };
