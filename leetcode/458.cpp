@@ -6,6 +6,6 @@ public:
         const int minutesToTest
     ) const noexcept {
         const auto radix{minutesToTest / minutesToDie + 1};
-        return static_cast<int>(ceil(log2(buckets) / log2(radix)));
+        return int(ceil(log2(buckets) / log2(radix)));
     }
 };
