@@ -13,6 +13,6 @@ public:
                 cnt = 0;
             }
         maxDistance = max(maxDistance, cnt);
-        return static_cast<int>(maxDistance);
+        return int(maxDistance);
     }
 };
