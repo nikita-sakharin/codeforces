@@ -3,7 +3,7 @@ private:
     using uint = unsigned;
 
     static constexpr size_t maxLength{1000};
-    static constexpr int mod{10};
+    static constexpr auto mod{10};
     static constexpr array<int, mod> mod10Inverse{0, 1, 0, 7, 0, 0, 0, 3, 0, 9};
     static constexpr array<int, 4> remainders{6, 2, 4, 8};
 
@@ -33,14 +33,14 @@ private:
             const auto multiplierTwos{countr_zero(multiplier)};
             exp2 += multiplierTwos;
             multiplier >>= multiplierTwos;
-            tie(multiplier, diff) = factorize<uint>(multiplier, 5);
+            tie(multiplier, diff) = factorize<size_t>(multiplier, 5);
             exp5 += diff;
             binomial = binomial * multiplier % mod;
 
             const auto dividerTwos{countr_zero(divider)};
             exp2 -= dividerTwos;
             divider >>= dividerTwos;
-            tie(divider, diff) = factorize<uint>(divider, 5);
+            tie(divider, diff) = factorize<size_t>(divider, 5);
             exp5 -= diff;
             binomial = binomial * mod10Inverse[divider % mod] % mod;
 
