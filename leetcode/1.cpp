@@ -4,7 +4,7 @@ public:
         const vector<int> &nums,
         const int target
     ) const noexcept {
-        const auto size{static_cast<int>(nums.size())};
+        const auto size{int(nums.size())};
         unordered_map<int, int> numMap;
         for (auto i{0}; i < size; ++i)
             numMap[nums[i]] = i;
