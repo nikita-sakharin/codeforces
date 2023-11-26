@@ -4,16 +4,16 @@ public:
         const vector<int> &nums,
         const int target
     ) const noexcept {
-        const auto size{int(nums.size())};
-        unordered_map<int, int> numMap;
-        for (auto i{0}; i < size; ++i)
+        const auto size{nums.size()};
+        unordered_map<int, size_t> numMap;
+        for (size_t i{0}; i < size; ++i)
             numMap[nums[i]] = i;
         const auto end{numMap.cend()};
-        for (auto i{0}; i < size; ++i)
+        for (size_t i{0}; i < size; ++i)
             if (const auto iter{numMap.find(target - nums[i])};
                 iter != end && iter->second != i
             )
-                return {i, iter->second};
+                return {int(i), int(iter->second)};
         return {};
     }
 };
