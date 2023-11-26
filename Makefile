@@ -13,7 +13,7 @@ CXXFLAGS=-Wall -Walloc-zero -Walloca -Warith-conversion -Wcast-align=strict    \
     -std=c++20
 LDFLAGS=
 LDLIBS=-lm
-SOURCES=leetcode/125.cpp
+SOURCES=main.cpp
 OBJECTS=$(SOURCES:.cpp=.o)
 EXECUTABLE=main
 
