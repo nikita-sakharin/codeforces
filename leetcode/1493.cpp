@@ -12,6 +12,6 @@ public:
             result = max(result, zeroCnt == 1 ? lastCnt + oneCnt : oneCnt);
             lastCnt = oneCnt;
         }
-        return static_cast<int>(result);
+        return int(result);
     }
 };
