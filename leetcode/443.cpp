@@ -1,6 +1,6 @@
 class Solution final {
 public:
-    inline int compress(vector<char> &chars) const noexcept {
+    constexpr int compress(vector<char> &chars) const noexcept {
         const auto size{chars.size()};
         const auto ptrEnd{chars.data() + size};
         auto ptr{chars.data() + 1};
@@ -16,7 +16,7 @@ public:
         }
         if (cnt > 1)
             ptr = to_chars(ptr, ptrEnd, cnt).ptr;
-        chars.resize(ptr - chars.data());
-        return static_cast<int>(chars.size());
+        chars.resize(size_t(ptr - chars.data()));
+        return int(chars.size());
     }
 };
