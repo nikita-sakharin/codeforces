@@ -7,7 +7,7 @@ private:
     static constexpr array<int, mod> mod10Inverse{0, 1, 0, 7, 0, 0, 0, 3, 0, 9};
     static constexpr array<int, 4> remainders{6, 2, 4, 8};
 
-    template<typename T>
+    template<class T>
     static constexpr pair<T, uint> factorize(
         T value,
         const T divider
@@ -20,7 +20,7 @@ private:
         return {value, result};
     }
 
-    template<typename ForwardIter>
+    template<class ForwardIter>
     static constexpr void pascalTriangleRow(
         ForwardIter first,
         const size_t rowIndex
