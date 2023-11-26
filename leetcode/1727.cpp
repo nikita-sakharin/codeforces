@@ -1,4 +1,4 @@
-class Solution {
+class Solution final {
 public:
     constexpr int largestSubmatrix(
         vector<vector<int>> &matrix
