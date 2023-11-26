@@ -10,8 +10,8 @@ private:
     }
 
     default_random_engine eng{random_device{}()};
-    const dbl radius{0.0}, xCenter{0.0}, yCenter{0.0};
-    piecewise_linear_distribution<dbl> rDist{radiusDistribution(radius)};
+    const dbl xCenter{0.0}, yCenter{0.0};
+    piecewise_linear_distribution<dbl> rDist;
     uniform_real_distribution<dbl> phiDist{0.0, 2.0 * numbers::pi};
 
     inline vector<dbl> toCircle(
@@ -26,7 +26,8 @@ public:
         const dbl radius,
         const dbl xCenter,
         const dbl yCenter
-    ) noexcept : radius{radius}, xCenter{xCenter}, yCenter{yCenter} {
+    ) noexcept : xCenter{xCenter}, yCenter{yCenter},
+        rDist{radiusDistribution(radius)} {
     }
 
     inline vector<dbl> randPoint() noexcept {
