@@ -33,14 +33,14 @@ private:
             const auto multiplierTwos{countr_zero(multiplier)};
             exp2 += multiplierTwos;
             multiplier >>= multiplierTwos;
-            tie(multiplier, diff) = factorize<size_t>(multiplier, 5);
+            tie(multiplier, diff) = factorize(multiplier, size_t(5));
             exp5 += diff;
             binomial = binomial * multiplier % mod;
 
             const auto dividerTwos{countr_zero(divider)};
             exp2 -= dividerTwos;
             divider >>= dividerTwos;
-            tie(divider, diff) = factorize<size_t>(divider, 5);
+            tie(divider, diff) = factorize(divider, size_t(5));
             exp5 -= diff;
             binomial = binomial * mod10Inverse[divider % mod] % mod;
 
