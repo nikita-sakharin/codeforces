@@ -16,7 +16,7 @@ class Solution final {
             case 'M':
                 return 1000;
             default:
-                unreachable();
+                terminate();
         }
     }
 
@@ -29,6 +29,7 @@ public:
                 result -= toInt;
             else
                 result += toInt;
+            prevInt = toInt;
         }
         return result;
     }
