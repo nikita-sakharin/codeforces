@@ -15,7 +15,7 @@ public:
         auto [iter, lastCnt] = adjacent_count(nums.cbegin(), numsEnd, 0);
         auto result{lastCnt - (iter == numsEnd)};
         while (iter != numsEnd) {
-            ptrdiff_t zeroCnt{}, oneCnt{};
+            ptrdiff_t zeroCnt{0}, oneCnt{0};
             tie(iter, zeroCnt) = adjacent_count(iter, numsEnd, 1);
             tie(iter, oneCnt) = adjacent_count(iter, numsEnd, 0);
             result = max(result, zeroCnt == 1 ? lastCnt + oneCnt : oneCnt);
