@@ -23,8 +23,8 @@ class Solution final {
 public:
     constexpr int romanToInt(const string &str) const noexcept {
         auto result{0}, prevInt{0};
-        for (const auto &chr : str) {
-            const auto toInt{letterToInt(chr)};
+        for (auto i{ptrdiff_t(str.size()) - 1}; i >= 0; --i) {
+            const auto toInt{letterToInt(str[size_t(i)])};
             if (toInt < prevInt)
                 result -= toInt;
             else
