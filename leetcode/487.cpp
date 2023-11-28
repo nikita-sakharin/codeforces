@@ -15,9 +15,9 @@ public:
     ) const noexcept {
         const auto numsEnd{nums.cend()};
         auto iter{nums.cbegin()};
-        ptrdiff_t result{}, lastCnt{};
+        ptrdiff_t result{0}, lastCnt{0};
         while (iter != numsEnd) {
-            ptrdiff_t zeroCnt{}, oneCnt{};
+            ptrdiff_t zeroCnt{0}, oneCnt{0};
             tie(iter, zeroCnt) = adjacent_count(iter, numsEnd, 1);
             tie(iter, oneCnt) = adjacent_count(iter, numsEnd, 0);
             result = max(result, oneCnt + 1 + (zeroCnt == 1 ? lastCnt : 0));
