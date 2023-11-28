@@ -36,8 +36,7 @@ public:
         }
 
         auto result{0};
-        for (size_t i{0}; i < size; ++i) {
-            const auto num{nums[i]};
+        for (const auto num : nums) {
             deleteNum(numMap, num);
             result += countSubarray(numMap, num, k);
         }
