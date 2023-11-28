@@ -11,7 +11,9 @@ private:
     }
 
 public:
-    inline vector<string> summaryRanges(const vector<int> &nums) const noexcept {
+    inline vector<string> summaryRanges(
+        const vector<int> &nums
+    ) const noexcept {
         const auto size{nums.size()};
         vector<string> result;
         if (size == 0)
