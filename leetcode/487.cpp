@@ -14,7 +14,7 @@ public:
         const vector<int> &nums
     ) const noexcept {
         const auto numsEnd{nums.cend()};
-        auto iter = nums.cbegin();
+        auto iter{nums.cbegin()};
         ptrdiff_t result{}, lastCnt{};
         while (iter != numsEnd) {
             ptrdiff_t zeroCnt{}, oneCnt{};
