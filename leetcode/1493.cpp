@@ -6,7 +6,7 @@ private:
         const T &value
     ) noexcept {
         const auto iter{find(first, last, value)};
-        return {iter, iter - first};
+        return {iter, distance(first, iter)};
     }
 
 public:
