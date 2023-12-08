@@ -86,7 +86,7 @@ static void mexum(ullong n, Producer producer, Consumer consumer) noexcept {
 
     for (; n != 0; --n) {
         producer(a);
-        const size_t size = a.size(), limit = size + 2;
+        const auto size{a.size()}, limit{size + 2};
         count.assign(limit, 0);
         for (size_t i = 0; i < size; ++i)
             ++count[min(a[i], static_cast<ullong>(size) + 1)];
@@ -96,8 +96,8 @@ static void mexum(ullong n, Producer producer, Consumer consumer) noexcept {
         for (ptrdiff_t i = limit - 2; i >= 0; --i)
             suffix[i] = count[i + 1] + suffix[i + 1];
 
-        ullong result = 0, prefix = 1;
-        for (size_t i = 1; i < limit; ++i) {
+        ullong result{0}, prefix{1};
+        for (size_t i{1}; i < limit; ++i) {
             result = (result + prefix * two[suffix[i]] % mod * i % mod) % mod;
             prefix = prefix * (two[count[i]] - 1) % mod;
         }
