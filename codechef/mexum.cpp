@@ -88,7 +88,7 @@ static void mexum(ullong n, Producer producer, Consumer consumer) noexcept {
         producer(a);
         const auto size{a.size()}, limit{size + 2};
         count.assign(limit, 0);
-        for (size_t i = 0; i < size; ++i)
+        for (size_t i{0}; i < size; ++i)
             ++count[min(a[i], static_cast<ullong>(size) + 1)];
 
         suffix.resize(limit);
