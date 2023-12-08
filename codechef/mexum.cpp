@@ -93,7 +93,7 @@ static void mexum(ullong n, Producer producer, Consumer consumer) noexcept {
 
         suffix.resize(limit);
         suffix.back() = 0;
-        for (ptrdiff_t i = limit - 2; i >= 0; --i)
+        for (auto i{ptrdiff_t(limit) - 2}; i >= 0; --i)
             suffix[i] = count[i + 1] + suffix[i + 1];
 
         ullong result{0}, prefix{1};
