@@ -68,8 +68,8 @@ int main() {
             size_t n;
             cin >> n;
             a.resize(n);
-            for (ullong &a_i : a)
-                cin >> a_i;
+            for (auto &aI : a)
+                cin >> aI;
         },
         [](const ullong result) noexcept -> void {
             cout << result << '\n';
@@ -88,13 +88,13 @@ static void mexum(ullong n, Producer producer, Consumer consumer) noexcept {
         producer(a);
         const auto size{a.size()}, limit{size + 2};
         count.assign(limit, 0);
-        for (size_t i{0}; i < size; ++i)
-            ++count[min(a[i], ullong{size} + 1)];
+        for (const auto aI : a)
+            ++count[min(aI, ullong{size} + 1)];
 
         suffix.resize(limit);
         suffix.back() = 0;
-        for (auto i{ptrdiff_t(limit) - 2}; i >= 0; --i)
-            suffix[i] = count[i + 1] + suffix[i + 1];
+        for (auto i{limit - 1}; i != 0; --i)
+            suffix[i - 1] = count[i] + suffix[i];
 
         ullong result{0}, prefix{1};
         for (size_t i{1}; i < limit; ++i) {
