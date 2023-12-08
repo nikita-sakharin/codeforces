@@ -48,7 +48,7 @@ using ldbl   = long double;
 
 using namespace std;
 
-static constexpr ullong max_n{100'000L}, mod{998'244'353L};
+static constexpr ullong maxN{100'000L}, mod{998'244'353L};
 
 template<typename Producer, typename Consumer>
 static void mexum(ullong, Producer, Consumer) noexcept;
@@ -80,9 +80,9 @@ int main() {
 
 template<typename Producer, typename Consumer>
 static void mexum(ullong n, Producer producer, Consumer consumer) noexcept {
-    const vector<ullong> two{power(2ULL, max_n + 1)};
-    vector<ullong> a(max_n);
-    vector<size_t> count(max_n + 2), suffix(max_n + 2);
+    const vector<ullong> two{power(2ULL, maxN + 1)};
+    vector<ullong> a(maxN);
+    vector<size_t> count(maxN + 2), suffix(maxN + 2);
 
     for (; n != 0; --n) {
         producer(a);
