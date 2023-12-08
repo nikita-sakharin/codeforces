@@ -80,7 +80,7 @@ int main() {
 
 template<typename Producer, typename Consumer>
 static void mexum(ullong n, Producer producer, Consumer consumer) noexcept {
-    const vector<ullong> two = power(2ULL, max_n + 1);
+    const vector<ullong> two{power(2ULL, max_n + 1)};
     vector<ullong> a(max_n);
     vector<size_t> count(max_n + 2), suffix(max_n + 2);
 
@@ -106,11 +106,14 @@ static void mexum(ullong n, Producer producer, Consumer consumer) noexcept {
 }
 
 template<typename Arithmetic>
-static vector<Arithmetic> power(const Arithmetic x, const size_t n) noexcept {
+static inline vector<Arithmetic> power(
+    const Arithmetic x,
+    const size_t n
+) noexcept {
     vector<Arithmetic> result(n);
     if (n != 0)
         result[0] = 1;
-    for (size_t i = 1; i < n; ++i)
+    for (size_t i{1}; i < n; ++i)
         result[i] = result[i - 1] * x % mod;
     return result;
 }
