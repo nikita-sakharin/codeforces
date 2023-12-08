@@ -48,7 +48,7 @@ using ldbl   = long double;
 
 using namespace std;
 
-static constexpr ullong max_n = 100'000L, mod = 998'244'353L;
+static constexpr ullong max_n{100'000L}, mod{998'244'353L};
 
 template<typename Producer, typename Consumer>
 static void mexum(ullong, Producer, Consumer) noexcept;
