@@ -140,8 +140,8 @@ static void mexum(ullong n, Producer producer, Consumer consumer) noexcept {
         producer(a);
         const auto size{a.size()}, limit{size + 2};
         count.assign(limit, 0);
-        for (const auto aI : a)
-            ++count[min(aI, ullong{size} + 1)];
+        for (const ullong maxMex{size + 1}; const auto aI : a)
+            ++count[min(aI, maxMex)];
 
         size_t sum{0};
         ullong result{0}, product{1};
