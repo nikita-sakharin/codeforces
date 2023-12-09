@@ -105,7 +105,7 @@ static constexpr ullong maxN{100'000L}, mod{998'244'353L};
 template<class Producer, class Consumer>
 static void mexum(ullong, Producer, Consumer) noexcept;
 template<class Arithmetic>
-static vector<Arithmetic> power(Arithmetic, size_t) noexcept;
+static inline vector<Arithmetic> power(Arithmetic, size_t) noexcept;
 
 int main() {
     ios_base::sync_with_stdio(false);
