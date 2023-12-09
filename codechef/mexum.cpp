@@ -103,7 +103,7 @@ using namespace std;
 static constexpr ullong maxN{100'000L}, mod{998'244'353L};
 
 template<class Producer, class Consumer>
-static void mexum(ullong, Producer, Consumer) noexcept;
+static inline void mexum(ullong, Producer, Consumer) noexcept;
 template<class Arithmetic>
 static inline vector<Arithmetic> power(Arithmetic, size_t) noexcept;
 
@@ -131,7 +131,11 @@ int main() {
 }
 
 template<class Producer, class Consumer>
-static void mexum(ullong t, Producer producer, Consumer consumer) noexcept {
+static inline void mexum(
+    ullong t,
+    Producer producer,
+    Consumer consumer
+) noexcept {
     const vector<ullong> pows{power(2ULL, maxN + 1)};
     vector<ullong> a(maxN);
     vector<size_t> count(maxN + 2);
