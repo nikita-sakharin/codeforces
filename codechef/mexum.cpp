@@ -146,7 +146,8 @@ static void mexum(ullong n, Producer producer, Consumer consumer) noexcept {
         size_t sum{0};
         ullong result{0}, product{1};
         for (size_t i{1}; i < limit; ++i) {
-            result = (result + product * two[size - sum - count[i]] % mod * i % mod) % mod;
+            result = (result
+                + product * two[size - sum - count[i]] % mod * i % mod) % mod;
             sum += count[i];
             product = product * (two[count[i]] - 1) % mod;
         }
