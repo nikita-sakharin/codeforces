@@ -9,8 +9,8 @@ CXXFLAGS=-Wall -Walloc-zero -Walloca -Wanalyzer-too-complex -Warith-conversion \
     -Wmissing-declarations -Wmissing-include-dirs -Wnon-virtual-dtor           \
     -Wnull-dereference -Wpedantic -Wredundant-decls -Wshadow=global            \
     -Wsign-conversion -Wswitch-default -Wswitch-enum -Wundef -Wuninitialized   \
-    -Wunreachable-code -Wunused-const-variable=2 -Wunused-macros               \
-    -Wzero-as-null-pointer-constant -pedantic-errors -std=c++20
+    -Wunreachable-code -Wunsafe-loop-optimizations -Wunused-const-variable=2   \
+    -Wunused-macros -Wzero-as-null-pointer-constant -pedantic-errors -std=c++20
 LDFLAGS=
 LDLIBS=-lm
 SOURCES=main.cpp
