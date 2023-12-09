@@ -73,7 +73,6 @@
 #include <streambuf>
 #include <string>
 #include <string_view>
-#include <strstream>
 #include <system_error>
 #include <thread>
 #include <tuple>
