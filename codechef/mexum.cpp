@@ -131,12 +131,12 @@ int main() {
 }
 
 template<class Producer, class Consumer>
-static void mexum(ullong n, Producer producer, Consumer consumer) noexcept {
-    const vector<ullong> two{power(2ULL, maxN + 1)};
+static void mexum(ullong t, Producer producer, Consumer consumer) noexcept {
+    const vector<ullong> pows{power(2ULL, maxN + 1)};
     vector<ullong> a(maxN);
     vector<size_t> count(maxN + 2);
 
-    for (; n != 0; --n) {
+    for (; t != 0; --t) {
         producer(a);
         const auto size{a.size()}, limit{size + 2};
         count.assign(limit, 0);
@@ -146,8 +146,8 @@ static void mexum(ullong n, Producer producer, Consumer consumer) noexcept {
         ullong result{0}, product{1};
         for (size_t i{1}, sum{size}; i < limit; ++i) {
             sum -= count[i];
-            result = (result + product * two[sum] % mod * i % mod) % mod;
-            product = product * (two[count[i]] - 1) % mod;
+            result = (result + product * pows[sum] % mod * i % mod) % mod;
+            product = product * (pows[count[i]] - 1) % mod;
         }
         consumer(result);
     }
