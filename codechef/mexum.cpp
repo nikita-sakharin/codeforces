@@ -143,12 +143,10 @@ static void mexum(ullong n, Producer producer, Consumer consumer) noexcept {
         for (const ullong maxMex{size + 1}; const auto aI : a)
             ++count[min(aI, maxMex)];
 
-        size_t sum{0};
         ullong result{0}, product{1};
-        for (size_t i{1}; i < limit; ++i) {
-            result = (result
-                + product * two[size - sum - count[i]] % mod * i % mod) % mod;
-            sum += count[i];
+        for (size_t i{1}, sum{size}; i < limit; ++i) {
+            sum -= count[i];
+            result = (result + product * two[sum] % mod * i % mod) % mod;
             product = product * (two[count[i]] - 1) % mod;
         }
         consumer(result);
