@@ -4,11 +4,9 @@ public:
         auto result{0};
         ptrdiff_t i{0}, j(height.size() - 1);
         while (i < j) {
-            const auto minHeight{height[i] < height[j]
-                ? height[i++]
-                : height[j--]
-            };
-            result = max(result, int(j - i) * minHeight);
+            const auto width{int(j - i)},
+                minHeight{height[i] < height[j] ? height[i++] : height[j--]};
+            result = max(result, width * minHeight);
         }
         return result;
     }
