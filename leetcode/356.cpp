@@ -12,7 +12,7 @@ private:
         static constexpr hash<llong> hashCode{};
 
     public:
-        constexpr size_t operator()(const pair<int, int> &key) const noexcept {
+        inline size_t operator()(const pair<int, int> &key) const noexcept {
             return hashCode(llong{key.first} << shift ^ key.second);
         }
     };
