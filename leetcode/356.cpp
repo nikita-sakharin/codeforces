@@ -9,11 +9,11 @@ private:
 
         static constexpr auto
             shift{min(digits<int> + 1, digits<llong> - digits<int>)};
-        static constexpr hash<llong> hash{};
+        static constexpr hash<llong> hashCode{};
 
     public:
         constexpr size_t operator()(const pair<int, int> &key) const noexcept {
-            return hash(llong{key.first} << shift ^ key.second);
+            return hashCode(llong{key.first} << shift ^ key.second);
         }
     };
 
