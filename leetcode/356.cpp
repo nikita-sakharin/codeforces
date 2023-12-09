@@ -1,15 +1,18 @@
 class Solution final {
 private:
     struct Hash final {
+    private:
+        using llong = long long;
+
+        template<class T>
+        static constexpr auto digits{numeric_limits<T>::digits};
+
+        static constexpr auto
+            shift{min(digits<int> + 1, digits<llong> - digits<int>)};
+        static constexpr hash<llong> hash{};
+
     public:
         constexpr size_t operator()(const pair<int, int> &key) const noexcept {
-            using llong = long long;
-
-            static constexpr auto intWidth{numeric_limits<int>::digits + 1},
-                llongWidth{numeric_limits<llong>::digits + 1},
-                shift{min(intWidth, llongWidth - intWidth)};
-            static constexpr hash<llong> hash{};
-
             return hash(llong{key.first} << shift ^ key.second);
         }
     };
