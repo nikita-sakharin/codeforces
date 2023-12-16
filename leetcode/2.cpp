@@ -29,7 +29,8 @@ public:
             l1 = prev1->next = l2;
         else if (!l1 && carry) {
             l1 = prev1->next = reserve;
-            reserve->val = 0;
+            l1->val = 0;
+            l1->next = nullptr;
         }
         for (; l1 && carry; l1 = l1->next) {
             ++l1->val;
@@ -40,9 +41,9 @@ public:
             prev1 = l1;
         }
         if (carry) {
+            prev1->next = reserve;
             reserve->val = 1;
             reserve->next = nullptr;
-            prev1->next = reserve;
         }
         return result;
     }
