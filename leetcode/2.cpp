@@ -27,8 +27,10 @@ public:
         }
         if (l2)
             l1 = prev1->next = l2;
-        else if (!l1 && carry)
+        else if (!l1 && carry) {
             l1 = prev1->next = reserve;
+            reserve->val = 0;
+        }
         for (; l1 && carry; l1 = l1->next) {
             ++l1->val;
             if (l1->val >= 10)
