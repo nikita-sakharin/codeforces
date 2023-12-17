@@ -30,9 +30,9 @@ public:
             if (!l1->next && l2)
                 swap(l1->next, l2);
             else if (!l1->next && carry) {
-                l1->next = reserve;
                 reserve->val = 0;
                 reserve->next = nullptr;
+                l1->next = reserve;
             }
             l1 = l1->next;
         }
