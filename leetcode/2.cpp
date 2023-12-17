@@ -14,36 +14,27 @@ public:
         ListNode *l1,
         ListNode *l2
     ) const noexcept {
-        ListNode * const result{l1}, * const reserve{l2}, *prev1{};
+        ListNode * const result{l1}, * const reserve{l2};
         auto carry{false};
-        for (; l1 && l2; l1 = l1->next, l2 = l2->next) {
-            l1->val += l2->val + carry;
+        while (l1) {
+            if (l2) {
+                l1->val += l2->val;
+                l2 = l2->next;
+            }
+            l1->val += carry;
             if (l1->val >= 10) {
                 l1->val -= 10;
                 carry = true;
             } else
                 carry = false;
-            prev1 = l1;
-        }
-        if (l2)
-            l1 = prev1->next = l2;
-        else if (!l1 && carry) {
-            l1 = prev1->next = reserve;
-            l1->val = 0;
-            l1->next = nullptr;
-        }
-        for (; l1 && carry; l1 = l1->next) {
-            ++l1->val;
-            if (l1->val >= 10)
-                l1->val = 0;
-            else
-                carry = false;
-            prev1 = l1;
-        }
-        if (carry) {
-            prev1->next = reserve;
-            reserve->val = 1;
-            reserve->next = nullptr;
+            if (!l1->next && l2)
+                swap(l1->next, l2);
+            else if (!l1->next && carry) {
+                l1->next = reserve;
+                reserve->val = 0;
+                reserve->next = nullptr;
+            }
+            l1 = l1->next;
         }
         return result;
     }
