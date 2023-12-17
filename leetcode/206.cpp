@@ -12,7 +12,7 @@ class Solution final {
 public:
     constexpr ListNode *reverseList(ListNode *head) const noexcept {
         ListNode *prev{};
-        while (head != nullptr) {
+        while (head) {
             const auto next{head->next};
             head->next = prev;
             prev = head;
