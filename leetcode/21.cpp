@@ -8,7 +8,7 @@
  *     ListNode(int x, ListNode *next) : val(x), next(next) {}
  * };
  */
-class Solution {
+class Solution final {
 public:
     constexpr ListNode *mergeTwoLists(
         ListNode *list1,
