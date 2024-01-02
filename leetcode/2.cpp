@@ -14,7 +14,7 @@ public:
         ListNode *l1,
         ListNode *l2
     ) const noexcept {
-        ListNode * const result{l1}, * const reserve{l2};
+        const auto result{l1}, reserve{l2};
         auto carry{false};
         while (l1) {
             if (l2) {
