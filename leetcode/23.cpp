@@ -21,7 +21,7 @@ private:
     };
 
 public:
-    constexpr ListNode *mergeKLists(vector<ListNode*> &lists) const noexcept {
+    constexpr ListNode *mergeKLists(vector<ListNode *> &lists) const noexcept {
         const auto first{lists.begin()};
         lists.resize(partition(first, lists.end(), identity{}) - first);
 
