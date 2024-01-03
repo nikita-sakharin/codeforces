@@ -24,6 +24,6 @@ public:
         distances.insert(distanceSquare(p2, p3));
         distances.insert(distanceSquare(p2, p4));
         distances.insert(distanceSquare(p3, p4));
-        return distances.size() == 2;
+        return !distances.contains(0) && distances.size() == 2;
     }
 };
