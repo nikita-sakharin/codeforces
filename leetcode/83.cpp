@@ -10,15 +10,15 @@
  */
 class Solution final {
 public:
-    constexpr ListNode *deleteDuplicates(ListNode *head) const noexcept {
+    constexpr ListNode *deleteDuplicates(ListNode * const head) const noexcept {
         if (!head)
             return nullptr;
-        const auto result{head};
-        while (head->next)
-            if (head->val == head->next->val)
-                head->next = head->next->next;
+        auto current{head};
+        while (current->next)
+            if (current->val == current->next->val)
+                current->next = current->next->next;
             else
-                head = head->next;
-        return result;
+                current = current->next;
+        return head;
     }
 };
