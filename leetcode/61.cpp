@@ -41,7 +41,7 @@ public:
         if (!last)
             return nullptr;
         last->next = head;
-        const auto middle = listNthElement(head, size - k % size - 1);
+        const auto middle = listNthElement(head, size - size_t(k) % size - 1);
         head = middle->next;
         middle->next = nullptr;
         return head;
