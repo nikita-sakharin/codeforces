@@ -6,7 +6,7 @@
  *     ListNode(int x) : val(x), next(NULL) {}
  * };
  */
-class Solution {
+class Solution final {
 public:
     constexpr bool hasCycle(const ListNode *head) const noexcept {
         auto fast{head};
