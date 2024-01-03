@@ -10,7 +10,7 @@
  */
 class Solution final {
 public:
-    constexpr ListNode* removeNthFromEnd(
+    constexpr ListNode *removeNthFromEnd(
         ListNode * const head,
         int n
     ) const noexcept {
