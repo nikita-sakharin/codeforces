@@ -2,10 +2,10 @@ class LRUCache final {
 private:
     unordered_map<int, list<pair<int, int>>::iterator> index{};
     list<pair<int, int>> elements{};
-    size_t maxSize{0};
+    size_t capacity{0};
 
 public:
-    inline LRUCache(int capacity) noexcept : maxSize(capacity) {}
+    inline LRUCache(int capacity) noexcept : capacity{capacity} {}
 
     inline int get(const int key) noexcept {
         const auto iter{index.find(key)};
@@ -25,7 +25,7 @@ public:
             elements.erase(iter->second);
             index.erase(iter);
         }
-        if (index.size() >= maxSize) {
+        if (index.size() >= capacity) {
             index.erase(elements.front().first);
             elements.pop_front();
         }
