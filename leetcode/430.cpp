@@ -13,7 +13,7 @@ public:
     inline Node *flatten(Node * const head) const noexcept {
         if (!head)
             return nullptr;
-        stack<Node *> s;
+        stack<Node *, vector<Node *>> s;
         auto current{head};
         while (current->next || current->child || !s.empty()) {
             if (current->child) {
