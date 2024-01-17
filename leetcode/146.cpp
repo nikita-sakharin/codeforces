@@ -9,15 +9,14 @@ public:
 
     inline int get(const int key) noexcept {
         const auto iter{index.find(key)};
-        if (iter != index.end()) {
-            const auto value{iter->second->second};
-            elements.erase(iter->second);
-            index.erase(iter);
-            elements.emplace_back(key, value);
-            index.emplace(key, --elements.end());
-            return value;
-        }
-        return -1;
+        if (iter == index.end())
+            return -1;
+        const auto value{iter->second->second};
+        elements.erase(iter->second);
+        index.erase(iter);
+        elements.emplace_back(key, value);
+        index.emplace(key, --elements.end());
+        return value;
     }
 
     inline void put(const int key, const int value) noexcept {
