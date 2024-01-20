@@ -12,7 +12,9 @@
 class Solution final {
 public:
     inline bool isSymmetric(const TreeNode * const root) const noexcept {
-        stack<pair<TreeNode *, TreeNode *>> s{};
+        using TreeNodePair = pair<TreeNode *, TreeNode *>;
+
+        stack<TreeNodePair, vector<TreeNodePair>> s{};
         s.emplace(root->left, root->right);
         do {
             const auto [left, right] = s.top();
@@ -26,6 +28,7 @@ public:
                 s.emplace(left->right, right->left);
             }
         } while (!s.empty());
+
         return true;
     }
 };
