@@ -9,11 +9,15 @@ public:
 };
 */
 class Solution final {
+private:
+    template<class T>
+    using Stack = stack<T, vector<T>>;
+
 public:
     inline Node *flatten(Node * const head) const noexcept {
         if (!head)
             return nullptr;
-        stack<Node *, vector<Node *>> s{};
+        Stack<Node *> s{};
         auto current{head};
         while (current->next || current->child || !s.empty()) {
             if (current->child) {
