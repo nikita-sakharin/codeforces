@@ -10,11 +10,13 @@
  * };
  */
 class Solution final {
+private:
+    template<class T>
+    using Stack = stack<T, vector<T>>;
+
 public:
     inline bool isSymmetric(const TreeNode * const root) const noexcept {
-        using TreeNodePair = pair<TreeNode *, TreeNode *>;
-
-        stack<TreeNodePair, vector<TreeNodePair>> s{};
+        Stack<pair<const TreeNode *, const TreeNode *>> s{};
         s.emplace(root->left, root->right);
         do {
             const auto [left, right] = s.top();
