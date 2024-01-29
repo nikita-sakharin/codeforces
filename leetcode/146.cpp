@@ -2,10 +2,10 @@ class LRUCache final {
 private:
     unordered_map<int, list<pair<int, int>>::iterator> index{};
     list<pair<int, int>> elements{};
-    size_t capacity{0};
+    const size_t capacity{0};
 
 public:
-    inline LRUCache(int capacity) noexcept : capacity{capacity} {}
+    inline LRUCache(const int capacity) noexcept : capacity{capacity} {}
 
     inline int get(const int key) noexcept {
         const auto iter{index.find(key)};
