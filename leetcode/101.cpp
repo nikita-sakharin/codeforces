@@ -19,7 +19,7 @@ public:
         Stack<pair<const TreeNode *, const TreeNode *>> s{};
         s.emplace(root->left, root->right);
         do {
-            const auto [left, right] = s.top();
+            const auto [left, right]{s.top()};
             s.pop();
             if (bool(left) != bool(right))
                 return false;
