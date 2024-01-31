@@ -23,10 +23,16 @@ public:
             s.pop();
             if (treeNode->val < left || treeNode->val > right)
                 return false;
-            if (treeNode->left)
+            if (treeNode->left) {
+                if (treeNode->val == numeric_limits<int>::min())
+                    return false;
                 s.emplace(treeNode->left, left, treeNode->val - 1);
-            if (treeNode->right)
+            }
+            if (treeNode->right) {
+                if (treeNode->val == numeric_limits<int>::max())
+                    return false;
                 s.emplace(treeNode->right, treeNode->val + 1, right);
+            }
         } while (!s.empty());
         return true;
     }
