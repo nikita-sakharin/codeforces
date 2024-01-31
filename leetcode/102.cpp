@@ -15,20 +15,24 @@ public:
         const TreeNode * const root
     ) const noexcept {
         vector<vector<int>> result{};
-        queue<pair<const TreeNode *, size_t>> q{};
+        queue<const TreeNode *> q{};
         if (root)
-            q.emplace(root, 0);
-        while (!q.empty()) {
-            const auto [treeNode, level]{q.front()};
+            q.push(nullptr);
+        q.push(root);
+        do {
+            const auto treeNode{q.front()};
             q.pop();
-            if (result.size() <= level)
+            if (treeNode) {
+                result.back().push_back(treeNode->val);
+                if (treeNode->left)
+                    q.emplace(treeNode->left);
+                if (treeNode->right)
+                    q.emplace(treeNode->right);
+            } else if (!q.empty()) {
                 result.emplace_back();
-            result.back().push_back(treeNode->val);
-            if (treeNode->left)
-                q.emplace(treeNode->left, level + 1);
-            if (treeNode->right)
-                q.emplace(treeNode->right, level + 1);
-        }
+                q.push(nullptr);
+            }
+        } while (!q.empty());
         return result;
     }
 };
