@@ -16,21 +16,17 @@ private:
 
 public:
     inline bool isValidBST(const TreeNode * const root) const noexcept {
-        Stack<const TreeNode *> s{};
-        s.push(root);
+        Stack<tuple<const TreeNode *, int, int>> s{};
+        s.emplace(root, numeric_limits<int>::min(), numeric_limits<int>::max());
         do {
-            const auto treeNode{s.top()};
+            const auto [treeNode, left, right]{s.top()};
             s.pop();
-            if (treeNode->left) {
-                if (treeNode->val <= treeNode->left->val)
-                    return false;
-                s.push(treeNode->left);
-            }
-            if (treeNode->right) {
-                if (treeNode->val >= treeNode->right->val)
-                    return false;
-                s.push(treeNode->right);
-            }
+            if (treeNode->val < left || treeNode->val > right)
+                return false;
+            if (treeNode->left)
+                s.emplace(treeNode->left, left, treeNode->val - 1);
+            if (treeNode->right)
+                s.emplace(treeNode->right, treeNode->val + 1, right);
         } while (!s.empty());
         return true;
     }
