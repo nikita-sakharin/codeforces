@@ -16,7 +16,8 @@ public:
     ) const noexcept {
         vector<vector<int>> result{};
         queue<pair<const TreeNode *, size_t>> q{};
-        q.emplace(root, 0);
+        if (root)
+            q.emplace(root, 0);
         while (!q.empty()) {
             const auto [treeNode, level]{q.front()};
             q.pop();
