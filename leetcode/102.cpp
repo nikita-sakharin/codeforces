@@ -17,7 +17,7 @@ public:
         vector<vector<int>> result{};
         queue<const TreeNode *> q{};
         if (root)
-            q.push(nullptr);
+            q.emplace();
         q.push(root);
         do {
             const auto treeNode{q.front()};
@@ -30,7 +30,7 @@ public:
                     q.emplace(treeNode->right);
             } else if (!q.empty()) {
                 result.emplace_back();
-                q.push(nullptr);
+                q.emplace();
             }
         } while (!q.empty());
         return result;
