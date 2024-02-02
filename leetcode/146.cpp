@@ -5,18 +5,14 @@ private:
     const size_t capacity{0};
 
 public:
-    inline LRUCache(const int capacity) noexcept : capacity{capacity} {}
+    inline LRUCache(const int capacity) noexcept : capacity(capacity) {}
 
     inline int get(const int key) noexcept {
         const auto iter{index.find(key)};
         if (iter == index.end())
             return -1;
-        const auto value{iter->second->second};
-        elements.erase(iter->second);
-        index.erase(iter);
-        elements.emplace_back(key, value);
-        index.emplace(key, --elements.end());
-        return value;
+        elements.splice(elements.cend(), elements, iter->second);
+        return iter->second->second;
     }
 
     inline void put(const int key, const int value) noexcept {
