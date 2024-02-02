@@ -11,25 +11,25 @@
 class Solution final {
 private:
     static constexpr pair<ListNode *, size_t> listLastElement(
-        ListNode *head
+        ListNode *listNode
     ) noexcept {
-        if (!head)
+        if (!listNode)
             return {nullptr, 0};
         size_t result{1};
-        while (head->next) {
-            head = head->next;
+        while (listNode->next) {
+            listNode = listNode->next;
             ++result;
         }
-        return {head, result};
+        return {listNode, result};
     }
 
     static constexpr ListNode *listNthElement(
-        ListNode * head,
+        ListNode *listNode,
         size_t index
     ) noexcept {
         for (; index != 0; --index)
-            head = head->next;
-        return head;
+            listNode = listNode->next;
+        return listNode;
     }
 
 public:
