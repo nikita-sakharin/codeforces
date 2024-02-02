@@ -11,7 +11,7 @@
 class Solution final {
 private:
     static constexpr pair<ListNode *, size_t> listLastElement(
-        ListNode * head
+        ListNode *head
     ) noexcept {
         if (!head)
             return {nullptr, 0};
