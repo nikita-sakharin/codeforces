@@ -16,8 +16,7 @@ public:
     }
 
     inline void put(const int key, const int value) noexcept {
-        const auto iter{index.find(key)};
-        if (iter != index.end()) {
+        if (const auto iter{index.find(key)}; iter != index.end()) {
             elements.splice(elements.cend(), elements, iter->second);
             iter->second->second = value;
         } else {
