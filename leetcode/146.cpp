@@ -1,6 +1,6 @@
 class LRUCache final {
 private:
-    unordered_map<int, list<pair<int, int>>::iterator> index{};
+    unordered_map<int, const list<pair<int, int>>::const_iterator> index{};
     list<pair<int, int>> elements{};
     const size_t capacity{0};
 
