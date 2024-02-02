@@ -20,14 +20,14 @@ public:
         if (iter != index.end()) {
             elements.splice(elements.cend(), elements, iter->second);
             iter->second->second = value;
-            return;
+        } else {
+            if (index.size() >= capacity) {
+                index.erase(elements.front().first);
+                elements.pop_front();
+            }
+            elements.emplace_back(key, value);
+            index.emplace(key, --elements.end());
         }
-        if (index.size() >= capacity) {
-            index.erase(elements.front().first);
-            elements.pop_front();
-        }
-        elements.emplace_back(key, value);
-        index.emplace(key, --elements.end());
     }
 };
 /**
