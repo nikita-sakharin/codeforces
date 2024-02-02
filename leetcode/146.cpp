@@ -1,6 +1,6 @@
 class LRUCache final {
 private:
-    unordered_map<int, const list<pair<int, int>>::const_iterator> index{};
+    unordered_map<int, const list<pair<int, int>>::iterator> index{};
     list<pair<int, int>> elements{};
     const size_t capacity{0};
 
@@ -18,8 +18,9 @@ public:
     inline void put(const int key, const int value) noexcept {
         const auto iter{index.find(key)};
         if (iter != index.end()) {
-            elements.erase(iter->second);
-            index.erase(iter);
+            elements.splice(elements.cend(), elements, iter->second);
+            iter->second->second = value;
+            return;
         }
         if (index.size() >= capacity) {
             index.erase(elements.front().first);
