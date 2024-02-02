@@ -10,7 +10,7 @@
  */
 class Solution final {
 private:
-    static constexpr pair<ListNode *, size_t> listLastElement(
+    static constexpr pair<ListNode *, size_t> tailElement(
         ListNode *listNode
     ) noexcept {
         if (!listNode)
@@ -23,7 +23,7 @@ private:
         return {listNode, result};
     }
 
-    static constexpr ListNode *listNthElement(
+    static constexpr ListNode *nthElement(
         ListNode *listNode,
         size_t index
     ) noexcept {
@@ -37,13 +37,13 @@ public:
         ListNode *head,
         const int k
     ) const noexcept {
-        const auto [last, size] = listLastElement(head);
-        if (!last)
+        auto [tail, size] = tailElement(head);
+        if (!tail)
             return nullptr;
-        last->next = head;
-        const auto middle = listNthElement(head, size - size_t(k) % size - 1);
-        head = middle->next;
-        middle->next = nullptr;
+        tail->next = head;
+        tail = nthElement(head, size - size_t(k) % size - 1);
+        head = tail->next;
+        tail->next = nullptr;
         return head;
     }
 };
