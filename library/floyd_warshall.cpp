@@ -14,7 +14,7 @@ static inline vector<vector<ptrdiff_t>> floyd_warshall(vector<vector<T>> &d) {
     vector<vector<ptrdiff_t>> pi(n);
     for (size_t i{0}; i < n; ++i) {
         pi[i].resize(n);
-        for (size_t j = 0; j < n; ++j)
+        for (size_t j{0}; j < n; ++j)
             pi[i][j] = i == j || d[i][j] == infinity ? -1 : i;
     }
     auto flag{true};
