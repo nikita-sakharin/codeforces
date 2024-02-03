@@ -1,7 +1,7 @@
 #include <cstddef>
 
-#include <exception>
 #include <limits>
+#include <stdexcept>
 #include <vector>
 
 using namespace std;
