@@ -17,9 +17,7 @@ static inline vector<vector<ptrdiff_t>> floyd_warshall(vector<vector<T>> &d) {
         for (size_t j{0}; j < n; ++j)
             pi[i][j] = i == j || d[i][j] == infinity ? -1 : i;
     }
-    auto flag{true};
-    for (size_t k{0}; flag && k < n; ++k) {
-        flag = false;
+    for (size_t k{0}; k < n; ++k)
         for (size_t i{0}; i < n; ++i)
             for (size_t j{0}; j < n; ++j)
                 if (d[i][k] != infinity && d[k][j] != infinity
@@ -27,9 +25,7 @@ static inline vector<vector<ptrdiff_t>> floyd_warshall(vector<vector<T>> &d) {
                 ) {
                     d[i][j] = d[i][k] + d[k][j];
                     pi[i][j] = pi[k][j];
-                    flag = true;
                 }
-    }
     if constexpr (numeric_limits<T>::is_signed)
         for (size_t i{0}; i < n; ++i)
             if (d[i][i] < 0)
