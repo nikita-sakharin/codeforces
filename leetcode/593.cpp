@@ -6,7 +6,7 @@ private:
         const vector<int> &p1,
         const vector<int> &p2
     ) noexcept {
-        const auto dx = p1[0] - p2[0], dy = p1[1] - p2[1];
+        const auto dx{p1[0] - p2[0]}, dy{p1[1] - p2[1]};
         return uint(dx * dx + dy * dy);
     }
 
