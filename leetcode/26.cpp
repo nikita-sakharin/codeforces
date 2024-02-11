@@ -7,6 +7,6 @@ public:
             if (nums[i - 1] != nums[i])
                 nums[newSize++] = nums[i];
         nums.resize(newSize);
-        return newSize;
+        return int(newSize);
     }
 };
