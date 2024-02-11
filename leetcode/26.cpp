@@ -6,6 +6,7 @@ public:
         for (size_t i{1}; i < size; ++i)
             if (nums[i - 1] != nums[i])
                 nums[newSize++] = nums[i];
+        nums.resize(newSize);
         return newSize;
     }
 };
