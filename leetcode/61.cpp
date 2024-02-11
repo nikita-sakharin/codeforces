@@ -13,12 +13,12 @@ private:
     static constexpr pair<ListNode *, size_t> tailElement(
         ListNode *listNode
     ) noexcept {
-        size_t result{1};
+        size_t size{1};
         while (listNode->next) {
             listNode = listNode->next;
-            ++result;
+            ++size;
         }
-        return {listNode, result};
+        return {listNode, size};
     }
 
     static constexpr ListNode *nthElement(
