@@ -1,4 +1,4 @@
-class Solution {
+class Solution final {
 public:
     constexpr int removeElement(
         vector<int> &nums,
