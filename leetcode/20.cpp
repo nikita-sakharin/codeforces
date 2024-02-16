@@ -9,10 +9,10 @@ public:
         for (const auto &ch : str)
             if (ch == '(' || ch == '[' || ch == '{')
                 s.push(ch);
-            else if (!s.empty() && ((s.top() + 1) | 1) == ch)
-                s.pop();
-            else
+            else if (s.empty() || ((s.top() + 1) | 1) != ch)
                 return false;
+            else
+                s.pop();
         return s.empty();
     }
 };
