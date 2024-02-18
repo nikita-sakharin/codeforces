@@ -4,7 +4,7 @@ private:
     using Stack = stack<T, vector<T>>;
 
     static constexpr char getClosing(const char opening) noexcept {
-        return (opening + 1) | 1;
+        return char((opening + 1) | 1);
     }
 
 public:
