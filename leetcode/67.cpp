@@ -7,8 +7,10 @@ public:
         string result(aSize, '\0');
         auto carry{false};
         for (size_t i{0}; i < aSize; ++i) {
-            const auto right{i < bSize ? b[bSize - i - 1] - '0' : 0};
-            const auto sum{carry + a[aSize - i - 1] - '0' + right};
+            const auto
+                left{a[aSize - i - 1] - '0'},
+                right{i < bSize ? b[bSize - i - 1] - '0' : 0},
+                sum{carry + left + right};
             result[aSize - i - 1] = '0' + (sum & 1);
             carry = sum >> 1;
         }
