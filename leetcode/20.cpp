@@ -10,7 +10,7 @@ private:
 public:
     inline bool isValid(const string &str) const noexcept {
         Stack<char> s{};
-        for (const auto &ch : str)
+        for (const auto ch : str)
             if (ch == '(' || ch == '[' || ch == '{')
                 s.push(ch);
             else if (s.empty() || getClosing(s.top()) != ch)

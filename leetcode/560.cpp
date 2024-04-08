@@ -36,7 +36,7 @@ public:
         }
 
         auto result{0};
-        for (const auto &num : nums) {
+        for (const auto num : nums) {
             deleteNum(numMap, num);
             result += countSubarray(numMap, num, k);
         }
