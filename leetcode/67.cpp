@@ -13,11 +13,6 @@ public:
                 sum{carry + left + right};
             result[aSize - i - 1] = '0' + (sum & 1);
             carry = sum >> 1;
-            /*
-            result[aSize - i - 1] = '0' + (carry ^ left ^ right);
-            carry = (carry & (left | right)) | (left & right);
-            carry = (carry & left) | (carry & right) | (left & right);
-            */
         }
         if (carry)
             result.insert(result.cbegin(), '1');
