@@ -1,3 +1,5 @@
+import static java.util.Objects.min;
+
 final class Solution {
     private static int set(
         final int[] array, final int idx, final int value
@@ -105,13 +107,13 @@ final class Solution {
 
     public final int[] sortArray(final int[] nums) {
         final int length = nums.length, half = length >> 1;
-        int width = 1;
+        var width = 1;
         while (width < length) {
-            final int newWidth = width <= half ? width << 1 : length;
-            int i = 0;
+            final var newWidth = width <= half ? width << 1 : length;
+            var i = 0;
             while (i < length) {
-                final int bound = length - i, newI = i + Math.min(newWidth, bound);
-                merge(nums, i, i + Math.min(width, bound), newI);
+                final int bound = length - i, newI = i + min(newWidth, bound);
+                merge(nums, i, i + min(width, bound), newI);
                 i = newI;
             }
             width = newWidth;
