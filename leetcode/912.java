@@ -1,4 +1,4 @@
-import static java.util.Objects.min;
+import static java.lang.Math.min;
 
 final class Solution {
     private static int set(
