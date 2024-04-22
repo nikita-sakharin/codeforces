@@ -96,12 +96,12 @@ final class Solution {
             merge(array, newMiddle + 1, rightIdx, to);
         } else {
             final int rightIdx = middle + (rightLen - 1 >> 1),
-                leftIdx = upperBound(array, from, middle, array[rightIdx]),
-                distance = rightIdx + 1 - middle,
+                leftIdx = upperBound(array, from, middle, array[rightIdx]) + 1,
+                distance = rightIdx - middle,
                 newMiddle = leftIdx + distance;
-            rotate(array, leftIdx, rightIdx + 1, distance);
+            rotate(array, leftIdx, rightIdx, distance);
             merge(array, from, leftIdx, newMiddle - 1);
-            merge(array, newMiddle, rightIdx + 1, to);
+            merge(array, newMiddle, rightIdx, to);
         }
     }
 
