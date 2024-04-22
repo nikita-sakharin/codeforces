@@ -2,7 +2,9 @@ import static java.lang.Math.min;
 
 final class Solution {
     private static int set(
-        final int[] array, final int idx, final int value
+        final int[] array,
+        final int idx,
+        final int value
     ) {
         final var previous = array[idx];
         array[idx] = value;
@@ -10,7 +12,10 @@ final class Solution {
     }
 
     private static void rotate(
-        final int[] array, final int from, final int to, int distance
+        final int[] array,
+        final int from,
+        final int to,
+        int distance
     ) {
         final var size = to - from;
         if (size == 0)
@@ -78,7 +83,10 @@ final class Solution {
     }
 
     private static void merge(
-        final int[] array, final int from, final int middle, final int to
+        final int[] array,
+        final int from,
+        final int middle,
+        final int to
     ) {
         final int leftLen = middle - from, rightLen = to - middle;
         if (leftLen == 0 || rightLen == 0)
