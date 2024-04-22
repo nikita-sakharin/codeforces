@@ -12,7 +12,6 @@ final class Solution {
     private static void rotate(
         final int[] array, final int from, final int to, int distance
     ) {
-        Objects.checkFromToIndex(from, to, array.length);
         final var size = to - from;
         if (size == 0)
             return;
@@ -81,28 +80,24 @@ final class Solution {
     private static void merge(
         final int[] array, final int from, final int middle, final int to
     ) {
-        Objects.checkFromToIndex(from, middle, array.length);
-        Objects.checkFromToIndex(middle, to, array.length);
         final int leftLen = middle - from, rightLen = to - middle;
         if (leftLen == 0 || rightLen == 0)
             return;
+        final int leftIdx, rightIdx, distance, newMiddle;
         if (leftLen > rightLen) {
-            final int leftIdx = from + (leftLen - 1 >> 1),
-                rightIdx = lowerBound(array, middle, to, array[leftIdx]),
-                distance = rightIdx - middle,
-                newMiddle = leftIdx + distance;
-            rotate(array, leftIdx, rightIdx, distance);
-            merge(array, from, leftIdx, newMiddle);
-            merge(array, newMiddle + 1, rightIdx, to);
+            leftIdx = from + (leftLen - 1 >> 1);
+            rightIdx = lowerBound(array, middle, to, array[leftIdx]);
+            distance = rightIdx - middle;
+            newMiddle = leftIdx + distance;
         } else {
-            final int rightIdx = middle + (rightLen - 1 >> 1),
-                leftIdx = upperBound(array, from, middle, array[rightIdx]) + 1,
-                distance = rightIdx - middle,
-                newMiddle = leftIdx + distance;
-            rotate(array, leftIdx, rightIdx, distance);
-            merge(array, from, leftIdx, newMiddle - 1);
-            merge(array, newMiddle, rightIdx, to);
+            rightIdx = middle + (rightLen - 1 >> 1) + 1;
+            leftIdx = upperBound(array, from, middle, array[rightIdx - 1]);
+            distance = rightIdx - middle;
+            newMiddle = leftIdx + distance - 1;
         }
+        rotate(array, leftIdx, rightIdx, distance);
+        merge(array, from, leftIdx, newMiddle);
+        merge(array, newMiddle + 1, rightIdx, to);
     }
 
     public final int[] sortArray(final int[] nums) {
