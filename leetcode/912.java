@@ -84,16 +84,16 @@ final class Solution {
         if (leftLen == 0 || rightLen == 0)
             return;
         final int leftIdx, rightIdx, distance, newMiddle;
-        if (leftLen > rightLen) {
-            leftIdx = from + (leftLen - 1 >> 1);
-            rightIdx = lowerBound(array, middle, to, array[leftIdx]);
-            distance = rightIdx - middle;
-            newMiddle = leftIdx + distance;
-        } else {
+        if (leftLen < rightLen) {
             rightIdx = middle + (rightLen - 1 >> 1) + 1;
             leftIdx = upperBound(array, from, middle, array[rightIdx - 1]);
             distance = rightIdx - middle;
             newMiddle = leftIdx + distance - 1;
+        } else {
+            leftIdx = from + (leftLen - 1 >> 1);
+            rightIdx = lowerBound(array, middle, to, array[leftIdx]);
+            distance = rightIdx - middle;
+            newMiddle = leftIdx + distance;
         }
         rotate(array, leftIdx, rightIdx, distance);
         merge(array, from, leftIdx, newMiddle);
