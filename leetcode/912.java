@@ -23,8 +23,8 @@ final class Solution {
 
         final var bound = from + size - distance;
         for (int cycleStart = from, nMoved = 0; nMoved < size; ++cycleStart) {
-            int displaced = array[cycleStart];
-            int i = cycleStart;
+            var displaced = array[cycleStart];
+            var i = cycleStart;
             do {
                 if (i >= bound)
                     i -= size;
