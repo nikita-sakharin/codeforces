@@ -32,6 +32,7 @@ private:
                 const auto middle{next(iter, left)},
                     nextIter{next(middle, right)};
                 merge(iter, middle, nextIter);
+                n -= left + right;
                 iter = nextIter;
             }
             width = nextWidth;
