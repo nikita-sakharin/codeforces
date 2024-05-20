@@ -2,7 +2,7 @@ class Solution final {
 private:
     template<class Iter>
     static void merge(Iter first, const Iter middle, const Iter last) noexcept {
-        queue<iterator_traits<Iter>::value_type> buffer{};
+        queue<typename iterator_traits<Iter>::value_type> buffer{};
         Iter second{middle};
         while (first != middle && second != last) {
             buffer.push(move(*first));
@@ -39,7 +39,8 @@ private:
     }
 
 public:
-    constexpr vector<int> sortArray(vector<int> &nums) const noexcept {
+    inline vector<int> sortArray(vector<int> &nums) const noexcept {
         mergeSort(nums.begin(), nums.end());
+        return nums;
     }
 };
