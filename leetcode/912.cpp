@@ -4,8 +4,9 @@ private:
     static void merge(Iter first, const Iter middle, const Iter last) noexcept {
         queue<typename iterator_traits<Iter>::value_type> buffer{};
         Iter second{middle};
-        while (first != middle && second != last) {
-            buffer.push(move(*first));
+        while ((first != middle || !buffer.empty()) && second != last) {
+            if (first != middle)
+                buffer.push(move(*first));
             if (*second < buffer.front())
                 *first++ = move(*second++);
             else {
@@ -28,7 +29,7 @@ private:
             auto n{size};
             auto iter{first};
             while (iter != last) {
-                const auto left{min(width, n)}, right{nextWidth - width};
+                const auto left{min(width, n)}, right{min(width, n - left)}; // TODO
                 const auto middle{next(iter, left)},
                     nextIter{next(middle, right)};
                 merge(iter, middle, nextIter);
