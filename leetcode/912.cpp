@@ -2,19 +2,22 @@ class Solution final {
 private:
     template<class Iter>
     static void merge(Iter first, const Iter middle, const Iter last) noexcept {
+        if (middle == last)
+            return;
+
         queue<typename iterator_traits<Iter>::value_type> buffer{};
-        auto second{middle};
-        while (!buffer.empty() || first < middle) {
-            if (first < middle)
+        for (auto second{middle}, output{first}; !buffer.empty() || first != middle; ++output) {
+            if (first != middle) {
                 buffer.push(move(*first));
+                ++first;
+            }
             if (buffer.empty() || (second != last && *second < buffer.front())) {
-                *first = move(*second);
+                *output = move(*second);
                 ++second;
             } else {
-                *first = move(buffer.front());
+                *output = move(buffer.front());
                 buffer.pop();
             }
-            ++first;
         }
     }
 
