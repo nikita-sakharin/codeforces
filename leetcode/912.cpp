@@ -7,10 +7,10 @@ private:
         while (first != last) {
             if (first < middle)
                 buffer.push(move(*first));
-            if (!buffer.empty() && second < last && *second < buffer.front()) {
+            if (buffer.empty() || (second != last && *second < buffer.front())) {
                 *first = move(*second);
                 ++second;
-            } else if (!buffer.empty()) {
+            } else {
                 *first = move(buffer.front());
                 buffer.pop();
             }
