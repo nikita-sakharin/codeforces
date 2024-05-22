@@ -8,7 +8,8 @@ private:
             if (first < middle)
                 buffer.push(move(*first));
             if (!buffer.empty() && second < last && *second < buffer.front()) {
-                *first = move(*second++);
+                *first = move(*second);
+                ++second;
             } else if (!buffer.empty()) {
                 *first = move(buffer.front());
                 buffer.pop();
