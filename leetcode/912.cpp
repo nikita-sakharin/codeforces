@@ -6,7 +6,8 @@ private:
             return;
 
         queue<typename iterator_traits<Iter>::value_type> buffer{};
-        for (auto second{middle}, output{first}; !buffer.empty() || first != middle; ++output) {
+        auto second{middle}, output{first};
+        while (first != middle || !buffer.empty()) {
             if (first != middle) {
                 buffer.push(move(*first));
                 ++first;
@@ -18,6 +19,7 @@ private:
                 *output = move(buffer.front());
                 buffer.pop();
             }
+            ++output;
         }
     }
 
