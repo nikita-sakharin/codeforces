@@ -1,7 +1,11 @@
 class Solution final {
 private:
     template<class Iter>
-    static void merge(Iter first, const Iter middle, const Iter last) noexcept {
+    static constexpr void merge(
+        Iter first,
+        const Iter middle,
+        const Iter last
+    ) noexcept {
         if (middle == last)
             return;
 
@@ -24,7 +28,10 @@ private:
     }
 
     template<class Iter>
-    static void mergeSort(const Iter first, const Iter last) noexcept {
+    static constexpr void mergeSort(
+        const Iter first,
+        const Iter last
+    ) noexcept {
         const auto size{distance(first, last)}, half{size >> 1};
         typename iterator_traits<Iter>::difference_type width{1};
         while (width < size) {
