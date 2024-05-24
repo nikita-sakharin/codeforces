@@ -10,21 +10,21 @@ private:
             return;
 
         queue<typename iterator_traits<Iter>::value_type> buffer{};
-        auto second{middle}, output{first};
-        while (first != middle || !buffer.empty()) {
-            if (first != middle) {
+        auto second{middle};
+        auto leftNonEmpty{first != middle};
+        do {
+            if (leftNonEmpty)
                 buffer.push(move(*first));
-                ++first;
-            }
             if (buffer.empty() || (second != last && *second < buffer.front())) {
-                *output = move(*second);
+                *first = move(*second);
                 ++second;
             } else {
-                *output = move(buffer.front());
+                *first = move(buffer.front());
                 buffer.pop();
             }
-            ++output;
-        }
+            ++first;
+            leftNonEmpty = leftNonEmpty && first != middle;
+        } while (leftNonEmpty || !buffer.empty());
     }
 
     template<class Iter>
