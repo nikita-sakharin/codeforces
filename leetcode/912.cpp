@@ -52,6 +52,6 @@ private:
 public:
     inline vector<int> sortArray(vector<int> &nums) const noexcept {
         mergeSort(nums.begin(), nums.end());
-        return nums;
+        return move(nums);
     }
 };
