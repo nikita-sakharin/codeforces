@@ -6,10 +6,11 @@ private:
         const Iter middle,
         const Iter last
     ) noexcept {
+        using Value = iterator_traits<Iter>::value_type;
+
         if (middle == last)
             return;
-
-        queue<typename iterator_traits<Iter>::value_type> buffer{};
+        queue<Value> buffer{};
         auto second{middle};
         auto leftNonEmpty{first != middle};
         do {
@@ -32,8 +33,10 @@ private:
         const Iter first,
         const Iter last
     ) noexcept {
+        using Difference = iterator_traits<Iter>::difference_type;
+
         const auto size{distance(first, last)}, half{size >> 1};
-        typename iterator_traits<Iter>::difference_type width{1};
+        Difference width{1};
         while (width < size) {
             auto n{size};
             auto iter{first};
