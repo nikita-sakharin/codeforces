@@ -33,6 +33,6 @@ public:
                 q.emplace();
             }
         } while (!q.empty());
-        return result;
+        return move(result);
     }
 };
