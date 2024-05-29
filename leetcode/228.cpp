@@ -17,7 +17,7 @@ public:
         const auto size{nums.size()};
         if (size == 0)
             return {};
-        vector<string> result;
+        vector<string> result{};
         auto left{nums.front()};
         for (size_t i{1}; i < size; ++i)
             if (const auto prev{nums[i - 1]}; nums[i] != prev + 1) {
