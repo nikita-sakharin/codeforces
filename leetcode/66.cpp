@@ -11,6 +11,6 @@ public:
             }
         if (carry)
             digits.insert(digits.cbegin(), 1);
-        return digits;
+        return move(digits);
     }
 };
