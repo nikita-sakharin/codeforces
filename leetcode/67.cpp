@@ -16,6 +16,6 @@ public:
         }
         if (carry)
             result.insert(result.cbegin(), '1');
-        return result;
+        return move(result);
     }
 };
