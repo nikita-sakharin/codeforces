@@ -25,6 +25,6 @@ public:
                 left = nums[i];
             }
         pushBack(result, left, nums.back());
-        return result;
+        return move(result);
     }
 };
