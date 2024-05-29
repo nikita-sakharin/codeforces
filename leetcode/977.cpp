@@ -15,6 +15,6 @@ public:
                 ++i;
             }
         }
-        return result;
+        return move(result);
     }
 };
