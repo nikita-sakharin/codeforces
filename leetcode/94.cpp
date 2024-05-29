@@ -31,6 +31,6 @@ public:
             treeNode = treeNode->right;
         }
 
-        return result;
+        return move(result);
     }
 };
