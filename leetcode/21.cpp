@@ -15,8 +15,8 @@ public:
         ListNode *list2
     ) const noexcept {
         ListNode *result{}, **ptr{&result};
-        while (list1 || list2) {
-            if (!list1 || (list2 && list1->val > list2->val)) {
+        while (list1 && list2) {
+            if (list1->val > list2->val) {
                 *ptr = list2;
                 list2 = list2->next;
             } else {
@@ -25,6 +25,10 @@ public:
             }
             ptr = &(*ptr)->next;
         }
+        if (list1)
+            *ptr = list1;
+        else if (list2)
+            *ptr = list2;
         return result;
     }
 };
