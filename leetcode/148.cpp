@@ -19,12 +19,6 @@ private:
         return size;
     }
 
-    static constexpr ListNode *nextNode(ListNode *listNode, size_t n) noexcept {
-        for (; n != 0; --n)
-            listNode = listNode->next;
-        return listNode;
-    }
-
     static constexpr ListNode **merge(
         ListNode *first,
         ListNode * const middle,
@@ -46,6 +40,12 @@ private:
         }
         *ptr = last;
         return ptr;
+    }
+
+    static constexpr ListNode *nextNode(ListNode *listNode, size_t n) noexcept {
+        for (; n != 0; --n)
+            listNode = listNode->next;
+        return listNode;
     }
 
 public:
