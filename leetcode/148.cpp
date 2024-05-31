@@ -33,7 +33,9 @@ private:
     ) noexcept {
         ListNode *second{middle};
         while (first != middle || second != last) {
-            if (first == middle || (second != last && second->val < first->val)) {
+            if (first == middle
+                || (second != last && second->val < first->val)
+            ) {
                 *ptr = second;
                 second = second->next;
             } else {
