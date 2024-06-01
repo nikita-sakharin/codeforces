@@ -1,8 +1,18 @@
 class LRUCache final {
 private:
-    unordered_map<int, list<pair<int, int>>::iterator> index{};
-    list<pair<int, int>> elements{};
+    class Node final {
+    public:
+        int key{0}, value{0};
+    };
+
+    unordered_map<int, list<Node>::iterator> index{};
+    list<Node> elements{};
     const size_t capacity{0};
+
+    inline int &get(const list<Node>::iterator nodeIter) noexcept {
+        elements.splice(elements.cend(), elements, nodeIter);
+        return nodeIter->value;
+    }
 
 public:
     inline LRUCache(const int capacity) noexcept : capacity(capacity) {}
@@ -11,18 +21,16 @@ public:
         const auto iter{index.find(key)};
         if (iter == index.end())
             return -1;
-        elements.splice(elements.cend(), elements, iter->second);
-        return iter->second->second;
+        return get(iter->second);
     }
 
     inline void put(const int key, const int value) noexcept {
         const auto iter{index.find(key)};
         if (iter != index.end()) {
-            elements.splice(elements.cend(), elements, iter->second);
-            iter->second->second = value;
+            get(iter->second) = value;
         } else {
             if (index.size() >= capacity) {
-                index.erase(elements.front().first);
+                index.erase(elements.front().key);
                 elements.pop_front();
             }
             elements.emplace_back(key, value);
