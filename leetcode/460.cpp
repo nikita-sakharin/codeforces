@@ -23,7 +23,8 @@ private:
         newElements.splice(newElements.cend(), elements, nodeIter);
         if (elements.empty()) {
             frequencies.erase(frequencyIter);
-            minFrequency = frequency;
+            if (minFrequency == frequency - 1)
+                minFrequency = frequency;
         }
         return nodeIter->value;
     }
