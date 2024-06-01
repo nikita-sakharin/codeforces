@@ -40,7 +40,7 @@ private:
         while (width < size) {
             auto n{size};
             auto iter{first};
-            while (iter != last) {
+            while (n != 0) {
                 const auto left{min(width, n)}, right{min(width, n - left)};
                 const auto middle{next(iter, left)},
                     nextIter{next(middle, right)};

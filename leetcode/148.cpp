@@ -55,7 +55,7 @@ public:
         while (width < size) {
             auto n{size};
             auto ptr{&head};
-            while (*ptr) {
+            while (n != 0) {
                 const auto left{min(width, n)}, right{min(width, n - left)};
                 const auto middle{nextNode(*ptr, left)},
                     last{nextNode(middle, right)};
