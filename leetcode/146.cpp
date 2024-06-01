@@ -30,11 +30,15 @@ public:
             get(iter->second) = value;
         else {
             if (index.size() >= capacity) {
-                index.erase(elements.front().key);
-                elements.pop_front();
+                auto node{index.extract(elements.front().key)};
+                node.key() = key;
+                index.insert(std::move(node));
+                elements.splice(elements.cend(), elements, elements.begin());
+                elements.back() = {key, value};
+            } else {
+                elements.emplace_back(key, value);
+                index.emplace(key, --elements.end());
             }
-            elements.emplace_back(key, value);
-            index.emplace(key, --elements.end());
         }
     }
 };
