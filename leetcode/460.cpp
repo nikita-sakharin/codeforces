@@ -5,7 +5,7 @@ private:
     class Node final {
     public:
         int key{0}, value{0};
-        int frequency{0};
+        uint frequency{0};
     };
 
     unordered_map<int, list<Node>::iterator> index{};
