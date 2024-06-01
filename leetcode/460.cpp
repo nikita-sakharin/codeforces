@@ -40,9 +40,9 @@ public:
 
     inline void put(const int key, const int value) noexcept {
         const auto iter{index.find(key)};
-        if (iter != index.end()) {
+        if (iter != index.end())
             get(iter->second) = value;
-        } else {
+        else {
             if (index.size() >= capacity) {
                 auto frequencyIter{frequencies.find(minFrequency)};
                 auto &elements{frequencyIter->second};
