@@ -50,7 +50,7 @@ public:
             auto &elements{frequencyIter->second}, &newElements{frequencies[1]};
             auto node{index.extract(elements.front().key)};
             node.key() = key;
-            index.insert(std::move(node));
+            index.insert(move(node));
             newElements.splice(newElements.cend(), elements, elements.begin());
             newElements.back() = {key, value, 1};
             if (elements.empty())

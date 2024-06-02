@@ -34,7 +34,7 @@ public:
         if (index.size() >= capacity) {
             auto node{index.extract(elements.front().key)};
             node.key() = key;
-            index.insert(std::move(node));
+            index.insert(move(node));
             elements.splice(elements.cend(), elements, elements.begin());
             elements.back() = {key, value};
         } else {
