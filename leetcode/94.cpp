@@ -30,7 +30,6 @@ public:
             result.push_back(treeNode->val);
             treeNode = treeNode->right;
         }
-
         return result;
     }
 };
