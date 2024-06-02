@@ -26,19 +26,20 @@ public:
 
     inline void put(const int key, const int value) noexcept {
         const auto iter{index.find(key)};
-        if (iter != index.end())
+        if (iter != index.end()) {
             get(iter->second) = value;
-        else {
-            if (index.size() >= capacity) {
-                auto node{index.extract(elements.front().key)};
-                node.key() = key;
-                index.insert(std::move(node));
-                elements.splice(elements.cend(), elements, elements.begin());
-                elements.back() = {key, value};
-            } else {
-                elements.emplace_back(key, value);
-                index.emplace(key, --elements.end());
-            }
+            return;
+        }
+
+        if (index.size() >= capacity) {
+            auto node{index.extract(elements.front().key)};
+            node.key() = key;
+            index.insert(std::move(node));
+            elements.splice(elements.cend(), elements, elements.begin());
+            elements.back() = {key, value};
+        } else {
+            elements.emplace_back(key, value);
+            index.emplace(key, --elements.end());
         }
     }
 };
