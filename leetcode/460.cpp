@@ -46,16 +46,19 @@ public:
         }
 
         if (index.size() >= capacity) {
-            const auto frequencyIter{frequencies.find(minFrequency)};
-            auto &elements{frequencyIter->second};
+            auto frequencyIter{frequencies.find(minFrequency)};
+            auto &elements{frequencyIter->second}, &newElements{frequencies[1]};
             index.erase(elements.front().key);
             elements.pop_front();
+            newElements.emplace_back(key, value, 1);
+            index.emplace(key, --newElements.end());
             if (elements.empty())
                 frequencies.erase(frequencyIter);
+        } else {
+            auto &elements{frequencies[1]};
+            elements.emplace_back(key, value, 1);
+            index.emplace(key, --elements.end());
         }
-        auto &elements{frequencies[1]};
-        elements.emplace_back(key, value, 1);
-        index.emplace(key, --elements.end());
         minFrequency = 1;
     }
 };
