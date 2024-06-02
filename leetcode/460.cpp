@@ -46,7 +46,7 @@ public:
         }
 
         if (index.size() >= capacity) {
-            auto frequencyIter{frequencies.find(minFrequency)};
+            const auto frequencyIter{frequencies.find(minFrequency)};
             auto &elements{frequencyIter->second};
             index.erase(elements.front().key);
             elements.pop_front();
