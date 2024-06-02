@@ -15,9 +15,9 @@ public:
         const vector<int> &nums
     ) const noexcept {
         const auto size{nums.size()};
-        if (size == 0)
-            return {};
         vector<string> result{};
+        if (size == 0)
+            return result;
         auto left{nums.front()};
         for (size_t i{1}; i < size; ++i)
             if (const auto prev{nums[i - 1]}; nums[i] != prev + 1) {
@@ -25,6 +25,6 @@ public:
                 left = nums[i];
             }
         pushBack(result, left, nums.back());
-        return move(result);
+        return result;
     }
 };
