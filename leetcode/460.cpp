@@ -14,19 +14,18 @@ private:
     uint minFrequency{0};
 
     inline int &get(const list<Node>::iterator nodeIter) noexcept {
-        auto &frequency{nodeIter->frequency};
+        auto &[unused, value, frequency]{*nodeIter};
         const auto frequencyIter{frequencies.find(frequency)};
-        auto &elements{frequencyIter->second};
-
-        ++frequency;
-        auto &newElements{frequencies[frequency]};
+        auto &elements{frequencyIter->second},
+            &newElements{frequencies[frequency + 1]};
         newElements.splice(newElements.cend(), elements, nodeIter);
         if (elements.empty()) {
             frequencies.erase(frequencyIter);
-            if (minFrequency == frequency - 1)
-                minFrequency = frequency;
+            if (minFrequency == frequency)
+                minFrequency = frequency + 1;
         }
-        return nodeIter->value;
+        ++frequency;
+        return value;
     }
 
 public:
@@ -41,22 +40,23 @@ public:
 
     inline void put(const int key, const int value) noexcept {
         const auto iter{index.find(key)};
-        if (iter != index.end())
+        if (iter != index.end()) {
             get(iter->second) = value;
-        else {
-            if (index.size() >= capacity) {
-                auto frequencyIter{frequencies.find(minFrequency)};
-                auto &elements{frequencyIter->second};
-                index.erase(elements.front().key);
-                elements.pop_front();
-                if (elements.empty())
-                    frequencies.erase(frequencyIter);
-            }
-            minFrequency = 1;
-            auto &elements{frequencies[minFrequency]};
-            elements.emplace_back(key, value, minFrequency);
-            index.emplace(key, --elements.end());
+            return;
         }
+
+        if (index.size() >= capacity) {
+            auto frequencyIter{frequencies.find(minFrequency)};
+            auto &elements{frequencyIter->second};
+            index.erase(elements.front().key);
+            elements.pop_front();
+            if (elements.empty())
+                frequencies.erase(frequencyIter);
+        }
+        auto &elements{frequencies[1]};
+        elements.emplace_back(key, value, 1);
+        index.emplace(key, --elements.end());
+        minFrequency = 1;
     }
 };
 /**
