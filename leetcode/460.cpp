@@ -48,10 +48,11 @@ public:
         if (index.size() >= capacity) {
             auto frequencyIter{frequencies.find(minFrequency)};
             auto &elements{frequencyIter->second}, &newElements{frequencies[1]};
-            index.erase(elements.front().key);
+            auto node{index.extract(elements.front().key)};
+            node.key() = key;
+            index.insert(std::move(node));
             newElements.splice(newElements.cend(), elements, elements.begin());
             newElements.back() = {key, value, 1};
-            index.emplace(key, --newElements.end());
             if (elements.empty())
                 frequencies.erase(frequencyIter);
         } else {
