@@ -49,8 +49,8 @@ public:
             auto frequencyIter{frequencies.find(minFrequency)};
             auto &elements{frequencyIter->second}, &newElements{frequencies[1]};
             index.erase(elements.front().key);
-            elements.pop_front();
-            newElements.emplace_back(key, value, 1);
+            newElements.splice(newElements.cend(), elements, elements.begin());
+            newElements.back() = {key, value, 1};
             index.emplace(key, --newElements.end());
             if (elements.empty())
                 frequencies.erase(frequencyIter);
