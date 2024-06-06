@@ -1,8 +1,7 @@
 class Solution final {
 public:
     constexpr void reverseString(vector<char> &s) const noexcept {
-        const auto size{s.size()}, half{size >> 1};
-        for (size_t i{0}; i < half; ++i)
-            swap(s[i], s[size - i - 1]);
+        for (size_t i{0}, j{s.size() - 1}; i < j; ++i, --j)
+            swap(s[i], s[j]);
     }
 };
