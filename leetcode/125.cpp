@@ -4,9 +4,9 @@ private:
 
 public:
     constexpr bool isPalindrome(const string &s) const noexcept {
-        ptrdiff_t i{0}, j{ptrdiff_t(s.size()) - 1};
+        auto i{s.cbegin()}, j{--s.cend()};
         while (i < j) {
-            const auto left{s[size_t(i)]}, right{s[size_t(j)]};
+            const auto left{*i}, right{*j};
             if (!isalnum(left, classic))
                 ++i;
             else if (!isalnum(right, classic))
