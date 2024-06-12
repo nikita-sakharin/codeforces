@@ -12,9 +12,8 @@ private:
             return;
         queue<Value> buffer{};
         auto second{middle};
-        auto leftNonEmpty{first != middle};
-        do {
-            if (leftNonEmpty)
+        while (first < middle || !buffer.empty()) {
+            if (first < middle)
                 buffer.push(move(*first));
             if (buffer.empty() || (second != last && *second < buffer.front())) {
                 *first = move(*second);
@@ -24,8 +23,7 @@ private:
                 buffer.pop();
             }
             ++first;
-            leftNonEmpty = leftNonEmpty && first != middle;
-        } while (leftNonEmpty || !buffer.empty());
+        }
     }
 
     template<class Iter>
