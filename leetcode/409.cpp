@@ -18,6 +18,7 @@ public:
             result += c & ~1UZ;
             odd = odd | (c & 1);
         }
+
         return int(result) + odd;
     }
 };
