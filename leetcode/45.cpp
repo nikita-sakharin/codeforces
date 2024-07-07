@@ -6,7 +6,7 @@ public:
 
         while (i < last) {
             auto maxJump{0UZ};
-            const auto bound{last - i}, stop{i + min(size_t(nums[i]), bound)};
+            const auto stop{i + min(size_t(nums[i]), last - i)};
             for (auto j{i + 1}; j <= stop; ++j) {
                 const auto jumpJ{j + min(last - j, size_t(nums[j]))};
                 if (jumpJ >= maxJump) {
