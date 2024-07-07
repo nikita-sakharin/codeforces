@@ -6,12 +6,12 @@ public:
 
         while (i < last) {
             auto maxJump{0UZ};
-            const auto stop{i + min(size_t(nums[i]), last - i)};
+            const auto stop{i + min(last - i, size_t(nums[i]))};
             for (auto j{i + 1}; j <= stop; ++j) {
-                const auto jumpJ{j + min(last - j, size_t(nums[j]))};
-                if (jumpJ >= maxJump) {
+                const auto jJump{j + min(last - j, size_t(nums[j]))};
+                if (jJump >= maxJump) {
                     i = j;
-                    maxJump = jumpJ;
+                    maxJump = jJump;
                 }
             }
             ++result;
