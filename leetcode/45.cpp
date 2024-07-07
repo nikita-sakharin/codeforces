@@ -16,7 +16,6 @@ public:
             }
             ++result;
         }
-
         return int(result);
     }
 };
