@@ -5,16 +5,15 @@ public:
         auto i{0UZ}, result{0UZ};
 
         while (i < last) {
-            auto newI{0UZ}, maxJump{0UZ};
-            const auto bound{last - i}, stop{min(size_t(nums[i]), bound)};
-            for (auto j{1UZ}; j <= stop; ++j) {
-                const auto jumpJ{i + j + min(bound - j, size_t(nums[i + j]))};
+            auto maxJump{0UZ};
+            const auto bound{last - i}, stop{i + min(size_t(nums[i]), bound)};
+            for (auto j{i + 1}; j <= stop; ++j) {
+                const auto jumpJ{j + min(last - j, size_t(nums[j]))};
                 if (jumpJ >= maxJump) {
-                    newI = i + j;
+                    i = j;
                     maxJump = jumpJ;
                 }
             }
-            i = newI;
             ++result;
         }
 
