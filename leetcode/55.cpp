@@ -5,7 +5,7 @@ public:
         for (auto i{0UZ}, maxI{0UZ}; i < size; ++i) {
             if (i > maxI)
                 return false;
-            maxI = max(maxI, i + min(size - i - 1, size_t(nums[i])));
+            maxI = max(maxI, i + min(size - i, size_t(nums[i])));
         }
         return true;
     }
