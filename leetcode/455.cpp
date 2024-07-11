@@ -1,6 +1,9 @@
 class Solution final {
 public:
-    constexpr int findContentChildren(vector<int> &g, vector<int> &s) noexcept {
+    constexpr int findContentChildren(
+        vector<int> &g,
+        vector<int> &s
+    ) const noexcept {
         sort(g.begin(), g.end());
         sort(s.begin(), s.end());
 
