@@ -6,7 +6,7 @@ public:
             return addBinary(b, a);
         string result(aSize, '\0');
         auto carry{false};
-        for (size_t i{0}; i < aSize; ++i) {
+        for (auto i{0UZ}; i < aSize; ++i) {
             const auto
                 left{a[aSize - i - 1] - '0'},
                 right{i < bSize ? b[bSize - i - 1] - '0' : 0},
