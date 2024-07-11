@@ -6,7 +6,7 @@
  *     ListNode(int x) : val(x), next(NULL) {}
  * };
  */
-class Solution {
+class Solution final {
 private:
     static constexpr size_t listSize(const ListNode *head) noexcept {
         auto size{0UZ};
