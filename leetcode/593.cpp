@@ -16,8 +16,8 @@ public:
         const vector<int> &p2,
         const vector<int> &p3,
         const vector<int> &p4
-    ) noexcept {
-        set<uint> distances;
+    ) const noexcept {
+        set<uint> distances{};
         distances.insert(distanceSquare(p1, p2));
         distances.insert(distanceSquare(p1, p3));
         distances.insert(distanceSquare(p1, p4));
