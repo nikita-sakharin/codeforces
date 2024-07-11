@@ -2,10 +2,10 @@ class Solution final {
 public:
     constexpr int maxDistToClosest(const vector<int> &seats) const noexcept {
         const auto size{seats.size()};
-        size_t maxDistance{0}, cnt{0};
+        auto maxDistance{0UZ}, cnt{0UZ};
         while (maxDistance < size && seats[maxDistance] == 0)
             ++maxDistance;
-        for (size_t i{maxDistance}; i < size; ++i)
+        for (auto i{maxDistance}; i < size; ++i)
             if (seats[i] == 0)
                 ++cnt;
             else {
