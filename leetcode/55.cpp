@@ -1,6 +1,6 @@
 class Solution final {
 public:
-    constexpr bool canJump(const vector<int> &nums) noexcept {
+    constexpr bool canJump(const vector<int> &nums) const noexcept {
         const auto size{nums.size()};
         for (auto i{0UZ}, maxI{0UZ}; i < size; ++i) {
             if (i > maxI)
