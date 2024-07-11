@@ -7,13 +7,13 @@ private:
     }
 
 public:
-    constexpr int longestPalindrome(const string &s) noexcept {
+    constexpr int longestPalindrome(const string &s) const noexcept {
         array<size_t, letters_count << 1> count{};
         for (const auto ch : s)
             ++count[ord(ch)];
 
-        size_t result{0};
-        bool odd{false};
+        auto result{0UZ};
+        auto odd{false};
         for (const auto c : count) {
             result += c & ~1UZ;
             odd = odd | (c & 1);
