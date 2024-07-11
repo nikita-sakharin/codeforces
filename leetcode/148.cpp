@@ -11,7 +11,7 @@
 class Solution final {
 private:
     static constexpr size_t listSize(const ListNode *head) noexcept {
-        size_t size{0};
+        auto size{0UZ};
         while (head) {
             head = head->next;
             ++size;
@@ -51,7 +51,7 @@ private:
 public:
     constexpr ListNode *sortList(ListNode *head) const noexcept {
         const auto size{listSize(head)}, half{size >> 1};
-        size_t width{1};
+        auto width{1UZ};
         while (width < size) {
             auto n{size};
             auto ptr{&head};
