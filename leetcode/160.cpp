@@ -9,7 +9,7 @@
 class Solution {
 private:
     static constexpr size_t listSize(const ListNode *head) noexcept {
-        size_t size{0};
+        auto size{0UZ};
         while (head) {
             head = head->next;
             ++size;
