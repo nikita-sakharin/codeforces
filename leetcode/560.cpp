@@ -30,7 +30,7 @@ public:
     ) const noexcept {
         const auto size{nums.size()};
         unordered_map<int, int> numMap{{nums[0], 1}};
-        for (size_t i{1}; i < size; ++i) {
+        for (auto i{1UZ}; i < size; ++i) {
             nums[i] += nums[i - 1];
             ++numMap[nums[i]];
         }
