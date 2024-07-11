@@ -13,7 +13,7 @@ private:
     static constexpr pair<ListNode *, size_t> tailElement(
         ListNode *listNode
     ) noexcept {
-        size_t size{1};
+        auto size{1UZ};
         while (listNode->next) {
             listNode = listNode->next;
             ++size;
@@ -34,7 +34,7 @@ public:
     constexpr ListNode *rotateRight(ListNode *head, int k) const noexcept {
         if (!head)
             return nullptr;
-        auto [tail, size] = tailElement(head);
+        auto [tail, size]{tailElement(head)};
         k %= size;
         if (k != 0) {
             tail->next = head;
