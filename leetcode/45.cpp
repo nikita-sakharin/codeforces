@@ -1,6 +1,6 @@
 class Solution final {
 public:
-    constexpr int jump(const vector<int> &nums) noexcept {
+    constexpr int jump(const vector<int> &nums) const noexcept {
         const auto last{nums.size() - 1};
         auto i{0UZ}, nextI{0UZ}, result{0UZ};
 
