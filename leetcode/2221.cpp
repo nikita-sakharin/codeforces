@@ -26,7 +26,7 @@ private:
         const size_t rowIndex
     ) noexcept {
         auto binomial = *first++ = 1;
-        for (size_t k{0}, exp2{0}, exp5{0}; k < rowIndex; ++first, ++k) {
+        for (auto k{0UZ}, exp2{0UZ}, exp5{0UZ}; k < rowIndex; ++first, ++k) {
             auto multiplier{rowIndex - k}, divider{k + 1};
             auto diff{0U};
 
@@ -61,7 +61,7 @@ public:
         array<int, maxLength> row;
         pascalTriangleRow(row.begin(), size - 1);
         auto result{0};
-        for (size_t i{0}; i < size; ++i)
+        for (auto i{0UZ}; i < size; ++i)
             result = (result + nums[i] * row[i]) % mod;
         return result;
     }
