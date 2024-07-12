@@ -5,7 +5,7 @@ public:
         const int target
     ) const noexcept {
         const auto size{nums.size()};
-        for (size_t i{0}; i < size; ++i)
+        for (auto i{0UZ}; i < size; ++i)
             if (nums[i] >= target)
                 return int(i);
         return size;
