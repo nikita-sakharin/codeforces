@@ -12,7 +12,7 @@ public:
         const auto
             size{size_t(to_chars(str.begin(), str.end(), x).ptr - str.begin())},
             lastIndex{size - 1}, half{size >> 1};
-        for (size_t i{0}; i < half; ++i)
+        for (auto i{0UZ}; i < half; ++i)
             if (str[i] != str[lastIndex - i])
                 return false;
         return true;
