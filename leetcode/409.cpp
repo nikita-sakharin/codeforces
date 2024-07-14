@@ -1,6 +1,6 @@
 class Solution final {
 private:
-    static constexpr size_t letters_count{26};
+    static constexpr size_t lettersCount{26};
 
     static constexpr size_t ord(const char ch) noexcept {
         return ch >= 'a' ? ch - 'a' + 26 : ch - 'A';
@@ -8,7 +8,7 @@ private:
 
 public:
     constexpr int longestPalindrome(const string &s) const noexcept {
-        array<size_t, letters_count << 1> count{};
+        array<size_t, lettersCount << 1> count{};
         for (const auto ch : s)
             ++count[ord(ch)];
 
