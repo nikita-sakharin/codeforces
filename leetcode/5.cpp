@@ -7,10 +7,9 @@ public:
         for (auto diagonal{0UZ}; diagonal < size; ++diagonal)
             for (auto j{diagonal}; j < size; ++j) {
                 const auto i{j - diagonal};
-                if (diagonal == 0)
-                    matrix[i][j] = true;
-                else
-                    matrix[i][j] = s[i] == s[j] && matrix[i + 1][j - 1];
+                matrix[i][j] = s[i] == s[j];
+                if (diagonal >= 2)
+                    matrix[i][j] = matrix[i][j] && matrix[i + 1][j - 1];
                 if (matrix[i][j] && diagonal + 1 > result.size())
                     result = string_view(s).substr(i, diagonal + 1);
             }
