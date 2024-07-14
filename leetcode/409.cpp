@@ -3,7 +3,7 @@ private:
     static constexpr size_t lettersCount{26};
 
     static constexpr size_t order(const char ch) noexcept {
-        return ch >= 'a' ? ch - 'a' + 26 : ch - 'A';
+        return ch >= 'a' ? ch - 'a' + lettersCount : ch - 'A';
     }
 
 public:
