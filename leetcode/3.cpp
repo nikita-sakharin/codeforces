@@ -6,10 +6,8 @@ public:
         unordered_set<char> chars{};
         for (auto i{0UZ}; i < size; ++i) {
             const auto ch{s[i]};
-            while (chars.contains(ch)) {
-                const auto first{s[i - chars.size()]};
-                chars.erase(first);
-            }
+            while (chars.contains(ch))
+                chars.erase(s[i - chars.size()]);
             chars.insert(ch);
             result = max(result, chars.size());
         }
