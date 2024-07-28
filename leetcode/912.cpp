@@ -42,6 +42,7 @@ private:
         ) const noexcept {
             if (first == middle || middle == last)
                 return;
+
             const auto leftSize{distance(first, middle)},
                 rightSize{distance(middle, last)};
             Iter leftIter, rightIter;
