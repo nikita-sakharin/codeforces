@@ -37,25 +37,25 @@ private:
         template<class Iter>
         constexpr void operator()(
             const Iter first,
-            const Iter middle,
+            Iter middle,
             const Iter last
         ) const noexcept {
             if (first == middle || middle == last)
                 return;
             const auto leftSize{distance(first, middle)},
                 rightSize{distance(middle, last)};
-            Iter leftIter, rightIter, newMiddle;
+            Iter leftIter, rightIter;
             if (leftSize < rightSize) {
                 rightIter = next(middle, (rightSize + 1) >> 1);
                 leftIter = upper_bound(first, middle, *prev(rightIter));
-                newMiddle = prev(rotate(leftIter, middle, rightIter));
+                middle = prev(rotate(leftIter, middle, rightIter));
             } else {
                 leftIter = next(first, (leftSize - 1) >> 1);
                 rightIter = lower_bound(middle, last, *leftIter);
-                newMiddle = rotate(leftIter, middle, rightIter);
+                middle = rotate(leftIter, middle, rightIter);
             }
-            (*this)(first, leftIter, newMiddle);
-            (*this)(next(newMiddle), rightIter, last);
+            (*this)(first, leftIter, middle);
+            (*this)(next(middle), rightIter, last);
         }
     };
 
@@ -86,7 +86,7 @@ private:
 
 public:
     inline vector<int> sortArray(vector<int> &nums) const noexcept {
-        mergeSort(nums.begin(), nums.end(), BufferMerger<int>{});
+        mergeSort(nums.begin(), nums.end(), DefaultMerger<int>{});
         return move(nums);
     }
 };
