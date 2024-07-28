@@ -86,8 +86,8 @@ private:
     }
 
 public:
-    inline vector<int> sortArray(vector<int> &nums) const noexcept {
-        mergeSort(nums.begin(), nums.end(), DefaultMerger<int>{});
+    constexpr vector<int> sortArray(vector<int> &nums) const noexcept {
+        mergeSort(nums.begin(), nums.end(), RotateMerger<int>{});
         return move(nums);
     }
 };
