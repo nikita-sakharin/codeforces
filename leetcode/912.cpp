@@ -1,35 +1,69 @@
 class Solution final {
 private:
-    template<class Iter>
-    static constexpr void merge(
-        Iter first,
-        const Iter middle,
-        const Iter last
-    ) noexcept {
-        using Value = iterator_traits<Iter>::value_type;
+    template<class T>
+    class DefaultMerger final {
+    private:
+        mutable queue<T> buffer{};
 
-        if (middle == last)
-            return;
-        queue<Value> buffer{};
-        auto second{middle};
-        while (first < middle || !buffer.empty()) {
-            if (first < middle)
-                buffer.push(move(*first));
-            if (buffer.empty() || (second != last && *second < buffer.front())) {
-                *first = move(*second);
-                ++second;
-            } else {
-                *first = move(buffer.front());
-                buffer.pop();
+    public:
+        template<class Iter>
+        constexpr void operator()(
+            Iter first,
+            const Iter middle,
+            const Iter last
+        ) const noexcept {
+            if (middle == last)
+                return;
+
+            auto second{middle};
+            while (first < middle || !buffer.empty()) {
+                if (first < middle)
+                    buffer.push(move(*first));
+                if (buffer.empty() || (second != last && *second < buffer.front())) {
+                    *first = move(*second);
+                    ++second;
+                } else {
+                    *first = move(buffer.front());
+                    buffer.pop();
+                }
+                ++first;
             }
-            ++first;
         }
-    }
+    };
 
-    template<class Iter>
+    template<class T>
+    class RotateMerger final {
+    public:
+        template<class Iter>
+        constexpr void operator()(
+            const Iter first,
+            const Iter middle,
+            const Iter last
+        ) const noexcept {
+            if (first == middle || middle == last)
+                return;
+            const auto leftSize{distance(first, middle)},
+                rightSize{distance(middle, last)};
+            Iter leftIter, rightIter, newMiddle;
+            if (leftSize < rightSize) {
+                rightIter = next(middle, (rightSize + 1) >> 1);
+                leftIter = upper_bound(first, middle, *prev(rightIter));
+                newMiddle = prev(rotate(leftIter, middle, rightIter));
+            } else {
+                leftIter = next(first, (leftSize - 1) >> 1);
+                rightIter = lower_bound(middle, last, *leftIter);
+                newMiddle = rotate(leftIter, middle, rightIter);
+            }
+            (*this)(first, leftIter, newMiddle);
+            (*this)(next(newMiddle), rightIter, last);
+        }
+    };
+
+    template<class Iter, class Merger>
     static constexpr void mergeSort(
         const Iter first,
-        const Iter last
+        const Iter last,
+        const Merger &merger
     ) noexcept {
         using Difference = iterator_traits<Iter>::difference_type;
 
@@ -42,7 +76,7 @@ private:
                 const auto left{min(width, n)}, right{min(width, n - left)};
                 const auto middle{next(iter, left)},
                     nextIter{next(middle, right)};
-                merge(iter, middle, nextIter);
+                merger(iter, middle, nextIter);
                 n -= left + right;
                 iter = nextIter;
             }
@@ -52,7 +86,7 @@ private:
 
 public:
     inline vector<int> sortArray(vector<int> &nums) const noexcept {
-        mergeSort(nums.begin(), nums.end());
+        mergeSort(nums.begin(), nums.end(), BufferMerger<int>{});
         return move(nums);
     }
 };
