@@ -93,7 +93,7 @@ final class Solution {
             return;
         final int leftIdx, rightIdx, distance, newMiddle;
         if (leftLen < rightLen) {
-            rightIdx = middle + (rightLen - 1 >> 1) + 1;
+            rightIdx = middle + (rightLen + 1 >> 1);
             leftIdx = upperBound(array, from, middle, array[rightIdx - 1]);
             distance = rightIdx - middle;
             newMiddle = leftIdx + distance - 1;
