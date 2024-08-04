@@ -1,9 +1,9 @@
 class Solution final {
 private:
-    template<class T>
+    template<class T, class Container = deque<T>>
     class DefaultMerger final {
     private:
-        mutable queue<T> buffer{};
+        mutable queue<T, Container> buffer{};
 
     public:
         template<class Iter>
