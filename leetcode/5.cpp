@@ -14,7 +14,7 @@ private:
         Container buffer{};
         for (Difference<Iter> i{!isOdd}, left{0}, right{-1}; i < size; ++i) {
             auto k{i > right ? isOdd : min(buffer[left + (right - i)], right + 1 - i)};
-            while (k < i + isOdd && k < size - i && first[i - !isOdd - k] == first[i + k])
+            while (k < min(i + isOdd, size - i) && first[i - !isOdd - k] == first[i + k])
                 ++k;
             buffer.push_back(k);
             if (i - 1 + k > right) {
@@ -37,8 +37,8 @@ public:
                     result = string_view(first, last);
             }
         };
-        findPalindromes(s.cbegin(), s.cend(), true, func);
         findPalindromes(s.cbegin(), s.cend(), false, func);
+        findPalindromes(s.cbegin(), s.cend(), true, func);
         return string(result);
     }
 };
