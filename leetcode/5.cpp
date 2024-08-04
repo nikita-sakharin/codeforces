@@ -14,14 +14,14 @@ private:
 
         const auto size{distance(first, last)};
         vector<Difference> buffer(size - !isOdd);
-        for (Difference i{!isOdd}, left{0}, right{-1}; i < size; ++i) {
-            auto k{i > right ? isOdd : min(buffer[right - i], right + 1 - i)};
+        for (Difference i{!isOdd}, left{0}, right{0}; i < size; ++i) {
+            auto k{i >= right ? isOdd : min(buffer[left + (right - 1 - i)], right - i)};
             while (k < min(i + isOdd, size - i) && first[i - !isOdd - k] == first[i + k])
                 ++k;
-            buffer.push_back(k);
-            if (i - 1 + k > right) {
+            buffer[i - !isOdd] = k;
+            if (i + k > right) {
                 left = i + isOdd - k;
-                right = i - 1 + k;
+                right = i + k;
             }
             func(first + i + isOdd - k, first + i + k);
         }
