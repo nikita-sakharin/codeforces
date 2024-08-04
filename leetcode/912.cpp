@@ -16,8 +16,9 @@ private:
                 return;
 
             auto second{middle};
-            while (first < middle || !buffer.empty()) {
-                if (first < middle)
+            auto leftNonEmpty{first != middle};
+            while (leftNonEmpty || !buffer.empty()) {
+                if (leftNonEmpty)
                     buffer.push(move(*first));
                 if (buffer.empty() || (second != last && *second < buffer.front())) {
                     *first = move(*second);
@@ -27,6 +28,7 @@ private:
                     buffer.pop();
                 }
                 ++first;
+                leftNonEmpty = leftNonEmpty && first != middle;
             }
         }
     };
