@@ -3,17 +3,19 @@ private:
     template<class Iter>
     using Difference = iterator_traits<Iter>::difference_type;
 
-    template<class Iter, class Func, class Container = deque<Difference<Iter>>>
+    template<class Iter, class Func>
     static constexpr void findPalindromes(
         const Iter first,
         const Iter last,
         const bool isOdd,
         Func func
     ) noexcept {
+        using Difference = iterator_traits<Iter>::difference_type;
+
         const auto size{distance(first, last)};
-        Container buffer{};
-        for (Difference<Iter> i{!isOdd}, left{0}, right{-1}; i < size; ++i) {
-            auto k{i > right ? isOdd : min(buffer[left + (right - i)], right + 1 - i)};
+        vector<Difference> buffer(size - !isOdd);
+        for (Difference i{!isOdd}, left{0}, right{-1}; i < size; ++i) {
+            auto k{i > right ? isOdd : min(buffer[right - i], right + 1 - i)};
             while (k < min(i + isOdd, size - i) && first[i - !isOdd - k] == first[i + k])
                 ++k;
             buffer.push_back(k);
