@@ -18,7 +18,7 @@ public:
             ptrdiff_t zeroCnt{0}, oneCnt{0};
             tie(iter, zeroCnt) = adjacentCount(iter, numsEnd, 1);
             tie(iter, oneCnt) = adjacentCount(iter, numsEnd, 0);
-            result = max(result, zeroCnt == 1 ? lastCnt + oneCnt : oneCnt);
+            result = max(result, (zeroCnt == 1 ? lastCnt : 0) + oneCnt);
             lastCnt = oneCnt;
         }
         return int(result);
