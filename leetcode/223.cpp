@@ -1,13 +1,13 @@
 class Solution final {
 private:
     template<class T>
+    using Interval = array<T, 2>;
+
+    template<class T>
     using Point = array<T, 2>;
 
     template<class T>
     using Rect = array<Point<T>, 2>;
-
-    template<class T>
-    using Interval = array<T, 2>;
 
     enum Coordinate : size_t {
         X,
