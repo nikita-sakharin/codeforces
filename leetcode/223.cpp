@@ -1,27 +1,47 @@
 class Solution final {
 private:
-    static constexpr int area(
-        const int x1, const int y1,
-        const int x2, const int y2
-    ) noexcept {
-        return (x2 - x1) * (y2 - y1);
+    template<class T>
+    using Point = array<T, 2>;
+
+    template<class T>
+    using Rect = array<Point<T>, 2>;
+
+    template<class T>
+    using Interval = array<T, 2>;
+
+    enum Coordinate : size_t {
+        X,
+        Y
+    };
+
+    template<class T>
+    static constexpr T area(const Rect<T> &rect) noexcept {
+        return (rect[1][X] - rect[0][X]) * (rect[1][Y] - rect[0][Y]);
     }
 
-    static constexpr int intersection(
-        const int a1, const int a2,
-        const int b1, const int b2
+    template<class T>
+    static constexpr T intersection(
+        const Interval<T> &a,
+        const Interval<T> &b
     ) noexcept {
-        return max(0, min(a2, b2) - max(a1, b1));
+        return max(T{0}, min(a[1], b[1]) - max(a[0], b[0]));
     }
 
-    static constexpr int intersectionArea(
-        const int ax1, const int ay1,
-        const int ax2, const int ay2,
-        const int bx1, const int by1,
-        const int bx2, const int by2
+    template<class T>
+    static constexpr T intersectionArea(
+        const Rect<T> &rectA,
+        const Rect<T> &rectB
     ) noexcept {
-        return intersection(ax1, ax2, bx1, bx2)
-            * intersection(ay1, ay2, by1, by2);
+        return intersection(interval(rectA, X), interval(rectB, X))
+            * intersection(interval(rectA, Y), interval(rectB, Y));
+    }
+
+    template<class T>
+    static constexpr Interval<T> interval(
+        const Rect<T> &rect,
+        const Coordinate coord
+    ) noexcept {
+        return {rect[0][coord], rect[1][coord]};
     }
 
 public:
@@ -31,7 +51,9 @@ public:
         const int bx1, const int by1,
         const int bx2, const int by2
     ) const noexcept {
-        return area(ax1, ay1, ax2, ay2) + area(bx1, by1, bx2, by2)
-            - intersectionArea(ax1, ay1, ax2, ay2, bx1, by1, bx2, by2);
+        const Rect<int>
+            rectA{{{ax1, ay1}, {ax2, ay2}}},
+            rectB{{{bx1, by1}, {bx2, by2}}};
+        return area(rectA) + area(rectB) - intersectionArea(rectA, rectB);
     }
 };
