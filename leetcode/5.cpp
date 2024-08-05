@@ -20,7 +20,8 @@ private:
                 left = i + isOdd - k;
                 right = i + k;
             }
-            func(first + i + isOdd - k, first + i + k);
+            if (k != 0)
+                func(first + i + isOdd - k, first + i + k);
         }
     }
 
