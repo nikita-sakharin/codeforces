@@ -9,6 +9,8 @@ private:
     ) noexcept {
         using Difference = iterator_traits<Iter>::difference_type;
 
+        if (first == last)
+            return;
         const auto size{distance(first, last)};
         vector<Difference> buffer(size - !isOdd);
         for (Difference i{!isOdd}, left{0}, right{0}; i < size; ++i) {
@@ -27,7 +29,7 @@ private:
     }
 
 public:
-    constexpr string longestPalindrome(const string &s) const noexcept {
+    constexpr string longestPalindrome(const string &str) const noexcept {
         string_view result{};
         const auto func{
             [&result](
@@ -38,8 +40,11 @@ public:
                     result = string_view(first, last);
             }
         };
-        findPalindromes(s.cbegin(), s.cend(), false, func);
-        findPalindromes(s.cbegin(), s.cend(), true, func);
+
+        const auto first{str.cbegin()}, last{str.cend()};
+        findPalindromes(first, last, false, func);
+        findPalindromes(first, last, true, func);
+
         return string(result);
     }
 };
