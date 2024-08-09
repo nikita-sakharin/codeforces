@@ -2,8 +2,7 @@ class Solution final {
 private:
     using uint = unsigned;
 
-    static constexpr size_t maxLength{1000};
-    static constexpr auto mod{10};
+    static constexpr auto mod{10UZ};
     static constexpr array<int, mod> mod10Inverse{0, 1, 0, 7, 0, 0, 0, 3, 0, 9};
     static constexpr array<int, 4> remainders{6, 2, 4, 8};
 
@@ -58,7 +57,7 @@ private:
 public:
     constexpr int triangularSum(const vector<int> &nums) const noexcept {
         const auto size{nums.size()};
-        array<int, maxLength> row;
+        vector<int> row(size);
         pascalTriangleRow(row.begin(), size - 1);
         auto result{0};
         for (auto i{0UZ}; i < size; ++i)
