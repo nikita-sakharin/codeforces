@@ -26,7 +26,8 @@ private:
     ) noexcept {
         using Value = iterator_traits<ForwardIter>::value_type;
 
-        auto binomial = *first++ = Value{1};
+        Value binomial{1};
+        *first++ = binomial;
         for (auto k{0UZ}, exp2{0UZ}, exp5{0UZ}; k < rowIndex; ++first, ++k) {
             auto multiplier{rowIndex - k}, divider{k + 1};
             auto diff{0U};
