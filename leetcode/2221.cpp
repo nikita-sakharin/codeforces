@@ -19,12 +19,12 @@ private:
         return {value, result};
     }
 
-    template<class ForwardIter>
+    template<class Iter>
     static constexpr void pascalTriangleRow(
-        ForwardIter first,
+        Iter first,
         const size_t rowIndex
     ) noexcept {
-        using Value = iterator_traits<ForwardIter>::value_type;
+        using Value = iterator_traits<Iter>::value_type;
 
         Value binomial{1};
         *first++ = binomial;
