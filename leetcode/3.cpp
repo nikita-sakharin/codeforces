@@ -1,6 +1,6 @@
 class Solution final {
 private:
-    static constexpr size_t printableChars{95};
+    static constexpr auto printableChars{95UZ};
 
     static constexpr size_t order(const char ch) noexcept {
         return ch - ' ';
