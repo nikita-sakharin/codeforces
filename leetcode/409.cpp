@@ -1,6 +1,6 @@
 class Solution final {
 private:
-    static constexpr size_t lettersCount{26};
+    static constexpr auto lettersCount{26UZ};
 
     static constexpr size_t order(const char ch) noexcept {
         return ch >= 'a' ? ch - 'a' + lettersCount : ch - 'A';
