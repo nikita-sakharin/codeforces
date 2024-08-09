@@ -45,11 +45,11 @@ private:
             exp5 -= diff;
             binomial = binomial * mod10Inverse[divider % mod] % Value{mod};
 
-            if (!exp2 && !exp5)
+            if (exp2 == 0 && exp5 == 0)
                 *first = binomial;
-            else if (exp2 && !exp5)
+            else if (exp2 != 0 && exp5 == 0)
                 *first = binomial * remainders[exp2 & 0X3] % Value{mod};
-            else if (!exp2 && exp5)
+            else if (exp2 == 0 && exp5 != 0)
                 *first = binomial * Value{5} % Value{mod};
             else
                 *first = Value{0};
