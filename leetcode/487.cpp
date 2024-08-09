@@ -1,8 +1,11 @@
 class Solution final {
 private:
-    template<class InputIter, class T>
-    static constexpr pair<InputIter, ptrdiff_t> adjacentCount(
-        const InputIter first, const InputIter last,
+    using Difference = iterator_traits<Iter>::difference_type;
+
+    template<class Iter, class T>
+    static constexpr pair<Iter, Difference<Iter>> adjacentCount(
+        const Iter first,
+        const Iter last,
         const T &value
     ) noexcept {
         const auto iter{find(first, last, value)};
