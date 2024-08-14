@@ -18,13 +18,13 @@ private:
     }
 
     static inline void deleteNum(
-        unordered_map<int, size_t> &numMap,
-        const int num
+        unordered_map<int, size_t> &countMap,
+        const int key
     ) noexcept {
-        const auto iter{numMap.find(num)};
+        const auto iter{countMap.find(key)};
         --iter->second;
         if (iter->second == 0)
-            numMap.erase(iter);
+            countMap.erase(iter);
     }
 
 public:
