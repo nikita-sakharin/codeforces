@@ -1,16 +1,20 @@
 class Solution final {
 private:
-    static constexpr size_t countSubarray(
-        const unordered_map<int, size_t> &numMap,
-        const int num,
-        const int k
+    template<class C>
+    using Key = C::key_type;
+
+    template<class C>
+    using Mapped = C::mapped_type;
+
+    template<class C>
+    static constexpr Mapped<C> getOrDefault(
+        const C &container,
+        const Key<C> &key,
+        const Mapped<C> &mapped
     ) noexcept {
-        auto result{0UZ};
-        if (num == k)
-            ++result;
-        if (const auto iter{numMap.find(num + k)}; iter != numMap.cend())
-            result += iter->second;
-        return result;
+        if (const auto iter{container.find(key)}; iter != container.cend())
+            return iter->second;
+        return mapped;
     }
 
     static inline void deleteNum(
@@ -35,10 +39,10 @@ public:
             ++numMap[nums[i]];
         }
 
-        auto result{0UZ};
+        auto result{getOrDefault(numMap, k, 0)};
         for (const auto num : nums) {
             deleteNum(numMap, num);
-            result += countSubarray(numMap, num, k);
+            result += getOrDefault(numMap, num + k, 0);
         }
         return int(result);
     }
