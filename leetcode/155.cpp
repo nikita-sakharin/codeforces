@@ -18,11 +18,11 @@ public:
         valueStack.pop();
     }
 
-    constexpr int top() noexcept {
+    constexpr int top() const noexcept {
         return valueStack.top();
     }
 
-    constexpr int getMin() noexcept {
+    constexpr int getMin() const noexcept {
         return minStack.top();
     }
 };
