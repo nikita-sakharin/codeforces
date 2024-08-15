@@ -17,7 +17,7 @@ private:
         return mapped;
     }
 
-    static inline void deleteNum(
+    static inline void deleteElement(
         unordered_map<int, size_t> &countMap,
         const int key
     ) noexcept {
@@ -41,7 +41,7 @@ public:
 
         auto result{getOrDefault(numMap, k, 0)};
         for (const auto num : nums) {
-            deleteNum(numMap, num);
+            deleteElement(numMap, num);
             result += getOrDefault(numMap, num + k, 0);
         }
         return int(result);
