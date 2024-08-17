@@ -41,6 +41,7 @@ public:
                     palindrome = string_view(first, last);
             }
         };
+
         findPalindromes(strFirst, strLast, false, func);
         findPalindromes(strFirst, strLast, true, func);
 
