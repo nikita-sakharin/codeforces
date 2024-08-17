@@ -11,10 +11,11 @@ public:
 
     inline int pop() noexcept {
         const auto value{values.back()};
-        values.pop_back();
         const auto iter{index.find(value)};
-        iter->second.pop();
-        if (iter->second.empty())
+        auto &iterStack{iter->second};
+        values.pop_back();
+        iterStack.pop();
+        if (iterStack.empty())
             index.erase(iter);
         return value;
     }
@@ -30,9 +31,10 @@ public:
     inline int popMax() noexcept {
         const auto iter{--index.end()};
         const auto value{iter->first};
-        values.erase(iter->second.top());
-        iter->second.pop();
-        if (iter->second.empty())
+        auto &iterStack{iter->second};
+        values.erase(iterStack.top());
+        iterStack.pop();
+        if (iterStack.empty())
             index.erase(iter);
         return value;
     }
