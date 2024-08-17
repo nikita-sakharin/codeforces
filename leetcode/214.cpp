@@ -51,6 +51,7 @@ public:
         copy(str.crbegin(), str.crbegin() + (strSize - palindromeSize), iter);
         copy(palindrome.cbegin(), palindrome.cend(), iter);
         copy(strFirst + palindromeSize, strLast, iter);
+
         return result;
     }
 };
