@@ -4,7 +4,7 @@ private:
     list<int> values{};
 
 public:
-    inline void push(const int value) noexcept {
+    constexpr void push(const int value) noexcept {
         values.push_back(value);
         index[value].push(--values.cend());
     }
@@ -19,7 +19,7 @@ public:
         return value;
     }
 
-    inline int top() const noexcept {
+    constexpr int top() const noexcept {
         return values.back();
     }
 
