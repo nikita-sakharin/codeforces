@@ -38,12 +38,14 @@ public:
         const vector<int> &nums1,
         const vector<int> &nums2
     ) const noexcept {
-        const ptrdiff_t size(nums1.size() + nums2.size()), index(size >> 1);
         const auto
             first1{nums1.cbegin()}, last1{nums1.cend()},
             first2{nums2.cbegin()}, last2{nums2.cend()};
+        const ptrdiff_t size(nums1.size() + nums2.size()), index(size >> 1);
+
         if ((size & 1) == 1)
             return *nthElement(first1, last1, first2, last2, index);
+
         return midpoint(
             double(*nthElement(first1, last1, first2, last2, index - 1)),
             double(*nthElement(first1, last1, first2, last2, index))
