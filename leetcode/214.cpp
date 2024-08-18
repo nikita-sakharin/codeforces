@@ -15,7 +15,10 @@ private:
         vector<Difference> buffer(size - !isOdd);
         for (Difference i{!isOdd}, left{0}, right{0}; i < size; ++i) {
             const auto bound{min(i + isOdd, size - i)};
-            auto k{i >= right ? isOdd : min(buffer[left + (right - 1 - i)], right - i)};
+            auto k{i >= right
+                ? isOdd
+                : min(buffer[left + (right - 1 - i)], right - i)
+            };
             while (k < bound && first[i - !isOdd - k] == first[i + k])
                 ++k;
             buffer[i - !isOdd] = k;
