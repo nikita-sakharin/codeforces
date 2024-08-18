@@ -47,7 +47,7 @@ public:
 
         const auto strSize{str.size()}, palindromeSize{palindrome.size()};
         string result{};
-        result.reserve((strSize << 1) + palindromeSize);
+        result.reserve((strSize << 1) - palindromeSize);
         const auto iter{back_inserter(result)};
         copy(str.crbegin(), str.crbegin() + (strSize - palindromeSize), iter);
         copy(palindrome.cbegin(), palindrome.cend(), iter);
