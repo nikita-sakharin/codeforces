@@ -6,7 +6,7 @@ public:
         auto result{0UZ};
         while (true) {
             for (const auto &str : strs)
-                if (result >= str.size() || strs.front()[result] != str[result])
+                if (result >= size(str) || strs.front()[result] != str[result])
                     return strs.front().substr(0, result);
             ++result;
         }
