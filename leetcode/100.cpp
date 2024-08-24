@@ -19,7 +19,7 @@ public:
         const TreeNode * const first,
         const TreeNode * const second
     ) const noexcept {
-        stack<pair<const TreeNode *, const TreeNode *>> s{};
+        Stack<pair<const TreeNode *, const TreeNode *>> s{};
         s.emplace(first, second);
         do {
             const auto [left, right]{s.top()};
