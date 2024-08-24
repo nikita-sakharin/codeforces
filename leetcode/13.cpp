@@ -1,4 +1,5 @@
 class Solution final {
+private:
     static constexpr int letterToInt(const char ch) noexcept {
         switch (ch) {
             case 'I':
