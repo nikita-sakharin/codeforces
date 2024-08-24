@@ -15,8 +15,8 @@ private:
 
 public:
     constexpr int longestSubarray(const vector<int> &nums) const noexcept {
-        const auto numsEnd{nums.cend()};
-        auto [iter, lastCnt] = adjacentCount(nums.cbegin(), numsEnd, 0);
+        const auto numsEnd{cend(nums)};
+        auto [iter, lastCnt] = adjacentCount(cbegin(nums), numsEnd, 0);
         auto result{lastCnt - (iter == numsEnd)};
         while (iter != numsEnd) {
             ptrdiff_t zeroCnt{0}, oneCnt{0};
