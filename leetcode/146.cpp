@@ -10,7 +10,7 @@ private:
     const size_t capacity{0};
 
     inline int &get(const list<Node>::iterator nodeIter) noexcept {
-        elements.splice(elements.cend(), elements, nodeIter);
+        elements.splice(cend(elements), elements, nodeIter);
         return nodeIter->value;
     }
 
@@ -19,7 +19,7 @@ public:
 
     inline int get(const int key) noexcept {
         const auto iter{index.find(key)};
-        if (iter == index.end())
+        if (iter == end(index))
             return -1;
         return get(iter->second);
     }
@@ -35,7 +35,7 @@ public:
             auto node{index.extract(elements.front().key)};
             node.key() = key;
             index.insert(move(node));
-            elements.splice(elements.cend(), elements, elements.begin());
+            elements.splice(cend(elements), elements, elements.begin());
             elements.back() = {key, value};
         } else {
             elements.emplace_back(key, value);
