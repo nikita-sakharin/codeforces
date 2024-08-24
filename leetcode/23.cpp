@@ -41,6 +41,7 @@ public:
             else
                 lists.pop_back();
         }
+
         return result;
     }
 };
