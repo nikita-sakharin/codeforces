@@ -23,14 +23,14 @@ private:
 public:
     constexpr ListNode *mergeKLists(vector<ListNode *> &lists) const noexcept {
         const auto first{lists.begin()};
-        lists.resize(partition(first, lists.end(), identity{}) - first);
+        lists.resize(partition(first, end(lists), identity{}) - first);
 
         const Compare compare{};
-        make_heap(first, lists.end(), compare);
+        make_heap(first, end(lists), compare);
 
         ListNode *result{}, **ptr{&result};
-        while (!lists.empty()) {
-            const auto last{lists.end()};
+        while (!empty(lists)) {
+            const auto last{end(lists)};
             pop_heap(first, last, compare);
             auto &back{lists.back()};
             *ptr = back;
