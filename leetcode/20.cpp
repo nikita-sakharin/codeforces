@@ -13,10 +13,10 @@ public:
         for (const auto ch : str)
             if (ch == '(' || ch == '[' || ch == '{')
                 s.push(ch);
-            else if (s.empty() || getClosing(s.top()) != ch)
+            else if (empty(s) || getClosing(s.top()) != ch)
                 return false;
             else
                 s.pop();
-        return s.empty();
+        return empty(s);
     }
 };
