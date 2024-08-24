@@ -29,7 +29,7 @@ public:
                 s.emplace(left->left, right->right);
                 s.emplace(left->right, right->left);
             }
-        } while (!s.empty());
+        } while (!empty(s));
 
         return true;
     }
