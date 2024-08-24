@@ -7,9 +7,9 @@ public:
     ) const noexcept {
         auto result{0};
         if (!left.empty())
-            result = *max_element(left.cbegin(), left.cend());
+            result = *max_element(cbegin(left), cend(left));
         if (!right.empty())
-            result = max(result, n - *min_element(right.cbegin(), right.cend()));
+            result = max(result, n - *min_element(cbegin(right), cend(right)));
         return result;
     }
 };
