@@ -22,9 +22,9 @@ public:
             else if (compare > 0)
                 root = root->right;
             else
-                break;
+                return root;
         }
 
-        return root;
+        return nullptr;
     }
 };
