@@ -8,7 +8,7 @@ private:
 public:
     constexpr void push(const int value) noexcept {
         valueStack.push(value);
-        if (minStack.empty() || minStack.top() >= value)
+        if (empty(minStack) || minStack.top() >= value)
             minStack.push(value);
     }
 
