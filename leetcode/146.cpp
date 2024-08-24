@@ -19,14 +19,14 @@ public:
 
     inline int get(const int key) noexcept {
         const auto iter{index.find(key)};
-        if (iter == end(index))
+        if (iter == cend(index))
             return -1;
         return get(iter->second);
     }
 
     inline void put(const int key, const int value) noexcept {
         const auto iter{index.find(key)};
-        if (iter != index.end()) {
+        if (iter != cend(index)) {
             get(iter->second) = value;
             return;
         }
