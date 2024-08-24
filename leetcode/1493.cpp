@@ -15,15 +15,15 @@ private:
 
 public:
     constexpr int longestSubarray(const vector<int> &nums) const noexcept {
-        const auto numsEnd{cend(nums)};
-        auto [iter, lastCnt] = adjacentCount(cbegin(nums), numsEnd, 0);
-        auto result{lastCnt - (iter == numsEnd)};
-        while (iter != numsEnd) {
+        const auto last{cend(nums)};
+        auto [iter, prevCnt] = adjacentCount(cbegin(nums), last, 0);
+        auto result{prevCnt - (iter == last)};
+        while (iter != last) {
             ptrdiff_t zeroCnt{0}, oneCnt{0};
-            tie(iter, zeroCnt) = adjacentCount(iter, numsEnd, 1);
-            tie(iter, oneCnt) = adjacentCount(iter, numsEnd, 0);
-            result = max(result, (zeroCnt == 1 ? lastCnt : 0) + oneCnt);
-            lastCnt = oneCnt;
+            tie(iter, zeroCnt) = adjacentCount(iter, last, 1);
+            tie(iter, oneCnt) = adjacentCount(iter, last, 0);
+            result = max(result, (zeroCnt == 1 ? prevCnt : 0) + oneCnt);
+            prevCnt = oneCnt;
         }
         return int(result);
     }
