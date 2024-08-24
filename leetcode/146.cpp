@@ -31,7 +31,7 @@ public:
             return;
         }
 
-        if (index.size() >= capacity) {
+        if (size(index) >= capacity) {
             auto node{index.extract(elements.front().key)};
             node.key() = key;
             index.insert(move(node));
