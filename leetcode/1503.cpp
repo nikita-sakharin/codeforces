@@ -6,9 +6,9 @@ public:
         const vector<int> &right
     ) const noexcept {
         auto result{0};
-        if (!left.empty())
+        if (!empty(left))
             result = *max_element(cbegin(left), cend(left));
-        if (!right.empty())
+        if (!empty(right))
             result = max(result, n - *min_element(cbegin(right), cend(right)));
         return result;
     }
