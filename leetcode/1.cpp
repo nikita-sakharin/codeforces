@@ -4,13 +4,13 @@ public:
         const vector<int> &nums,
         const int target
     ) const noexcept {
-        const auto size{size(nums)};
-        unordered_map<int, size_t> numMap{};
-        const auto end{cend(numMap)};
-        for (auto i{0UZ}; i < size; ++i) {
-            if (const auto iter{numMap.find(target - nums[i])}; iter != end)
+        const auto length{size(nums)};
+        unordered_map<int, size_t> index{};
+        const auto last{cend(index)};
+        for (auto i{0UZ}; i < length; ++i) {
+            if (const auto iter{index.find(target - nums[i])}; iter != last)
                 return {int(iter->second), int(i)};
-            numMap[nums[i]] = i;
+            index[nums[i]] = i;
         }
         return {};
     }
