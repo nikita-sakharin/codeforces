@@ -4,7 +4,7 @@ private:
 
 public:
     constexpr bool isPalindrome(const string &s) const noexcept {
-        auto i{s.cbegin()}, j{--s.cend()};
+        auto i{cbegin(s)}, j{--cend(s)};
         while (i < j) {
             const auto left{*i}, right{*j};
             if (!isalnum(left, classic))
