@@ -32,7 +32,7 @@ public:
                 s.emplace(left->left, right->left);
                 s.emplace(left->right, right->right);
             }
-        } while (!s.empty());
+        } while (!empty(s));
 
         return true;
     }
