@@ -31,7 +31,8 @@ public:
                 s.emplace(&treeNode->left, first, middle);
             if (middle + 1 < last)
                 s.emplace(&treeNode->right, middle + 1, last);
-        } while (!s.empty());
+        } while (!empty(s));
+
         return root;
     }
 };
