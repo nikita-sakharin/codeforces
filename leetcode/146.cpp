@@ -35,7 +35,7 @@ public:
             auto node{index.extract(elements.front().key)};
             node.key() = key;
             index.insert(move(node));
-            elements.splice(cend(elements), elements, elements.begin());
+            elements.splice(cend(elements), elements, cbegin(elements));
             elements.back() = {key, value};
         } else {
             elements.emplace_back(key, value);
