@@ -28,11 +28,11 @@ public:
                     q.emplace(treeNode->left);
                 if (treeNode->right)
                     q.emplace(treeNode->right);
-            } else if (!q.empty()) {
+            } else if (!empty(q)) {
                 result.emplace_back();
                 q.emplace();
             }
-        } while (!q.empty());
+        } while (!empty(q));
         return result;
     }
 };
