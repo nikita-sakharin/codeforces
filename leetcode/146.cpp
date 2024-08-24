@@ -39,7 +39,7 @@ public:
             elements.back() = {key, value};
         } else {
             elements.emplace_back(key, value);
-            index.emplace(key, --elements.end());
+            index.emplace(key, --end(elements));
         }
     }
 };
