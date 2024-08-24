@@ -4,7 +4,7 @@ public:
         const vector<int> &nums,
         const int target
     ) const noexcept {
-        const auto size{nums.size()};
+        const auto size{size(nums)};
         unordered_map<int, size_t> numMap{};
         const auto end{cend(numMap)};
         for (auto i{0UZ}; i < size; ++i) {
