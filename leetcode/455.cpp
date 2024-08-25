@@ -4,16 +4,16 @@ public:
         vector<int> &g,
         vector<int> &s
     ) const noexcept {
-        sort(g.begin(), g.end());
-        sort(s.begin(), s.end());
+        sort(begin(g), end(g));
+        sort(begin(s), end(s));
 
-        const auto gEnd{g.cend()}, sEnd{s.cend()};
-        auto gIter{g.cbegin()}, sIter{s.cbegin()};
+        const auto gEnd{cend(g)}, sEnd{cend(s)};
+        auto gIter{cbegin(g)}, sIter{cbegin(s)};
         while (gIter != gEnd && sIter != sEnd) {
             if (*gIter <= *sIter)
                 ++gIter;
             ++sIter;
         }
-        return gIter - g.cbegin();
+        return gIter - cbegin(g);
     }
 };
