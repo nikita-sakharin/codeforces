@@ -4,8 +4,8 @@ public:
         const vector<char> &letters,
         const char target
     ) const noexcept {
-        const auto begin{letters.cbegin()}, end{letters.cend()},
-            iter{upper_bound(begin, end, target)};
-        return iter == end ? *begin : *iter;
+        const auto first{cbegin(letters)}, last{cend(letters)},
+            iter{upper_bound(first, last, target)};
+        return iter == last ? *first : *iter;
     }
 };
