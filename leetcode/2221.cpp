@@ -61,7 +61,7 @@ public:
     constexpr int triangularSum(const vector<int> &nums) const noexcept {
         const auto size{nums.size()};
         vector<int> row(size);
-        pascalTriangleRow(row.begin(), size - 1);
+        pascalTriangleRow(begin(row), size - 1);
         auto result{0};
         for (auto i{0UZ}; i < size; ++i)
             result = (result + nums[i] * row[i]) % int{mod};
