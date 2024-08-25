@@ -22,7 +22,7 @@ private:
 
 public:
     constexpr ListNode *mergeKLists(vector<ListNode *> &lists) const noexcept {
-        const auto first{lists.begin()};
+        const auto first{begin(lists)};
         lists.resize(partition(first, end(lists), identity{}) - first);
 
         const Compare compare{};
