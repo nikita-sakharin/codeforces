@@ -27,7 +27,7 @@ private:
                     right = i + k;
                 }
                 if (k != 0)
-                    func(first + i + isOdd - k, first + i + k);
+                    func(next(first, i + isOdd - k), next(first, i + k));
             }
         }
     }
@@ -49,11 +49,10 @@ public:
 
         const auto strSize{size(str)}, palindromeSize{size(palindrome)};
         string result{};
-        result.reserve((strSize << 1) - palindromeSize);
+        result.reserve(strSize - palindromeSize + strSize);
         const auto iter{back_inserter(result)};
         copy(crbegin(str), next(crbegin(str), strSize - palindromeSize), iter);
-        copy(cbegin(palindrome), cend(palindrome), iter);
-        copy(next(strFirst, palindromeSize), strLast, iter);
+        copy(cbegin(str), cend(str), iter);
 
         return result;
     }
