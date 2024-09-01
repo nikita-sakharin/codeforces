@@ -40,11 +40,11 @@ public:
                 const auto first,
                 const auto last
             ) constexpr noexcept -> void {
-                if (size_t(distance(first, last)) > result.size())
+                if (size_t(distance(first, last)) > size(result))
                     result = string_view(first, last);
             }
         };
-        findPalindromes(str.cbegin(), str.cend(), func);
+        findPalindromes(cbegin(str), cend(str), func);
 
         return string(result);
     }
