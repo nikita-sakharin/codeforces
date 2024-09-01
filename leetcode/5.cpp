@@ -27,7 +27,7 @@ private:
                     right = i + k;
                 }
                 if (k != 0)
-                    func(first + i + isOdd - k, first + i + k);
+                    func(next(first, i + isOdd - k), next(first, i + k));
             }
         }
     }
