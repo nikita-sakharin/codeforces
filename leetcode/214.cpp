@@ -34,28 +34,26 @@ private:
 
 public:
     constexpr string shortestPalindrome(const string &str) const noexcept {
-        const auto strFirst{str.cbegin()}, strLast{str.cend()};
+        const auto strFirst{cbegin(str)}, strLast{cend(str)};
         string_view palindrome{};
         const auto func{
             [strFirst, &palindrome](
                 const auto first,
                 const auto last
             ) constexpr noexcept -> void {
-                if (first == strFirst
-                    && size_t(distance(first, last)) > palindrome.size()
-                )
+                if (first == strFirst && size_t(distance(first, last)) > palindrome.size())
                     palindrome = string_view(first, last);
             }
         };
         findPalindromes(strFirst, strLast, func);
 
-        const auto strSize{str.size()}, palindromeSize{palindrome.size()};
+        const auto strSize{size(str)}, palindromeSize{size(palindrome)};
         string result{};
         result.reserve((strSize << 1) - palindromeSize);
         const auto iter{back_inserter(result)};
-        copy(str.crbegin(), str.crbegin() + (strSize - palindromeSize), iter);
-        copy(palindrome.cbegin(), palindrome.cend(), iter);
-        copy(strFirst + palindromeSize, strLast, iter);
+        copy(crbegin(str), next(crbegin(str), strSize - palindromeSize), iter);
+        copy(cbegin(palindrome), cend(palindrome), iter);
+        copy(next(strFirst, palindromeSize), strLast, iter);
 
         return result;
     }
