@@ -4,19 +4,19 @@ public:
         const string &s,
         const string &t
     ) const noexcept {
-        const auto sSize{s.size()}, tSize{t.size()};
-        if (sSize < tSize)
+        const auto sLength{size(s)}, tLength{size(t)};
+        if (sLength < tLength)
             return isOneEditDistance(t, s);
-        if (sSize - tSize > 1)
+        if (sLength - tLength > 1)
             return false;
 
-        for (auto i{0UZ}; i < tSize; ++i)
-            if (s[i] != t[i]) {
+        const auto tLast{cend(t)};
+        for (auto sIter{cbegin(s)}, tIter{cbegin(t)}; tIter != tLast; ++sIter, ++tIter)
+            if (*sIter != *tIter)
                 return equal(
-                    s.cbegin() + i + 1, s.cend(),
-                    t.cbegin() + i + (sSize == tSize), t.cend()
+                    next(sIter), cend(s),
+                    next(tIter, sLength == tLength), tLast
                 );
-            }
-        return sSize != tSize;
+        return sLength != tLength;
     }
 };
