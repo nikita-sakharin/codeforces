@@ -45,7 +45,7 @@ public:
             return;
         }
 
-        if (index.size() >= capacity) {
+        if (size(index) >= capacity) {
             const auto frequencyIter{frequencies.find(minFrequency)};
             auto &elements{frequencyIter->second}, &newElements{frequencies[1]};
             auto node{index.extract(elements.front().key)};
