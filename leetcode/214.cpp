@@ -41,7 +41,7 @@ public:
                 const auto first,
                 const auto last
             ) constexpr noexcept -> void {
-                if (first == strFirst && size_t(distance(first, last)) > palindrome.size())
+                if (first == strFirst && size_t(distance(first, last)) > size(palindrome))
                     palindrome = string_view(first, last);
             }
         };
