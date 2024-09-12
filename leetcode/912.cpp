@@ -17,10 +17,10 @@ private:
 
             auto second{middle};
             auto leftNonEmpty{first != middle};
-            while (leftNonEmpty || !buffer.empty()) {
+            while (leftNonEmpty || !empty(buffer)) {
                 if (leftNonEmpty)
                     buffer.push(move(*first));
-                if (buffer.empty() || (second != last && *second < buffer.front())) {
+                if (empty(buffer) || (second != last && *second < buffer.front())) {
                     *first = move(*second);
                     ++second;
                 } else {
@@ -89,7 +89,7 @@ private:
 
 public:
     constexpr vector<int> sortArray(vector<int> &nums) const noexcept {
-        mergeSort(nums.begin(), nums.end(), RotateMerger<int>{});
+        mergeSort(begin(nums), end(nums), RotateMerger<int>{});
         return move(nums);
     }
 };
