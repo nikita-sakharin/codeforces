@@ -41,10 +41,10 @@ public:
 
         if (size(index) >= capacity) {
             const auto iter{index.find(head->first)};
-            get(*iter) = value;
             auto node{index.extract(iter)};
             node.key() = key;
             index.insert(move(node));
+            get(*iter) = value;
         } else {
             auto &element{*index.emplace(key, Mapped{tail, nullptr, value}).first};
             tail = (tail ? tail->second.next : head) = &element;
