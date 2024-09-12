@@ -51,7 +51,7 @@ public:
             auto node{index.extract(elements.front().key)};
             node.key() = key;
             index.insert(move(node));
-            newElements.splice(cend(newElements), elements, elements.begin());
+            newElements.splice(cend(newElements), elements, begin(elements));
             newElements.back() = {key, value, 1};
             if (elements.empty())
                 frequencies.erase(frequencyIter);
