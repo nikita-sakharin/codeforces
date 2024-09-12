@@ -33,7 +33,7 @@ public:
                     return false;
                 s.emplace(treeNode->right, treeNode->val + 1, right);
             }
-        } while (!s.empty());
+        } while (!empty(s));
         return true;
     }
 };
