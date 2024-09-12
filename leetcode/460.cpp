@@ -18,7 +18,7 @@ private:
         const auto frequencyIter{frequencies.find(frequency)};
         auto &elements{frequencyIter->second},
             &newElements{frequencies[frequency + 1]};
-        newElements.splice(newElements.cend(), elements, nodeIter);
+        newElements.splice(cend(newElements), elements, nodeIter);
         if (elements.empty()) {
             frequencies.erase(frequencyIter);
             if (minFrequency == frequency)
@@ -33,14 +33,14 @@ public:
 
     inline int get(const int key) noexcept {
         const auto iter{index.find(key)};
-        if (iter == index.end())
+        if (iter == cend(index))
             return -1;
         return get(iter->second);
     }
 
     inline void put(const int key, const int value) noexcept {
         const auto iter{index.find(key)};
-        if (iter != index.end()) {
+        if (iter != cend(index)) {
             get(iter->second) = value;
             return;
         }
@@ -51,14 +51,14 @@ public:
             auto node{index.extract(elements.front().key)};
             node.key() = key;
             index.insert(move(node));
-            newElements.splice(newElements.cend(), elements, elements.begin());
+            newElements.splice(cend(newElements), elements, elements.begin());
             newElements.back() = {key, value, 1};
             if (elements.empty())
                 frequencies.erase(frequencyIter);
         } else {
             auto &elements{frequencies[1]};
             elements.emplace_back(key, value, 1);
-            index.emplace(key, --elements.end());
+            index.emplace(key, --end(elements));
         }
         minFrequency = 1;
     }
