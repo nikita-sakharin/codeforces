@@ -18,7 +18,7 @@ private:
         const auto iter{frequencies.find(frequency)};
         auto &elements{iter->second}, &newElements{frequencies[frequency + 1]};
         newElements.splice(cend(newElements), elements, nodeIter);
-        if (elements.empty()) {
+        if (empty(elements)) {
             frequencies.erase(iter);
             if (minFrequency == frequency)
                 minFrequency = frequency + 1;
@@ -53,7 +53,7 @@ public:
             index.insert(move(node));
             newElements.splice(cend(newElements), elements, cbegin(elements));
             newElements.back() = {key, value, 1};
-            if (elements.empty())
+            if (empty(elements))
                 frequencies.erase(iter);
         } else {
             auto &elements{frequencies[1]};
