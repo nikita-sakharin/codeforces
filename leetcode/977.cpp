@@ -1,7 +1,7 @@
 class Solution final {
 public:
     inline vector<int> sortedSquares(const vector<int> &nums) const noexcept {
-        auto index{nums.size()};
+        auto index{size(nums)};
         vector<int> result(index);
         ptrdiff_t i{0}, j(index - 1);
         while (i <= j) {
