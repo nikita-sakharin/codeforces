@@ -20,7 +20,7 @@ public:
     ) const noexcept {
         TreeNode *root{};
         Stack<tuple<TreeNode **, size_t, size_t>> s{};
-        s.emplace(&root, 0, nums.size());
+        s.emplace(&root, 0, size(nums));
         do {
             const auto [ptr, first, last]{s.top()};
             s.pop();
