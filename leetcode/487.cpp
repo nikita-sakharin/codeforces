@@ -17,15 +17,15 @@ public:
     constexpr int findMaxConsecutiveOnes(
         const vector<int> &nums
     ) const noexcept {
-        const auto numsEnd{nums.cend()};
-        auto iter{nums.cbegin()};
-        ptrdiff_t result{0}, lastCnt{0};
-        while (iter != numsEnd) {
+        const auto last{cend(nums)};
+        auto iter{cbegin(nums)};
+        ptrdiff_t result{0}, prevCnt{0};
+        while (iter != last) {
             ptrdiff_t zeroCnt{0}, oneCnt{0};
-            tie(iter, zeroCnt) = adjacentCount(iter, numsEnd, 1);
-            tie(iter, oneCnt) = adjacentCount(iter, numsEnd, 0);
-            result = max(result, oneCnt + 1 + (zeroCnt == 1 ? lastCnt : 0));
-            lastCnt = oneCnt;
+            tie(iter, zeroCnt) = adjacentCount(iter, last, 1);
+            tie(iter, oneCnt) = adjacentCount(iter, last, 0);
+            result = max(result, oneCnt + 1 + (zeroCnt == 1 ? prevCnt : 0));
+            prevCnt = oneCnt;
         }
         return int(result);
     }
