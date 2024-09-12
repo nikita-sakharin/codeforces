@@ -3,9 +3,9 @@ public:
     constexpr int maxDistToClosest(const vector<int> &seats) const noexcept {
         const auto length{size(seats)};
         auto maxDistance{0UZ}, cnt{0UZ};
-        while (maxDistance < size && seats[maxDistance] == 0)
+        while (maxDistance < length && seats[maxDistance] == 0)
             ++maxDistance;
-        for (auto i{maxDistance}; i < size; ++i)
+        for (auto i{maxDistance}; i < length; ++i)
             if (seats[i] == 0)
                 ++cnt;
             else {
