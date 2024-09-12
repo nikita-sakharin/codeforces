@@ -15,12 +15,11 @@ private:
 
     inline int &get(const list<Node>::iterator nodeIter) noexcept {
         auto &[unused, value, frequency]{*nodeIter};
-        const auto frequencyIter{frequencies.find(frequency)};
-        auto &elements{frequencyIter->second},
-            &newElements{frequencies[frequency + 1]};
+        const auto iter{frequencies.find(frequency)};
+        auto &elements{iter->second}, &newElements{frequencies[frequency + 1]};
         newElements.splice(cend(newElements), elements, nodeIter);
         if (elements.empty()) {
-            frequencies.erase(frequencyIter);
+            frequencies.erase(iter);
             if (minFrequency == frequency)
                 minFrequency = frequency + 1;
         }
@@ -46,15 +45,15 @@ public:
         }
 
         if (size(index) >= capacity) {
-            const auto frequencyIter{frequencies.find(minFrequency)};
-            auto &elements{frequencyIter->second}, &newElements{frequencies[1]};
+            const auto iter{frequencies.find(minFrequency)};
+            auto &elements{iter->second}, &newElements{frequencies[1]};
             auto node{index.extract(elements.front().key)};
             node.key() = key;
             index.insert(move(node));
             newElements.splice(cend(newElements), elements, cbegin(elements));
             newElements.back() = {key, value, 1};
             if (elements.empty())
-                frequencies.erase(frequencyIter);
+                frequencies.erase(iter);
         } else {
             auto &elements{frequencies[1]};
             elements.emplace_back(key, value, 1);
