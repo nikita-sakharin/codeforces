@@ -1,17 +1,25 @@
 class LRUCache final {
 private:
-    class Node final {
+    class Mapped final {
     public:
-        int key{0}, value{0};
+        pair<const int, Mapped> *prev{}, *next{};
+        int value{0};
     };
 
-    unordered_map<int, list<Node>::iterator> index{};
-    list<Node> elements{};
+    unordered_map<int, Mapped> index{};
+    pair<const int, Mapped> *head{}, *tail{};
     const size_t capacity{0};
 
-    inline int &get(const list<Node>::iterator nodeIter) noexcept {
-        elements.splice(cend(elements), elements, nodeIter);
-        return nodeIter->value;
+    constexpr int &get(pair<const int, Mapped> &element) noexcept {
+        auto &mapped{element.second};
+        (mapped.prev ? mapped.prev->second.next : head) = mapped.next;
+        (mapped.next ? mapped.next->second.prev : tail) = mapped.prev;
+
+        mapped.prev = tail;
+        mapped.next = nullptr;
+        tail = (tail ? tail->second.next : head) = &element;
+
+        return mapped.value;
     }
 
 public:
@@ -21,25 +29,25 @@ public:
         const auto iter{index.find(key)};
         if (iter == cend(index))
             return -1;
-        return get(iter->second);
+        return get(*iter);
     }
 
     inline void put(const int key, const int value) noexcept {
         const auto iter{index.find(key)};
         if (iter != cend(index)) {
-            get(iter->second) = value;
+            get(*iter) = value;
             return;
         }
 
         if (size(index) >= capacity) {
-            auto node{index.extract(elements.front().key)};
+            const auto iter{index.find(head->first)};
+            get(*iter) = value;
+            auto node{index.extract(iter)};
             node.key() = key;
             index.insert(move(node));
-            elements.splice(cend(elements), elements, cbegin(elements));
-            elements.back() = {key, value};
         } else {
-            elements.emplace_back(key, value);
-            index.emplace(key, --end(elements));
+            auto &element{*index.emplace(key, Mapped{tail, nullptr, value}).first};
+            tail = (tail ? tail->second.next : head) = &element;
         }
     }
 };
