@@ -6,7 +6,7 @@ private:
         const dbl radius
     ) noexcept {
         const auto i = {0.0, radius}, w = {0.0, 2 / radius};
-        return piecewise_linear_distribution(begin(i), end(i), begin(w));
+        return piecewise_linear_distribution(cbegin(i), cend(i), cbegin(w));
     }
 
     default_random_engine eng{random_device{}()};
