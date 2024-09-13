@@ -20,7 +20,7 @@ public:
     ) const noexcept {
         vector<int> result{};
         Stack<const TreeNode *> s{};
-        while (treeNode || !s.empty()) {
+        while (treeNode || !empty(s)) {
             while (treeNode) {
                 s.push(treeNode);
                 treeNode = treeNode->left;
