@@ -1,7 +1,7 @@
 class Solution final {
 public:
     inline string addBinary(const string &a, const string &b) const noexcept {
-        const auto aSize{a.size()}, bSize{b.size()};
+        const auto aSize{size(a)}, bSize{size(b)};
         if (aSize < bSize)
             return addBinary(b, a);
         string result(aSize, '\0');
@@ -15,7 +15,7 @@ public:
             carry = sum >> 1;
         }
         if (carry)
-            result.insert(result.cbegin(), '1');
+            result.insert(cbegin(result), '1');
         return result;
     }
 };
