@@ -15,24 +15,24 @@ public:
         const TreeNode * const root
     ) const noexcept {
         vector<vector<int>> result{};
-        queue<const TreeNode *> q{};
+        queue<const TreeNode *> fifo{};
         if (root)
-            q.emplace();
-        q.push(root);
+            fifo.emplace();
+        fifo.push(root);
         do {
-            const auto treeNode{q.front()};
-            q.pop();
+            const auto treeNode{fifo.front()};
+            fifo.pop();
             if (treeNode) {
                 result.back().push_back(treeNode->val);
                 if (treeNode->left)
-                    q.emplace(treeNode->left);
+                    fifo.emplace(treeNode->left);
                 if (treeNode->right)
-                    q.emplace(treeNode->right);
+                    fifo.emplace(treeNode->right);
             } else if (!empty(q)) {
                 result.emplace_back();
-                q.emplace();
+                fifo.emplace();
             }
-        } while (!empty(q));
+        } while (!empty(fifo));
 
         return result;
     }
