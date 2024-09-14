@@ -28,7 +28,7 @@ public:
                     fifo.emplace(treeNode->left);
                 if (treeNode->right)
                     fifo.emplace(treeNode->right);
-            } else if (!empty(q)) {
+            } else if (!empty(fifo)) {
                 result.emplace_back();
                 fifo.emplace();
             }
