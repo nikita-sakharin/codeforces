@@ -2,35 +2,39 @@ class Foo final {
 private:
     using uint = unsigned;
 
-    condition_variable condition{};
-    mutex sync{};
-    uint counter{0};
+    class Linearizer final {
+    private:
+        condition_variable condition{};
+        mutex sync{};
+        uint counter{0};
+
+    public:
+        inline void operator()(
+            const uint index,
+            const function<void()> &func
+        ) noexcept {
+            unique_lock lock{sync};
+            condition.wait(lock, [this, index]() constexpr noexcept -> bool {
+                return counter == index;
+            });
+            func();
+            ++counter;
+            condition.notify_all();
+        }
+    };
+
+    Linearizer linearizer{};
 
 public:
     inline void first(const function<void()> &printFirst) noexcept {
-        unique_lock lock{sync};
-        printFirst();
-        ++counter;
-        condition.notify_all();
+        linearizer(0, printFirst);
     }
 
     inline void second(const function<void()> &printSecond) noexcept {
-        unique_lock lock{sync};
-        condition.wait(lock, [this]() constexpr noexcept -> bool {
-            return counter == 1;
-        });
-        printSecond();
-        ++counter;
-        condition.notify_all();
+        linearizer(1, printSecond);
     }
 
     inline void third(const function<void()> &printThird) noexcept {
-        unique_lock lock{sync};
-        condition.wait(lock, [this]() constexpr noexcept -> bool {
-            return counter == 2;
-        });
-        printThird();
-        ++counter;
-        condition.notify_all();
+        linearizer(2, printThird);
     }
 };
