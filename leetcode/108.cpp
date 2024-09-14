@@ -19,19 +19,19 @@ public:
         const vector<int> &nums
     ) const noexcept {
         TreeNode *root{};
-        Stack<tuple<TreeNode **, size_t, size_t>> s{};
-        s.emplace(&root, 0, size(nums));
+        Stack<tuple<TreeNode **, size_t, size_t>> lifo{};
+        lifo.emplace(&root, 0, size(nums));
         do {
-            const auto [ptr, first, last]{s.top()};
-            s.pop();
+            const auto [ptr, first, last]{lifo.top()};
+            lifo.pop();
             const auto middle{first + ((last - first) >> 1)};
             const auto treeNode{new TreeNode(nums[middle])};
             *ptr = treeNode;
             if (first < middle)
-                s.emplace(&treeNode->left, first, middle);
+                lifo.emplace(&treeNode->left, first, middle);
             if (middle + 1 < last)
-                s.emplace(&treeNode->right, middle + 1, last);
-        } while (!empty(s));
+                lifo.emplace(&treeNode->right, middle + 1, last);
+        } while (!empty(lifo));
 
         return root;
     }
