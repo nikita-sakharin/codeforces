@@ -16,20 +16,20 @@ private:
 
 public:
     inline bool isSymmetric(const TreeNode * const root) const noexcept {
-        Stack<pair<const TreeNode *, const TreeNode *>> s{};
-        s.emplace(root->left, root->right);
+        Stack<pair<const TreeNode *, const TreeNode *>> lifo{};
+        lifo.emplace(root->left, root->right);
         do {
-            const auto [left, right]{s.top()};
-            s.pop();
+            const auto [left, right]{lifo.top()};
+            lifo.pop();
             if (bool(left) != bool(right))
                 return false;
             if (left) {
                 if (left->val != right->val)
                     return false;
-                s.emplace(left->left, right->right);
-                s.emplace(left->right, right->left);
+                lifo.emplace(left->left, right->right);
+                lifo.emplace(left->right, right->left);
             }
-        } while (!empty(s));
+        } while (!empty(lifo));
 
         return true;
     }
