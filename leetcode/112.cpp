@@ -37,24 +37,24 @@ public:
         }
 
         while (!empty(lifo)) {
-            const TreeNode *node{lifo.top()->right};
-            while (node) {
-                lifo.push(node);
-                targetSum -= node->val;
-                if (node->left)
-                    node = node->left;
+            treeNode = lifo.top()->right;
+            while (treeNode) {
+                lifo.push(treeNode);
+                targetSum -= treeNode->val;
+                if (treeNode->left)
+                    treeNode = treeNode->left;
                 else
-                    node = node->right;
+                    treeNode = treeNode->right;
             }
 
             if (targetSum == 0)
                 return true;
 
             do {
-                node = lifo.top();
-                targetSum += node->val;
+                treeNode = lifo.top();
+                targetSum += treeNode->val;
                 lifo.pop();
-            } while (!empty(lifo) && !hasRightSibling(node, lifo.top()));
+            } while (!empty(lifo) && !hasRightSibling(treeNode, lifo.top()));
         }
 
         return false;
