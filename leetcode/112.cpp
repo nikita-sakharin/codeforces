@@ -18,7 +18,7 @@ private:
         const TreeNode * const treeNode,
         const TreeNode * const parent
     ) noexcept {
-        return parent->right && treeNode == parent->left;
+        return treeNode == parent->left && parent->right;
     }
 
     static constexpr const int firstLeaf(
