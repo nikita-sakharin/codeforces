@@ -21,40 +21,52 @@ private:
         return parent->right && treeNode == parent->left;
     }
 
+    static constexpr const int firstLeaf(
+        const TreeNode *treeNode,
+        Stack<const TreeNode *> &lifo
+    ) noexcept {
+        auto sum{0};
+        while (treeNode) {
+            lifo.push(treeNode);
+            sum += treeNode->val;
+            if (treeNode->left)
+                treeNode = treeNode->left;
+            else
+                treeNode = treeNode->right;
+        }
+        return sum;
+    }
+
+    static constexpr const int nextLeaf(
+        Stack<const TreeNode *> &lifo
+    ) noexcept {
+        auto sum{0};
+        const TreeNode *treeNode{};
+        do {
+            treeNode = lifo.top();
+            sum -= treeNode->val;
+            lifo.pop();
+        } while (!empty(lifo) && !hasRightSibling(treeNode, lifo.top()));
+
+        if (!empty(lifo))
+            sum += firstLeaf(lifo.top()->right, lifo);
+
+        return sum;
+    }
+
 public:
     inline bool hasPathSum(
         const TreeNode *treeNode,
         int targetSum
     ) const noexcept {
         Stack<const TreeNode *> lifo{};
-        while (treeNode) {
-            lifo.push(treeNode);
-            targetSum -= treeNode->val;
-            if (treeNode->left)
-                treeNode = treeNode->left;
-            else
-                treeNode = treeNode->right;
-        }
+        targetSum -= firstLeaf(treeNode, lifo);
 
         while (!empty(lifo)) {
-            treeNode = lifo.top()->right;
-            while (treeNode) {
-                lifo.push(treeNode);
-                targetSum -= treeNode->val;
-                if (treeNode->left)
-                    treeNode = treeNode->left;
-                else
-                    treeNode = treeNode->right;
-            }
-
             if (targetSum == 0)
                 return true;
 
-            do {
-                treeNode = lifo.top();
-                targetSum += treeNode->val;
-                lifo.pop();
-            } while (!empty(lifo) && !hasRightSibling(treeNode, lifo.top()));
+            targetSum -= nextLeaf(lifo);
         }
 
         return false;
