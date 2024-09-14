@@ -19,20 +19,20 @@ public:
         const TreeNode * const first,
         const TreeNode * const second
     ) const noexcept {
-        Stack<pair<const TreeNode *, const TreeNode *>> s{};
-        s.emplace(first, second);
+        Stack<pair<const TreeNode *, const TreeNode *>> lifo{};
+        lifo.emplace(first, second);
         do {
-            const auto [left, right]{s.top()};
-            s.pop();
+            const auto [left, right]{lifo.top()};
+            lifo.pop();
             if (bool(left) != bool(right))
                 return false;
             if (left) {
                 if (left->val != right->val)
                     return false;
-                s.emplace(left->left, right->left);
-                s.emplace(left->right, right->right);
+                lifo.emplace(left->left, right->left);
+                lifo.emplace(left->right, right->right);
             }
-        } while (!empty(s));
+        } while (!empty(lifo));
 
         return true;
     }
