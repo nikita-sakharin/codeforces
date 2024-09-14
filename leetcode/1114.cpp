@@ -2,28 +2,30 @@ class Foo final {
 private:
     using uint = unsigned;
 
+    template<class Integer>
     class Linearizer final {
     private:
-        condition_variable condition{};
+        condition_variable condvar{};
         mutex sync{};
-        uint counter{0};
+        Integer counter{0};
 
     public:
+        template<class Func>
         inline void operator()(
-            const uint index,
-            const function<void()> &func
+            const Integer index,
+            Func &&func
         ) noexcept {
             unique_lock lock{sync};
-            condition.wait(lock, [this, index]() constexpr noexcept -> bool {
+            condvar.wait(lock, [this, index]() constexpr noexcept -> bool {
                 return counter == index;
             });
             func();
             ++counter;
-            condition.notify_all();
+            condvar.notify_all();
         }
     };
 
-    Linearizer linearizer{};
+    Linearizer<uint> linearizer{};
 
 public:
     inline void first(const function<void()> &printFirst) noexcept {
