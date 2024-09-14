@@ -1,21 +1,22 @@
 class Solution final {
 public:
-    inline string addBinary(const string &a, const string &b) const noexcept {
-        const auto aSize{size(a)}, bSize{size(b)};
-        if (aSize < bSize)
+    inline string addBinary(string &a, string &b) const noexcept {
+        if (size(a) < size(b))
             return addBinary(b, a);
-        string result(aSize, '\0');
+
         auto carry{false};
-        for (auto i{0UZ}; i < aSize; ++i) {
+        const auto lastA{crend(a)}, lastB{crend(b)};
+        for (auto iterA{rbegin(a)}, iterB{rbegin(b)}; iterA != lastA; ++iterA) {
             const auto
-                left{a[aSize - i - 1] - '0'},
-                right{i < bSize ? b[bSize - i - 1] - '0' : 0},
+                left{*iterA - '0'},
+                right{iterB != lastB ? *iterB++ - '0' : 0},
                 sum{carry + left + right};
-            result[aSize - i - 1] = '0' + (sum & 1);
+            *iterA = '0' + (sum & 1);
             carry = sum >> 1;
         }
         if (carry)
-            result.insert(cbegin(result), '1');
-        return result;
+            a.insert(cbegin(a), '1');
+
+        return move(a);
     }
 };
