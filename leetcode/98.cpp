@@ -16,24 +16,24 @@ private:
 
 public:
     inline bool isValidBST(const TreeNode * const root) const noexcept {
-        Stack<tuple<const TreeNode *, int, int>> s{};
-        s.emplace(root, numeric_limits<int>::min(), numeric_limits<int>::max());
+        Stack<tuple<const TreeNode *, int, int>> lifo{};
+        lifo.emplace(root, numeric_limits<int>::min(), numeric_limits<int>::max());
         do {
-            const auto [treeNode, left, right]{s.top()};
-            s.pop();
+            const auto [treeNode, left, right]{lifo.top()};
+            lifo.pop();
             if (treeNode->val < left || treeNode->val > right)
                 return false;
             if (treeNode->left) {
                 if (treeNode->val == numeric_limits<int>::min())
                     return false;
-                s.emplace(treeNode->left, left, treeNode->val - 1);
+                lifo.emplace(treeNode->left, left, treeNode->val - 1);
             }
             if (treeNode->right) {
                 if (treeNode->val == numeric_limits<int>::max())
                     return false;
-                s.emplace(treeNode->right, treeNode->val + 1, right);
+                lifo.emplace(treeNode->right, treeNode->val + 1, right);
             }
-        } while (!empty(s));
+        } while (!empty(lifo));
         return true;
     }
 };
