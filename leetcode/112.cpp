@@ -14,13 +14,6 @@ private:
     template<class T>
     using Stack = stack<T, vector<T>>;
 
-    static constexpr bool hasRightSibling(
-        const TreeNode * const treeNode,
-        const TreeNode * const parent
-    ) noexcept {
-        return treeNode == parent->left && parent->right;
-    }
-
     static constexpr const int firstLeaf(
         const TreeNode *treeNode,
         Stack<const TreeNode *> &lifo
@@ -35,6 +28,13 @@ private:
                 treeNode = treeNode->right;
         }
         return sum;
+    }
+
+    static constexpr bool hasRightSibling(
+        const TreeNode * const treeNode,
+        const TreeNode * const parent
+    ) noexcept {
+        return treeNode == parent->left && parent->right;
     }
 
     static constexpr const int nextLeaf(
@@ -56,11 +56,11 @@ private:
 
 public:
     inline bool hasPathSum(
-        const TreeNode *treeNode,
+        const TreeNode *root,
         int targetSum
     ) const noexcept {
         Stack<const TreeNode *> lifo{};
-        targetSum -= firstLeaf(treeNode, lifo);
+        targetSum -= firstLeaf(root, lifo);
 
         while (!empty(lifo)) {
             if (targetSum == 0)
