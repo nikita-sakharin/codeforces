@@ -32,9 +32,9 @@ public:
         vector<int> &nums,
         const int k
     ) const noexcept {
-        const auto size{nums.size()};
+        const auto length{size(nums)};
         unordered_map<int, size_t> numMap{{nums[0], 1}};
-        for (auto i{1UZ}; i < size; ++i) {
+        for (auto i{1UZ}; i < length; ++i) {
             nums[i] += nums[i - 1];
             ++numMap[nums[i]];
         }
