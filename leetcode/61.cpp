@@ -35,7 +35,7 @@ public:
         if (!head)
             return nullptr;
         auto [tail, size]{tailElement(head)};
-        k %= size;
+        k %= int(size);
         if (k != 0) {
             tail->next = head;
             tail = nthElement(head, size - k - 1);
