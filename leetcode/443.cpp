@@ -2,8 +2,8 @@ class Solution final {
 public:
     constexpr int compress(vector<char> &chars) const noexcept {
         const auto length{size(chars)};
-        const auto ptrEnd{chars.data() + length};
-        auto ptr{chars.data() + 1};
+        const auto ptrEnd{data(chars) + length};
+        auto ptr{data(chars) + 1};
         auto cnt{1UZ};
         for (auto i{1UZ}; i < length; ++i) {
             if (chars[i - 1] != chars[i]) {
@@ -16,7 +16,7 @@ public:
         }
         if (cnt > 1)
             ptr = to_chars(ptr, ptrEnd, cnt).ptr;
-        chars.resize(size_t(ptr - chars.data()));
+        chars.resize(size_t(ptr - data(chars)));
         return int(size(chars));
     }
 };
