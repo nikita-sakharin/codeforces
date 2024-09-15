@@ -22,11 +22,11 @@ public:
         Stack<tuple<TreeNode **, size_t, size_t>> lifo{};
         lifo.emplace(&root, 0, size(nums));
         do {
-            const auto [ptr, first, last]{lifo.top()};
+            const auto [parentPtr, first, last]{lifo.top()};
             lifo.pop();
             const auto middle{first + ((last - first) >> 1)};
             const auto treeNode{new TreeNode(nums[middle])};
-            *ptr = treeNode;
+            *parentPtr = treeNode;
             if (first < middle)
                 lifo.emplace(&treeNode->left, first, middle);
             if (middle + 1 < last)
