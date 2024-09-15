@@ -9,6 +9,9 @@
  * };
  */
 class Solution final {
+private:
+    static constexpr auto radix{10};
+
 public:
     constexpr ListNode *addTwoNumbers(
         ListNode *l1,
@@ -22,8 +25,8 @@ public:
                 l2 = l2->next;
             }
             l1->val += carry;
-            if (l1->val >= 10) {
-                l1->val -= 10;
+            if (l1->val >= radix) {
+                l1->val -= radix;
                 carry = true;
             } else
                 carry = false;
