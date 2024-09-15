@@ -10,10 +10,10 @@
  */
 class Solution final {
 private:
-    static constexpr size_t listSize(const ListNode *head) noexcept {
+    static constexpr size_t listSize(const ListNode *listNode) noexcept {
         auto size{0UZ};
-        while (head) {
-            head = head->next;
+        while (listNode) {
+            listNode = listNode->next;
             ++size;
         }
         return size;
