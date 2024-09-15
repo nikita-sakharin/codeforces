@@ -14,12 +14,12 @@ public:
     inline vector<string> summaryRanges(
         const vector<int> &nums
     ) const noexcept {
-        const auto size{nums.size()};
+        const auto length{size(nums)};
         vector<string> result{};
-        if (size == 0)
+        if (length == 0)
             return result;
         auto left{nums.front()};
-        for (auto i{1UZ}; i < size; ++i)
+        for (auto i{1UZ}; i < length; ++i)
             if (const auto prev{nums[i - 1]}; nums[i] != prev + 1) {
                 pushBack(result, left, prev);
                 left = nums[i];
