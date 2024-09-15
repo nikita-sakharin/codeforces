@@ -6,7 +6,7 @@ private:
 public:
     constexpr void push(const int value) noexcept {
         values.push_back(value);
-        index[value].push(--values.cend());
+        index[value].push(--cend(values));
     }
 
     inline int pop() noexcept {
@@ -15,7 +15,7 @@ public:
         auto &iterStack{iter->second};
         values.pop_back();
         iterStack.pop();
-        if (iterStack.empty())
+        if (empty(iterStack))
             index.erase(iter);
         return value;
     }
@@ -25,16 +25,16 @@ public:
     }
 
     inline int peekMax() const noexcept {
-        return (--index.cend())->first;
+        return (--cend(index))->first;
     }
 
     inline int popMax() noexcept {
-        const auto iter{--index.end()};
+        const auto iter{--end(index)};
         const auto value{iter->first};
         auto &iterStack{iter->second};
         values.erase(iterStack.top());
         iterStack.pop();
-        if (iterStack.empty())
+        if (empty(iterStack))
             index.erase(iter);
         return value;
     }
