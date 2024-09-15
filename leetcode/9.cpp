@@ -10,7 +10,7 @@ public:
 
         array<char, digits10<decltype(x)> + 1> str{};
         const auto
-            size{size_t(to_chars(str.begin(), str.end(), x).ptr - str.begin())},
+            size{size_t(to_chars(begin(str), end(str), x).ptr - cbegin(str))},
             lastIndex{size - 1}, half{size >> 1};
         for (auto i{0UZ}; i < half; ++i)
             if (str[i] != str[lastIndex - i])
