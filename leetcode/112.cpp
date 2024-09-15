@@ -27,6 +27,7 @@ private:
             else
                 treeNode = treeNode->right;
         }
+
         return sum;
     }
 
