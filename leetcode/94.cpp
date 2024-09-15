@@ -19,14 +19,14 @@ public:
         const TreeNode *treeNode
     ) const noexcept {
         vector<int> result{};
-        Stack<const TreeNode *> s{};
-        while (treeNode || !empty(s)) {
+        Stack<const TreeNode *> lifo{};
+        while (treeNode || !empty(lifo)) {
             while (treeNode) {
-                s.push(treeNode);
+                lifo.push(treeNode);
                 treeNode = treeNode->left;
             }
-            treeNode = s.top();
-            s.pop();
+            treeNode = lifo.top();
+            lifo.pop();
             result.push_back(treeNode->val);
             treeNode = treeNode->right;
         }
