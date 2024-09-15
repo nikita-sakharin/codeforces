@@ -3,8 +3,8 @@ public:
     constexpr vector<vector<int>> merge(
         vector<vector<int>> &intervals
     ) const noexcept {
-        const auto last{intervals.end()};
-        auto slow{intervals.begin()};
+        const auto last{end(intervals)};
+        auto slow{begin(intervals)};
         sort(slow, last);
 
         for (auto fast{next(slow)}; fast != last; ++fast) {
@@ -15,7 +15,7 @@ public:
             else if (++slow != fast)
                 iter_swap(slow, fast);
         }
-        intervals.resize(size_t(distance(intervals.begin(), slow)) + 1);
+        intervals.resize(size_t(distance(begin(intervals), slow)) + 1);
 
         return move(intervals);
     }
