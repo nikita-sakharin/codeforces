@@ -3,7 +3,7 @@ private:
     template<class Iter, class T>
     static constexpr Iter lowerBound(
         Iter first,
-        Iter last,
+        const Iter last,
         const T &value
     ) noexcept {
         auto length{distance(first, last)};
