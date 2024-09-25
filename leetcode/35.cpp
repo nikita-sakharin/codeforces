@@ -25,6 +25,6 @@ public:
         const int target
     ) const noexcept {
         const auto first{cbegin(nums)};
-        return int(lowerBound(first, cend(nums), target) - first);
+        return int(distance(first, lowerBound(first, cend(nums), target)));
     }
 };
