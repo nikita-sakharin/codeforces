@@ -8,7 +8,7 @@ private:
     ) noexcept {
         auto length{distance(first, last)};
         while (length > 0) {
-            const auto half{length >> 1};
+            const auto half{(length - 1) >> 1};
             const auto middle{next(first, half)};
             if (*middle < value) {
                 first = next(middle);
