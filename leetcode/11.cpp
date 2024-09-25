@@ -4,7 +4,8 @@ public:
         auto result{0};
         auto i{cbegin(height)}, j{--cend(height)};
         while (i != j) {
-            const auto width{int(j - i)}, minHeight{*i < *j ? *i++ : *j--};
+            const auto width{int(distance(i, j))},
+                minHeight{*i < *j ? *i++ : *j--};
             result = max(result, width * minHeight);
         }
         return result;
