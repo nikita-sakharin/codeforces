@@ -8,12 +8,12 @@
  */
 class Solution final {
 public:
-    constexpr bool hasCycle(const ListNode *head) const noexcept {
-        auto fast{head};
+    constexpr bool hasCycle(const ListNode *slow) const noexcept {
+        auto fast{slow};
         while (fast && fast->next) {
-            head = head->next;
+            slow = slow->next;
             fast = fast->next->next;
-            if (head == fast)
+            if (slow == fast)
                 return true;
         }
         return false;
