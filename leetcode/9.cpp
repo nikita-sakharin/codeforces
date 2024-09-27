@@ -8,14 +8,9 @@ public:
         if (x < 0)
             return false;
 
-        array<char, digits10<decltype(x)> + 1> str{};
-        auto first{data(str)}, last{to_chars(begin(str), end(str), x).ptr - 1};
-        while (first < last) {
-            if (*first != *last)
-                return false;
-            ++first;
-            --last;
-        }
+        array<char, digits10<decltype(x)> + 1> arr{};
+        auto first{data(arr)}, last{to_chars(begin(arr), end(arr), x).ptr};
+        return equal(first, midpoint(first, last), reverse_iterator(last));
 
         return true;
     }
