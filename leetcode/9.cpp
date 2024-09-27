@@ -9,12 +9,14 @@ public:
             return false;
 
         array<char, digits10<decltype(x)> + 1> str{};
-        const auto
-            length{size_t(to_chars(begin(str), end(str), x).ptr - cbegin(str))},
-            lastIndex{length - 1}, half{length >> 1};
-        for (auto i{0UZ}; i < half; ++i)
-            if (str[i] != str[lastIndex - i])
+        auto first{data(str)}, last{to_chars(begin(str), end(str), x).ptr - 1};
+        while (first < last) {
+            if (*first != *last)
                 return false;
+            ++first;
+            --last;
+        }
+
         return true;
     }
 };
