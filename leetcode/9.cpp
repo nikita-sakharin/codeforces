@@ -11,7 +11,5 @@ public:
         array<char, digits10<decltype(x)> + 1> arr{};
         auto first{data(arr)}, last{to_chars(begin(arr), end(arr), x).ptr};
         return equal(first, midpoint(first, last), reverse_iterator(last));
-
-        return true;
     }
 };
