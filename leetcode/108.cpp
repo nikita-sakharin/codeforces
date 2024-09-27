@@ -24,7 +24,7 @@ public:
         do {
             const auto [parentPtr, first, last]{lifo.top()};
             lifo.pop();
-            const auto middle{first + ((last - first) >> 1)};
+            const auto middle{midpoint(first, last)};
             const auto treeNode{new TreeNode(nums[middle])};
             *parentPtr = treeNode;
             if (first < middle)
