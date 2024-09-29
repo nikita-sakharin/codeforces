@@ -47,8 +47,8 @@ public:
         const vector<int> &nums2
     ) const noexcept {
         const auto
-            first1{nums1.cbegin()}, last1{nums1.cend()},
-            first2{nums2.cbegin()}, last2{nums2.cend()};
+            first1{cbegin(nums1)}, last1{cend(nums1)},
+            first2{cbegin(nums2)}, last2{cend(nums2)};
         const auto size1{ssize(nums1)}, size2{ssize(nums2)},
             median{midpointFloor(size1, size2)};
         const auto isOdd{((size1 ^ size2) & 1) == 1};
