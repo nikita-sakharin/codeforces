@@ -1,16 +1,19 @@
 class Solution final {
 private:
+    template<class Iter>
+    static constexpr auto category{iterator_traits<Iter>::iterator_category()};
+
     template<class T, class Container = deque<T>>
     class DefaultMerger final {
     private:
         mutable queue<T, Container> buffer{};
 
-    public:
         template<class Iter>
         constexpr void operator()(
             Iter first,
             const Iter middle,
-            const Iter last
+            const Iter last,
+            const forward_iterator_tag
         ) const noexcept {
             if (middle == last)
                 return;
@@ -30,6 +33,41 @@ private:
                 ++first;
                 leftNonEmpty = leftNonEmpty && first != middle;
             }
+        }
+
+        template<class Iter>
+        constexpr void operator()(
+            Iter first,
+            const Iter middle,
+            const Iter last,
+            const random_access_iterator_tag
+        ) const noexcept {
+            if (middle == last)
+                return;
+
+            auto second{middle};
+            while (first < middle || !empty(buffer)) {
+                if (first < middle)
+                    buffer.push(move(*first));
+                if (empty(buffer) || (second != last && *second < buffer.front())) {
+                    *first = move(*second);
+                    ++second;
+                } else {
+                    *first = move(buffer.front());
+                    buffer.pop();
+                }
+                ++first;
+            }
+        }
+
+    public:
+        template<class Iter>
+        constexpr void operator()(
+            Iter first,
+            const Iter middle,
+            const Iter last
+        ) const noexcept {
+            (*this)(first, leftIter, middle, category<Iter>);
         }
     };
 
@@ -71,19 +109,21 @@ private:
         using Difference = iterator_traits<Iter>::difference_type;
 
         const auto size{distance(first, last)}, half{size >> 1};
-        Difference width{1};
-        while (width < size) {
-            auto n{size};
+        Difference step{1};
+        while (step < size) {
+            auto length{size};
             auto iter{first};
-            while (n != 0) {
-                const auto left{min(width, n)}, right{min(width, n - left)};
+            while (length > 0) {
+                const auto
+                    left{min(step, length)},
+                    right{min(step, length - left)};
                 const auto middle{next(iter, left)},
                     nextIter{next(middle, right)};
                 merger(iter, middle, nextIter);
-                n -= left + right;
+                length -= left + right;
                 iter = nextIter;
             }
-            width = width <= half ? width << 1 : size;
+            step = step <= half ? step << 1 : size;
         }
     }
 
