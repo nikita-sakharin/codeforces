@@ -3,6 +3,14 @@ private:
     template<class Iter>
     using Difference = iterator_traits<Iter>::difference_type;
 
+    template<class T>
+    static constexpr T midpointFloor(
+        const T x,
+        const T y
+    ) noexcept {
+        return (x & y) + ((x ^ y) >> 1);
+    }
+
     template<class Iter>
     static constexpr Iter nthElement(
         Iter first1, const Iter last1,
@@ -42,7 +50,7 @@ public:
             first1{nums1.cbegin()}, last1{nums1.cend()},
             first2{nums2.cbegin()}, last2{nums2.cend()};
         const auto size1{ssize(nums1)}, size2{ssize(nums2)},
-            median{midpoint(size1, size2)};
+            median{midpointFloor(size1, size2)};
         const auto isOdd{((size1 ^ size2) & 1) == 1};
 
         if (isOdd)
