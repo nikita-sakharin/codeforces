@@ -1,7 +1,8 @@
 class Solution final {
 private:
     template<class Iter>
-    static constexpr auto category{iterator_traits<Iter>::iterator_category()};
+    static constexpr auto
+        category{typename iterator_traits<Iter>::iterator_category()};
 
     template<class T, class Container = deque<T>>
     class DefaultMerger final {
@@ -67,7 +68,7 @@ private:
             const Iter middle,
             const Iter last
         ) const noexcept {
-            (*this)(first, leftIter, middle, category<Iter>);
+            (*this)(first, middle, last, category<Iter>);
         }
     };
 
