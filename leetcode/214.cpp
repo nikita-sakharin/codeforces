@@ -12,7 +12,7 @@ private:
             return;
         const auto size{distance(first, last)};
         vector<Difference> buffer(size);
-        for (const bool isOdd : {false, true}) {
+        for (const auto isOdd : {false, true}) {
             for (Difference i{!isOdd}, left{0}, right{0}; i < size; ++i) {
                 const auto bound{min(i + isOdd, size - i)};
                 auto k{i >= right
