@@ -12,7 +12,7 @@ private:
         const Key<C> &key,
         const Mapped<C> &mapped
     ) noexcept {
-        if (const auto iter{container.find(key)}; iter != container.cend())
+        if (const auto iter{container.find(key)}; iter != cend(container))
             return iter->second;
         return mapped;
     }
