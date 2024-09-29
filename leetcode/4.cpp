@@ -1,5 +1,7 @@
 class Solution final {
 private:
+    using dbl = double;
+
     template<class Iter>
     using Difference = iterator_traits<Iter>::difference_type;
 
@@ -42,7 +44,7 @@ private:
     }
 
 public:
-    constexpr double findMedianSortedArrays(
+    constexpr dbl findMedianSortedArrays(
         const vector<int> &nums1,
         const vector<int> &nums2
     ) const noexcept {
@@ -57,8 +59,8 @@ public:
             return *nthElement(first1, last1, first2, last2, median);
 
         return midpoint(
-            double(*nthElement(first1, last1, first2, last2, median - 1)),
-            double(*nthElement(first1, last1, first2, last2, median))
+            dbl(*nthElement(first1, last1, first2, last2, median - 1)),
+            dbl(*nthElement(first1, last1, first2, last2, median))
         );
     }
 };
