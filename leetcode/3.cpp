@@ -7,14 +7,14 @@ private:
     }
 
 public:
-    inline int lengthOfLongestSubstring(const string &s) const noexcept {
-        const auto size{s.size()};
+    inline int lengthOfLongestSubstring(const string &str) const noexcept {
+        const auto length{size(str)};
         auto result{0UZ};
         bitset<printableChars> chars{};
-        for (auto i{0UZ}; i < size; ++i) {
-            const auto charOrder{order(s[i])};
+        for (auto i{0UZ}; i < length; ++i) {
+            const auto charOrder{order(str[i])};
             while (chars.test(charOrder))
-                chars.reset(order(s[i - chars.count()]));
+                chars.reset(order(str[i - chars.count()]));
             chars.set(charOrder);
             result = max(result, chars.count());
         }
