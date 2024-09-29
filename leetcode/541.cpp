@@ -4,9 +4,10 @@ public:
         const auto last{end(str)};
         auto iter{begin(str)};
         while (iter != last) {
-            const auto nextIter{iter + min(last - iter, ptrdiff_t(k))};
+            const auto
+                nextIter{next(iter, min(distance(iter, last), ptrdiff_t(k)))};
             reverse(iter, nextIter);
-            iter = nextIter + min(last - nextIter, ptrdiff_t(k));
+            iter = next(nextIter, min(distance(nextIter, last), ptrdiff_t(k)));
         }
         return move(str);
     }
