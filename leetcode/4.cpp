@@ -13,7 +13,12 @@ private:
         while (size1 != 0 && size2 != 0) {
             const auto half1{size1 >> 1}, half2{size2 >> 1};
             const auto iter1{next(first1, half1)}, iter2{next(first2, half2)};
-            if (index > half1 + half2) {
+            if (index <= half1 + half2) {
+                if (*iter1 > *iter2)
+                    size1 = half1;
+                else
+                    size2 = half2;
+            } else {
                 if (*iter1 > *iter2) {
                     first2 = next(iter2);
                     size2 -= half2 + 1;
@@ -23,11 +28,6 @@ private:
                     size1 -= half1 + 1;
                     index -= half1 + 1;
                 }
-            } else {
-                if (*iter1 > *iter2)
-                    size1 = half1;
-                else
-                    size2 = half2;
             }
         }
         return (size1 == 0 ? first2 : first1) + index;
