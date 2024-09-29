@@ -4,12 +4,12 @@ public:
         vector<int> &nums,
         const int val
     ) const noexcept {
-        const auto size{nums.size()};
-        auto newSize{0UZ};
-        for (auto i{0UZ}; i < size; ++i)
+        const auto length{size(nums)};
+        auto newlength{0UZ};
+        for (auto i{0UZ}; i < length; ++i)
             if (nums[i] != val)
-                nums[newSize++] = nums[i];
-        nums.resize(newSize);
-        return int(newSize);
+                nums[newlength++] = nums[i];
+        nums.resize(newlength);
+        return int(newlength);
     }
 };
