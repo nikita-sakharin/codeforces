@@ -1,7 +1,8 @@
 class Solution final {
 private:
     template<class Iter>
-    static constexpr auto category{typename iterator_traits<Iter>::iterator_category()};
+    static constexpr auto
+        category{typename iterator_traits<Iter>::iterator_category()};
 
     template<class Iter>
     static constexpr void reverse(
