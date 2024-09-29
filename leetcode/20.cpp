@@ -9,14 +9,14 @@ private:
 
 public:
     inline bool isValid(const string &str) const noexcept {
-        Stack<char> s{};
+        Stack<char> lifo{};
         for (const auto ch : str)
             if (ch == '(' || ch == '[' || ch == '{')
-                s.push(ch);
-            else if (!empty(s) && getClosing(s.top()) == ch)
-                s.pop();
+                lifo.push(ch);
+            else if (!empty(lifo) && getClosing(lifo.top()) == ch)
+                lifo.pop();
             else
                 return false;
-        return empty(s);
+        return empty(lifo);
     }
 };
