@@ -14,7 +14,7 @@ private:
     template<class T>
     using Stack = stack<T, vector<T>>;
 
-    static constexpr const int firstLeaf(
+    static constexpr int firstLeaf(
         const TreeNode *treeNode,
         Stack<const TreeNode *> &lifo
     ) noexcept {
@@ -38,7 +38,7 @@ private:
         return treeNode == parent->left && parent->right;
     }
 
-    static constexpr const int nextLeaf(
+    static constexpr int nextLeaf(
         Stack<const TreeNode *> &lifo
     ) noexcept {
         auto sum{0};
