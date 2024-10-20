@@ -6,6 +6,13 @@ private:
     using Difference = iterator_traits<Iter>::difference_type;
 
     template<class T>
+    static constexpr bool isOdd(
+        const T x
+    ) noexcept {
+        return (x & T{1}) == T{1};
+    }
+
+    template<class T>
     static constexpr T midpointFloor(
         const T x,
         const T y
@@ -53,9 +60,8 @@ public:
             first2{cbegin(nums2)}, last2{cend(nums2)};
         const auto size1{ssize(nums1)}, size2{ssize(nums2)},
             median{midpointFloor(size1, size2)};
-        const auto isOdd{((size1 ^ size2) & 1) == 1};
 
-        if (isOdd)
+        if (isOdd(size1 ^ size2))
             return *nthElement(first1, last1, first2, last2, median);
 
         return midpoint(
