@@ -28,7 +28,7 @@ private:
     ) noexcept {
         auto size1{distance(first1, last1)}, size2{distance(first2, last2)};
         while (size1 != 0 && size2 != 0) {
-            const auto half1{size1 >> 1}, half2{size2 >> 1};
+            const auto half1{(size1 - 1) >> 1}, half2{(size2 - 1) >> 1};
             const auto iter1{next(first1, half1)}, iter2{next(first2, half2)};
             if (index <= half1 + half2) {
                 if (*iter1 > *iter2)
