@@ -17,7 +17,7 @@ private:
                 const auto bound{min(i + isOdd, size - i)};
                 auto k{i >= right
                     ? isOdd
-                    : min(buffer[left + (right - 1 - i)], right - i)
+                    : min(buffer[left + (right - i - 1)], right - i)
                 };
                 while (k < bound && first[i - !isOdd - k] == first[i + k])
                     ++k;
