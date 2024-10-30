@@ -42,9 +42,14 @@ private:
             return {iter2, iter1};
         }
 
+        if (n > size2) {
+            first1 += n - size2;
+            n = size2;
+        }
+        size1 = min(size1, n);
+
         while (size1 > 0) {
-            const auto lower{max(Difference<Iter>{0}, n - size2)}, upper{min(size1, n)};
-            const auto index1{midpoint(lower, upper - 1)}, index2{n - index1 - 1};
+            const auto index1{(size1 - 1) >> 1}, index2{n - index1 - 1};
             const auto iter1{next(first1, index1)}, iter2{next(first2, index2)};
             if (*iter2 < *iter1)
                 size1 = index1;
@@ -66,12 +71,11 @@ public:
         const auto
             first1{cbegin(nums1)}, last1{cend(nums1)},
             first2{cbegin(nums2)}, last2{cend(nums2)};
-
         const auto size1{ssize(nums1)}, size2{ssize(nums2)},
-            median{midpointFloor(size1, size2)};
+            middle{midpointFloor(size1, size2)};
 
         const auto [iter1, iter2]{
-            nthElement(first1, last1, first2, last2, median)
+            nthElement(first1, last1, first2, last2, middle)
         };
 
         const auto right{
