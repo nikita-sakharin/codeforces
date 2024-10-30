@@ -21,33 +21,41 @@ private:
     }
 
     template<class Iter>
-    static constexpr Iter nthElement(
+    static constexpr tuple<Iter, Iter> nthElement(
         Iter first1, const Iter last1,
-        Iter first2, const Iter last2,
-        Difference<Iter> index
+        const Iter first2, const Iter last2,
+        Difference<Iter> n
     ) noexcept {
-        auto size1{distance(first1, last1)}, size2{distance(first2, last2)};
-        while (size1 != 0 && size2 != 0) {
-            const auto half1{(size1 - 1) >> 1}, half2{(size2 - 1) >> 1};
-            const auto iter1{next(first1, half1)}, iter2{next(first2, half2)};
-            if (index <= half1 + half2) {
-                if (*iter1 > *iter2)
-                    size1 = half1;
-                else
-                    size2 = half2;
-            } else {
-                if (*iter1 > *iter2) {
-                    first2 = next(iter2);
-                    size2 -= half2 + 1;
-                    index -= half2 + 1;
-                } else {
-                    first1 = next(iter1);
-                    size1 -= half1 + 1;
-                    index -= half1 + 1;
-                }
+        auto size1{distance(first1, last1)};
+        const auto size2{distance(first2, last2)};
+
+        if (n <= 0)
+            return {first1, first2};
+
+        if (n >= size1 + size2)
+            return {last1, last2};
+
+        if (size1 > size2) {
+            const auto [iter1, iter2]{
+                nthElement(first2, last2, first1, last1, n)
+            };
+            return {iter2, iter1};
+        }
+
+        while (size1 > 0) {
+            const auto lower{max(Difference<Iter>{0}, n - size2)}, upper{min(size1, n)};
+            const auto index1{midpoint(lower, upper - 1)}, index2{n - index1 - 1};
+            const auto iter1{next(first1, index1)}, iter2{next(first2, index2)};
+            if (*iter2 < *iter1)
+                size1 = index1;
+            else {
+                first1 = next(iter1);
+                size1 -= index1 + 1;
+                n -= index1 + 1;
             }
         }
-        return (size1 == 0 ? first2 : first1) + index;
+
+        return {first1, next(first2, n)};
     }
 
 public:
@@ -58,15 +66,29 @@ public:
         const auto
             first1{cbegin(nums1)}, last1{cend(nums1)},
             first2{cbegin(nums2)}, last2{cend(nums2)};
+
         const auto size1{ssize(nums1)}, size2{ssize(nums2)},
             median{midpointFloor(size1, size2)};
 
-        if (isOdd(size1 ^ size2))
-            return *nthElement(first1, last1, first2, last2, median);
+        const auto [iter1, iter2]{
+            nthElement(first1, last1, first2, last2, median)
+        };
 
-        return midpoint(
-            dbl(*nthElement(first1, last1, first2, last2, median - 1)),
-            dbl(*nthElement(first1, last1, first2, last2, median))
-        );
+        const auto right{
+            iter1 == last1 || (iter2 != last2 && *iter2 < *iter1)
+                ? *iter2
+                : *iter1
+        };
+
+        if (isOdd(size1 ^ size2))
+            return right;
+
+        const auto left{
+            iter2 == first2 || (iter1 != first1 && *prev(iter2) < *prev(iter1))
+                ? *prev(iter1)
+                : *prev(iter2)
+        };
+
+        return midpoint(dbl(left), dbl(right));
     }
 };
