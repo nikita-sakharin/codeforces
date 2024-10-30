@@ -29,18 +29,18 @@ private:
         auto size1{distance(first1, last1)};
         const auto size2{distance(first2, last2)};
 
-        if (n <= 0)
-            return {first1, first2};
-
-        if (n >= size1 + size2)
-            return {last1, last2};
-
         if (size1 > size2) {
             const auto [iter1, iter2]{
                 nthElement(first2, last2, first1, last1, n)
             };
             return {iter2, iter1};
         }
+
+        if (n <= 0)
+            return {first1, first2};
+
+        if (n - size2 >= size1)
+            return {last1, last2};
 
         if (n > size2) {
             first1 += n - size2;
