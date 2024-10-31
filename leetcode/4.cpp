@@ -30,7 +30,7 @@ private:
             first1 += n - size2;
             n = size2;
         }
-        if (n < size1)
+        if (size1 > n)
             size1 = n;
 
         while (size1 > 0) {
