@@ -22,31 +22,16 @@ private:
 
     template<class Iter>
     static constexpr pair<Iter, Iter> nthElement(
-        Iter first1, const Iter last1,
-        const Iter first2, const Iter last2,
+        Iter first1, Difference<Iter> size1,
+        const Iter first2, const Difference<Iter> size2,
         Difference<Iter> n
     ) noexcept {
-        auto size1{distance(first1, last1)};
-        const auto size2{distance(first2, last2)};
-
-        if (size1 > size2) {
-            const auto [iter1, iter2]{
-                nthElement(first2, last2, first1, last1, n)
-            };
-            return {iter2, iter1};
-        }
-
-        if (n <= 0)
-            return {first1, first2};
-
-        if (n - size2 >= size1)
-            return {last1, last2};
-
         if (n > size2) {
             first1 += n - size2;
             n = size2;
         }
-        size1 = min(size1, n);
+        if (n < size1)
+            size1 = n;
 
         while (size1 > 0) {
             const auto index1{(size1 - 1) >> 1}, index2{n - index1 - 1};
@@ -61,6 +46,31 @@ private:
         }
 
         return {first1, next(first2, n)};
+    }
+
+    template<class Iter>
+    static constexpr pair<Iter, Iter> nthElement(
+        const Iter first1, const Iter last1,
+        const Iter first2, const Iter last2,
+        Difference<Iter> n
+    ) noexcept {
+        const auto
+            size1{distance(first1, last1)}, size2{distance(first2, last2)};
+
+        if (n <= 0)
+            return {first1, first2};
+
+        if (n - size2 >= size1)
+            return {last1, last2};
+
+        if (size2 < size1) {
+            const auto [iter1, iter2]{
+                nthElement(first2, size2, first1, size1, n)
+            };
+            return {iter2, iter1};
+        }
+
+        return nthElement(first1, size1, first2, size2, n);
     }
 
 public:
