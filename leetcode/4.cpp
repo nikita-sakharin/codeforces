@@ -21,7 +21,7 @@ private:
     }
 
     template<class Iter>
-    static constexpr tuple<Iter, Iter> nthElement(
+    static constexpr pair<Iter, Iter> nthElement(
         Iter first1, const Iter last1,
         const Iter first2, const Iter last2,
         Difference<Iter> n
