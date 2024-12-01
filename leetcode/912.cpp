@@ -146,16 +146,19 @@ private:
 
     template<class Iter>
     static constexpr void makeHeap(const Iter first, const Iter last) noexcept {
-        if (first == last)
+        if (distance(first, last) < 2)
             return;
 
-        for (auto iter{first}; iter != last; ++iter)
+        for (auto iter{next(first)}; iter != last; ++iter)
             pushHeap(first, next(iter));
     }
 
     template<class Iter>
     static constexpr void sortHeap(const Iter first, Iter last) noexcept {
-        for (; first != last; --last)
+        if (distance(first, last) < 2)
+            return;
+
+        for (const auto second{next(first)}; second != last; --last)
             popHeap(first, last);
     }
 
