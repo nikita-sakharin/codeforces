@@ -146,11 +146,12 @@ private:
 
     template<class Iter>
     static constexpr void makeHeap(const Iter first, const Iter last) noexcept {
-        if (distance(first, last) < 2)
+        const auto length{distance(first, last)};
+        if (length < 2)
             return;
 
-        for (auto iter{next(first)}; iter != last; ++iter)
-            pushHeap(first, next(iter));
+        for (auto iter{next(first, length >> 1)}; iter != first; --iter)
+            siftDown(first, prev(iter), last);
     }
 
     template<class Iter>
