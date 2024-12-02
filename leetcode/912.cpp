@@ -150,8 +150,10 @@ private:
         if (length < 2)
             return;
 
-        for (auto iter{next(first, length >> 1)}; iter != first; --iter)
-            siftDown(first, prev(iter), last);
+        auto iter{next(first, length >> 1)}
+        do {
+            siftDown(first, --iter, last);
+        } while (iter != first);
     }
 
     template<class Iter>
@@ -159,8 +161,10 @@ private:
         if (distance(first, last) < 2)
             return;
 
-        for (const auto second{next(first)}; second != last; --last)
+        const auto second{next(first)};
+        do {
             popHeap(first, last);
+        } while (--last != second);
     }
 
     template<class Iter>
