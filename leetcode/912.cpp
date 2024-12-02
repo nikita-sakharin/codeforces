@@ -201,7 +201,7 @@ private:
     template<class Iter>
     static constexpr void siftUp(const Iter first, Iter element) noexcept {
         while (element != first) {
-            const auto parent{next(first, (distance(first, element) - 1) >> 1)};
+            const auto parent{prev(element, (distance(first, element) >> 1) + 1)};
             if (*parent >= *element)
                 break;
             iter_swap(parent, element);
