@@ -150,7 +150,7 @@ private:
         if (length < 2)
             return;
 
-        auto iter{next(first, length >> 1)}
+        auto iter{next(first, length >> 1)};
         do {
             siftDown(first, --iter, last);
         } while (iter != first);
