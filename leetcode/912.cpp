@@ -136,6 +136,14 @@ private:
     }
 
     template<class Iter>
+    static constexpr void rotateMergeSort(
+        const Iter first,
+        const Iter last
+    ) noexcept {
+        mergeSort(first, last, RotateMerger<Iter>{});
+    }
+
+    template<class Iter>
     static constexpr void heapSort(
         const Iter first,
         const Iter last
@@ -210,8 +218,8 @@ private:
     }
 
 public:
-    inline vector<int> sortArray(vector<int> &nums) const noexcept {
-        mergeSort(begin(nums), end(nums), RotateMerger<vector<int>::iterator>{});
+    constexpr vector<int> sortArray(vector<int> &nums) const noexcept {
+        rotateMergeSort(begin(nums), end(nums));
         return move(nums);
     }
 };
