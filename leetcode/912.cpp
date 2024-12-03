@@ -136,6 +136,14 @@ private:
     }
 
     template<class Iter>
+    static constexpr void defaultMergeSort(
+        const Iter first,
+        const Iter last
+    ) noexcept {
+        mergeSort(first, last, DefaultMerger<Iter>{});
+    }
+
+    template<class Iter>
     static constexpr void rotateMergeSort(
         const Iter first,
         const Iter last
