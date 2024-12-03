@@ -152,49 +152,6 @@ private:
     }
 
     template<class Iter>
-    static constexpr void heapSort(
-        const Iter first,
-        const Iter last
-    ) noexcept {
-        makeHeap(first, last);
-        sortHeap(first, last);
-    }
-
-    template<class Iter>
-    static constexpr void makeHeap(const Iter first, const Iter last) noexcept {
-        const auto length{distance(first, last)};
-        if (length < 2)
-            return;
-
-        auto iter{next(first, length >> 1)};
-        do {
-            siftDown(first, --iter, last);
-        } while (iter != first);
-    }
-
-    template<class Iter>
-    static constexpr void sortHeap(const Iter first, Iter last) noexcept {
-        if (distance(first, last) < 2)
-            return;
-
-        const auto second{next(first)};
-        do {
-            popHeap(first, last);
-        } while (--last != second);
-    }
-
-    template<class Iter>
-    static constexpr void popHeap(const Iter first, Iter last) noexcept {
-        iter_swap(first, --last);
-        siftDown(first, first, last);
-    }
-
-    template<class Iter>
-    static constexpr void pushHeap(const Iter first, const Iter last) noexcept {
-        siftUp(first, prev(last));
-    }
-
-    template<class Iter>
     static constexpr void siftDown(
         const Iter first,
         Iter element,
@@ -223,6 +180,49 @@ private:
             iter_swap(parent, element);
             element = parent;
         }
+    }
+
+    template<class Iter>
+    static constexpr void popHeap(const Iter first, Iter last) noexcept {
+        iter_swap(first, --last);
+        siftDown(first, first, last);
+    }
+
+    template<class Iter>
+    static constexpr void pushHeap(const Iter first, const Iter last) noexcept {
+        siftUp(first, prev(last));
+    }
+
+    template<class Iter>
+    static constexpr void makeHeap(const Iter first, const Iter last) noexcept {
+        const auto length{distance(first, last)};
+        if (length < 2)
+            return;
+
+        auto iter{next(first, length >> 1)};
+        do {
+            siftDown(first, --iter, last);
+        } while (iter != first);
+    }
+
+    template<class Iter>
+    static constexpr void sortHeap(const Iter first, Iter last) noexcept {
+        if (distance(first, last) < 2)
+            return;
+
+        const auto second{next(first)};
+        do {
+            popHeap(first, last);
+        } while (--last != second);
+    }
+
+    template<class Iter>
+    static constexpr void heapSort(
+        const Iter first,
+        const Iter last
+    ) noexcept {
+        makeHeap(first, last);
+        sortHeap(first, last);
     }
 
 public:
