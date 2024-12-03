@@ -330,7 +330,7 @@ private:
 
 public:
     constexpr vector<int> sortArray(vector<int> &nums) const noexcept {
-        rotateMergeSort(begin(nums), end(nums));
+        rotatePartitionMergeSort(begin(nums), end(nums));
         return move(nums);
     }
 };
