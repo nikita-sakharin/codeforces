@@ -113,6 +113,7 @@ private:
                     rightIter = lower_bound(middle, last, *leftIter);
                     middle = rotate(leftIter, middle, rightIter);
                 }
+
                 lifo.emplace(first, leftIter, middle);
                 lifo.emplace(next(middle), rightIter, last);
             } while (!empty(lifo));
@@ -195,6 +196,7 @@ private:
                     nthElement(first, middle, middle, last, n)
                 };
                 middle = rotate(leftIter, middle, rightIter);
+
                 lifo.emplace(first, leftIter, middle);
                 lifo.emplace(middle, rightIter, last);
             } while (!empty(lifo));
