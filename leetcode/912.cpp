@@ -10,6 +10,14 @@ private:
     static constexpr auto
         category{typename iterator_traits<Iter>::iterator_category()};
 
+    template<class T>
+    static constexpr T midpointFloor(
+        const T x,
+        const T y
+    ) noexcept {
+        return (x & y) + ((x ^ y) >> 1);
+    }
+
     template<class Iter, class Container = deque<Value<Iter>>>
     class DefaultMerger final {
     private:
