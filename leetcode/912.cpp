@@ -18,6 +18,59 @@ private:
         return (x & y) + ((x ^ y) >> 1);
     }
 
+    template<class Iter>
+    static constexpr pair<Iter, Iter> nthElement(
+        Iter first1, Difference<Iter> size1,
+        const Iter first2, const Difference<Iter> size2,
+        Difference<Iter> n
+    ) noexcept {
+        if (n > size2) {
+            first1 += n - size2;
+            n = size2;
+        }
+        if (size1 > n)
+            size1 = n;
+
+        while (size1 > 0) {
+            const auto index1{(size1 - 1) >> 1}, index2{n - index1 - 1};
+            const auto iter1{next(first1, index1)}, iter2{next(first2, index2)};
+            if (*iter2 < *iter1)
+                size1 = index1;
+            else {
+                first1 = next(iter1);
+                size1 -= index1 + 1;
+                n -= index1 + 1;
+            }
+        }
+
+        return {first1, next(first2, n)};
+    }
+
+    template<class Iter>
+    static constexpr pair<Iter, Iter> nthElement(
+        const Iter first1, const Iter last1,
+        const Iter first2, const Iter last2,
+        Difference<Iter> n
+    ) noexcept {
+        const auto
+            size1{distance(first1, last1)}, size2{distance(first2, last2)};
+
+        if (n <= 0)
+            return {first1, first2};
+
+        if (n - size2 >= size1)
+            return {last1, last2};
+
+        if (size2 < size1) {
+            const auto [iter1, iter2]{
+                nthElement(first2, size2, first1, size1, n)
+            };
+            return {iter2, iter1};
+        }
+
+        return nthElement(first1, size1, first2, size2, n);
+    }
+
     template<class Iter, class Container = deque<Value<Iter>>>
     class DefaultMerger final {
     private:
@@ -124,57 +177,6 @@ private:
     class RotatePartitionMerger final {
     private:
         mutable stack<tuple<Iter, Iter, Iter>, Container> lifo{};
-
-        static constexpr pair<Iter, Iter> nthElement(
-            Iter first1, Difference<Iter> size1,
-            const Iter first2, const Difference<Iter> size2,
-            Difference<Iter> n
-        ) noexcept {
-            if (n > size2) {
-                first1 += n - size2;
-                n = size2;
-            }
-            if (size1 > n)
-                size1 = n;
-
-            while (size1 > 0) {
-                const auto index1{(size1 - 1) >> 1}, index2{n - index1 - 1};
-                const auto iter1{next(first1, index1)}, iter2{next(first2, index2)};
-                if (*iter2 < *iter1)
-                    size1 = index1;
-                else {
-                    first1 = next(iter1);
-                    size1 -= index1 + 1;
-                    n -= index1 + 1;
-                }
-            }
-
-            return {first1, next(first2, n)};
-        }
-
-        static constexpr pair<Iter, Iter> nthElement(
-            const Iter first1, const Iter last1,
-            const Iter first2, const Iter last2,
-            Difference<Iter> n
-        ) noexcept {
-            const auto
-                size1{distance(first1, last1)}, size2{distance(first2, last2)};
-
-            if (n <= 0)
-                return {first1, first2};
-
-            if (n - size2 >= size1)
-                return {last1, last2};
-
-            if (size2 < size1) {
-                const auto [iter1, iter2]{
-                    nthElement(first2, size2, first1, size1, n)
-                };
-                return {iter2, iter1};
-            }
-
-            return nthElement(first1, size1, first2, size2, n);
-        }
 
     public:
         constexpr void operator()(
