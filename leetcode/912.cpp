@@ -1,6 +1,9 @@
 class Solution final {
 private:
     template<class Iter>
+    using Difference = iterator_traits<Iter>::difference_type;
+
+    template<class Iter>
     using Value = iterator_traits<Iter>::value_type;
 
     template<class Iter>
