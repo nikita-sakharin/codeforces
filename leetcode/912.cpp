@@ -113,7 +113,6 @@ private:
     private:
         mutable stack<tuple<Iter, Iter, Iter>, Container> lifo{};
 
-        template<class Iter>
         static constexpr pair<Iter, Iter> nthElement(
             Iter first1, Difference<Iter> size1,
             const Iter first2, const Difference<Iter> size2,
@@ -141,7 +140,6 @@ private:
             return {first1, next(first2, n)};
         }
 
-        template<class Iter>
         static constexpr pair<Iter, Iter> nthElement(
             const Iter first1, const Iter last1,
             const Iter first2, const Iter last2,
