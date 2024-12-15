@@ -47,11 +47,11 @@ public:
         };
         findPalindromes(strFirst, strLast, func);
 
-        const auto strSize{size(str)}, palindromeSize{size(palindrome)};
+        const auto strSize{size(str)}, difference{strSize - size(palindrome)};
         string result{};
-        result.reserve(strSize - palindromeSize + strSize);
+        result.reserve(difference + strSize);
         const auto iter{back_inserter(result)};
-        copy(crbegin(str), next(crbegin(str), strSize - palindromeSize), iter);
+        copy(crbegin(str), next(crbegin(str), difference), iter);
         copy(cbegin(str), cend(str), iter);
 
         return result;
