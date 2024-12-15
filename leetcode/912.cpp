@@ -305,9 +305,9 @@ private:
             return;
 
         auto iter{next(first, length >> 1)};
-        do {
+        do
             siftDown(first, --iter, last);
-        } while (iter != first);
+        while (iter != first);
     }
 
     template<class Iter>
@@ -316,9 +316,9 @@ private:
             return;
 
         const auto second{next(first)};
-        do {
+        do
             popHeap(first, last);
-        } while (--last != second);
+        while (--last != second);
     }
 
     template<class Iter>
