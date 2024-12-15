@@ -40,7 +40,7 @@ public:
                 const auto first,
                 const auto last
             ) constexpr noexcept -> void {
-                if (size_t(distance(first, last)) > size(result))
+                if (distance(first, last) > ssize(result))
                     result = string_view(first, last);
             }
         };
