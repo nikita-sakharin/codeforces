@@ -74,7 +74,7 @@ private:
     template<class Iter, class Container = deque<Value<Iter>>>
     class DefaultMerger final {
     private:
-        mutable queue<Value<Iter>, Container> buffer{};
+        mutable queue<Value<Iter>, Container> fifo{};
 
         constexpr void operator()(
             Iter first,
@@ -89,17 +89,17 @@ private:
             auto leftNonEmpty{true};
             do {
                 if (leftNonEmpty)
-                    buffer.push(move(*first));
-                if (empty(buffer) || (second != last && *second < buffer.front())) {
+                    fifo.push(move(*first));
+                if (empty(fifo) || (second != last && *second < fifo.front())) {
                     *first = move(*second);
                     ++second;
                 } else {
-                    *first = move(buffer.front());
-                    buffer.pop();
+                    *first = move(fifo.front());
+                    fifo.pop();
                 }
                 ++first;
                 leftNonEmpty = leftNonEmpty && first != middle;
-            } while (leftNonEmpty || !empty(buffer));
+            } while (leftNonEmpty || !empty(fifo));
         }
 
         constexpr void operator()(
@@ -114,16 +114,16 @@ private:
             auto second{middle};
             do {
                 if (first < middle)
-                    buffer.push(move(*first));
-                if (empty(buffer) || (second != last && *second < buffer.front())) {
+                    fifo.push(move(*first));
+                if (empty(fifo) || (second != last && *second < fifo.front())) {
                     *first = move(*second);
                     ++second;
                 } else {
-                    *first = move(buffer.front());
-                    buffer.pop();
+                    *first = move(fifo.front());
+                    fifo.pop();
                 }
                 ++first;
-            } while (first < middle || !empty(buffer));
+            } while (first < middle || !empty(fifo));
         }
 
     public:
