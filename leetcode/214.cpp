@@ -41,13 +41,13 @@ public:
                 const auto first,
                 const auto last
             ) constexpr noexcept -> void {
-                if (first == strFirst && size_t(distance(first, last)) > size(palindrome))
+                if (first == strFirst && distance(first, last) > ssize(palindrome))
                     palindrome = string_view(first, last);
             }
         };
         findPalindromes(strFirst, strLast, func);
 
-        const auto strSize{size(str)}, difference{strSize - size(palindrome)};
+        const auto strSize{ssize(str)}, difference{strSize - ssize(palindrome)};
         string result{};
         result.reserve(difference + strSize);
         const auto iter{back_inserter(result)};
