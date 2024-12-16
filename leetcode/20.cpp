@@ -8,7 +8,7 @@ private:
     }
 
 public:
-    inline bool isValid(const string &str) const noexcept {
+    constexpr bool isValid(const string &str) const noexcept {
         Stack<char> lifo{};
         for (const auto ch : str)
             if (ch == '(' || ch == '[' || ch == '{')
