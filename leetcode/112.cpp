@@ -45,8 +45,8 @@ private:
         const TreeNode *treeNode{};
         do {
             treeNode = lifo.top();
-            sum -= treeNode->val;
             lifo.pop();
+            sum -= treeNode->val;
         } while (!empty(lifo) && !hasRightSibling(treeNode, lifo.top()));
 
         if (!empty(lifo))
