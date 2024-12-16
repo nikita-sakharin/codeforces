@@ -15,7 +15,7 @@ private:
     using Stack = stack<T, vector<T>>;
 
 public:
-    inline bool isSameTree(
+    constexpr bool isSameTree(
         const TreeNode * const first,
         const TreeNode * const second
     ) const noexcept {
