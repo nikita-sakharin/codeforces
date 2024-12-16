@@ -17,6 +17,7 @@ public:
                 lifo.pop();
             else
                 return false;
+
         return empty(lifo);
     }
 };
