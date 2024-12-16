@@ -11,7 +11,7 @@
  */
 class Solution final {
 public:
-    inline vector<vector<int>> levelOrder(
+    constexpr vector<vector<int>> levelOrder(
         const TreeNode * const root
     ) const noexcept {
         vector<vector<int>> result{};
@@ -19,6 +19,7 @@ public:
         if (root)
             fifo.emplace();
         fifo.push(root);
+
         do {
             const auto treeNode{fifo.front()};
             fifo.pop();
