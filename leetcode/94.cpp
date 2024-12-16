@@ -44,6 +44,7 @@ public:
             const auto treeNode{inorderNext(lifo)};
             result.push_back(treeNode->val);
         };
+
         return result;
     }
 };
