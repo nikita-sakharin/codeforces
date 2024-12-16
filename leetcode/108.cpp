@@ -15,7 +15,7 @@ private:
     using Stack = stack<T, vector<T>>;
 
 public:
-    inline TreeNode *sortedArrayToBST(
+    constexpr TreeNode *sortedArrayToBST(
         const vector<int> &nums
     ) const noexcept {
         TreeNode *root{};
