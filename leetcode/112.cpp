@@ -56,8 +56,8 @@ private:
     }
 
 public:
-    inline bool hasPathSum(
-        const TreeNode *root,
+    constexpr bool hasPathSum(
+        const TreeNode * const root,
         int targetSum
     ) const noexcept {
         Stack<const TreeNode *> lifo{};
