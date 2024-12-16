@@ -18,6 +18,7 @@ public:
     constexpr bool isSymmetric(const TreeNode * const root) const noexcept {
         Stack<pair<const TreeNode *, const TreeNode *>> lifo{};
         lifo.emplace(root->left, root->right);
+
         do {
             const auto [left, right]{lifo.top()};
             lifo.pop();
