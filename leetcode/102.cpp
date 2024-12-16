@@ -25,9 +25,9 @@ public:
             if (treeNode) {
                 result.back().push_back(treeNode->val);
                 if (treeNode->left)
-                    fifo.emplace(treeNode->left);
+                    fifo.push(treeNode->left);
                 if (treeNode->right)
-                    fifo.emplace(treeNode->right);
+                    fifo.push(treeNode->right);
             } else if (!empty(fifo)) {
                 result.emplace_back();
                 fifo.emplace();
