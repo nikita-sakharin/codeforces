@@ -21,6 +21,7 @@ public:
         TreeNode *root{};
         Stack<tuple<TreeNode **, size_t, size_t>> lifo{};
         lifo.emplace(&root, 0, size(nums));
+
         do {
             const auto [parentPtr, first, last]{lifo.top()};
             lifo.pop();
