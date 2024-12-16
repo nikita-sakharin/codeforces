@@ -14,22 +14,36 @@ private:
     template<class T>
     using Stack = stack<T, vector<T>>;
 
+    static constexpr void inorderFirst(
+        const TreeNode *treeNode,
+        Stack<const TreeNode *> &lifo
+    ) noexcept {
+        while (treeNode) {
+            lifo.push(treeNode);
+            treeNode = treeNode->left;
+        }
+    }
+
+    static constexpr const TreeNode *inorderNext(
+        Stack<const TreeNode *> &lifo
+    ) noexcept {
+        const auto treeNode{lifo.top()};
+        lifo.pop();
+        inorderFirst(treeNode->right, lifo);
+        return treeNode;
+    }
+
 public:
-    inline vector<int> inorderTraversal(
-        const TreeNode *treeNode
+    constexpr vector<int> inorderTraversal(
+        const TreeNode * const root
     ) const noexcept {
         vector<int> result{};
         Stack<const TreeNode *> lifo{};
-        while (treeNode || !empty(lifo)) {
-            while (treeNode) {
-                lifo.push(treeNode);
-                treeNode = treeNode->left;
-            }
-            treeNode = lifo.top();
-            lifo.pop();
+        inorderFirst(root, lifo);
+        while (!empty(lifo)) {
+            const auto treeNode{inorderNext(lifo)};
             result.push_back(treeNode->val);
-            treeNode = treeNode->right;
-        }
+        };
         return result;
     }
 };
