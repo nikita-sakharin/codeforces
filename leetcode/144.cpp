@@ -10,23 +10,27 @@
  * };
  */
 class Solution final {
+private:
+    template<class T>
+    using Stack = stack<T, vector<T>>;
+
 public:
     constexpr vector<int> preorderTraversal(
         const TreeNode * const root
     ) const noexcept {
         vector<int> result{};
-        queue<const TreeNode *> fifo{};
-        fifo.push(root);
+        Stack<const TreeNode *> lifo{};
+        lifo.push(root);
 
         do {
-            const auto treeNode{fifo.front()};
-            fifo.pop();
+            const auto treeNode{lifo.top()};
+            lifo.pop();
             if (treeNode) {
                 result.push_back(treeNode->val);
-                fifo.push(treeNode->left);
-                fifo.push(treeNode->right);
+                lifo.push(treeNode->right);
+                lifo.push(treeNode->left);
             }
-        } while (!empty(fifo));
+        } while (!empty(lifo));
 
         return result;
     }
