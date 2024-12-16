@@ -21,6 +21,7 @@ public:
     ) const noexcept {
         Stack<pair<const TreeNode *, const TreeNode *>> lifo{};
         lifo.emplace(first, second);
+
         do {
             const auto [left, right]{lifo.top()};
             lifo.pop();
