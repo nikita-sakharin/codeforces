@@ -40,6 +40,7 @@ public:
         vector<int> result{};
         Stack<const TreeNode *> lifo{};
         inorderFirst(root, lifo);
+
         while (!empty(lifo)) {
             const auto treeNode{inorderNext(lifo)};
             result.push_back(treeNode->val);
