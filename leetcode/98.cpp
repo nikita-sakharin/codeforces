@@ -15,14 +15,16 @@ private:
     using Stack = stack<T, vector<T>>;
 
     template<class T>
-    static constexpr auto
-        min{numeric_limits<T>::min()},
-        max{numeric_limits<T>::max()};
+    static constexpr auto min{numeric_limits<T>::min()};
+
+    template<class T>
+    static constexpr auto max{numeric_limits<T>::max()};
 
 public:
-    inline bool isValidBST(const TreeNode * const root) const noexcept {
+    constexpr bool isValidBST(const TreeNode * const root) const noexcept {
         Stack<tuple<const TreeNode *, int, int>> lifo{};
         lifo.emplace(root, min<int>, max<int>);
+
         do {
             const auto [treeNode, left, right]{lifo.top()};
             lifo.pop();
