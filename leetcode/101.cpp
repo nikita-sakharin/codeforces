@@ -15,7 +15,7 @@ private:
     using Stack = stack<T, vector<T>>;
 
 public:
-    inline bool isSymmetric(const TreeNode * const root) const noexcept {
+    constexpr bool isSymmetric(const TreeNode * const root) const noexcept {
         Stack<pair<const TreeNode *, const TreeNode *>> lifo{};
         lifo.emplace(root->left, root->right);
         do {
