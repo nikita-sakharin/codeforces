@@ -1,6 +1,6 @@
 class Solution final {
 public:
-    inline int poorPigs(
+    constexpr int poorPigs(
         const int buckets,
         const int minutesToDie,
         const int minutesToTest
