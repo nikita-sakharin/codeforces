@@ -1,6 +1,6 @@
 class Solution final {
 public:
-    inline string addBinary(string &a, string &b) const noexcept {
+    constexpr string addBinary(string &a, string &b) const noexcept {
         if (size(a) < size(b))
             return addBinary(b, a);
 
