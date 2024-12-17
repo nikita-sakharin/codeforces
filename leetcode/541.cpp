@@ -1,6 +1,6 @@
 class Solution final {
 public:
-    inline string reverseStr(string &str, const int k) const noexcept {
+    constexpr string reverseStr(string &str, const int k) const noexcept {
         const auto last{end(str)};
         auto iter{begin(str)};
         while (iter != last) {
