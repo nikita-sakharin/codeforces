@@ -7,7 +7,7 @@ private:
     }
 
 public:
-    inline int lengthOfLongestSubstring(const string &str) const noexcept {
+    constexpr int lengthOfLongestSubstring(const string &str) const noexcept {
         const auto length{size(str)};
         auto result{0UZ};
         bitset<printableChars> chars{};
