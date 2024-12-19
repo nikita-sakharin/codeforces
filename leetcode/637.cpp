@@ -35,10 +35,11 @@ public:
                     fifo.push(treeNode->right);
             } else {
                 result.push_back(dbl(sum) / count);
-                if (!empty(fifo))
+                if (!empty(fifo)) {
                     fifo.emplace();
-                sum = 0;
-                count = 0;
+                    sum = 0;
+                    count = 0;
+                }
             }
         } while (!empty(fifo));
 
