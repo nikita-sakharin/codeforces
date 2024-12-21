@@ -213,22 +213,22 @@ private:
     ) noexcept {
         using Difference = iterator_traits<Iter>::difference_type;
 
-        const auto size{distance(first, last)}, half{size >> 1};
+        const auto length{distance(first, last)}, half{length >> 1};
         Difference step{1};
-        while (step < size) {
-            auto length{size};
+        while (step < length) {
+            auto n{length};
             auto iter{first};
-            while (length > 0) {
+            while (n > 0) {
                 const auto
-                    left{min(step, length)},
-                    right{min(step, length - left)};
+                    left{min(step, n)},
+                    right{min(step, n - left)};
                 const auto middle{next(iter, left)},
                     nextIter{next(middle, right)};
                 merger(iter, middle, nextIter);
-                length -= left + right;
+                n -= left + right;
                 iter = nextIter;
             }
-            step = step <= half ? step << 1 : size;
+            step = step <= half ? step << 1 : length;
         }
     }
 
