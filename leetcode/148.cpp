@@ -51,18 +51,18 @@ private:
 public:
     constexpr ListNode *sortList(ListNode *head) const noexcept {
         const auto length{listSize(head)}, half{length >> 1};
-        auto width{1UZ};
-        while (width < length) {
+        auto step{1UZ};
+        while (step < length) {
             auto n{length};
             auto ptr{&head};
             while (n != 0) {
-                const auto left{min(width, n)}, right{min(width, n - left)};
+                const auto left{min(step, n)}, right{min(step, n - left)};
                 const auto middle{nextNode(*ptr, left)},
                     last{nextNode(middle, right)};
                 ptr = merge(*ptr, middle, last, ptr);
                 n -= left + right;
             }
-            width = width <= half ? width << 1 : length;
+            step = step <= half ? step << 1 : length;
         }
         return head;
     }
