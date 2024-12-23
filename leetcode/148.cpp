@@ -11,12 +11,12 @@
 class Solution final {
 private:
     static constexpr size_t listSize(const ListNode *listNode) noexcept {
-        auto size{0UZ};
+        auto result{0UZ};
         while (listNode) {
             listNode = listNode->next;
-            ++size;
+            ++result;
         }
-        return size;
+        return result;
     }
 
     static constexpr ListNode **merge(
@@ -50,10 +50,10 @@ private:
 
 public:
     constexpr ListNode *sortList(ListNode *head) const noexcept {
-        const auto size{listSize(head)}, half{size >> 1};
+        const auto length{listSize(head)}, half{length >> 1};
         auto width{1UZ};
-        while (width < size) {
-            auto n{size};
+        while (width < length) {
+            auto n{length};
             auto ptr{&head};
             while (n != 0) {
                 const auto left{min(width, n)}, right{min(width, n - left)};
@@ -62,7 +62,7 @@ public:
                 ptr = merge(*ptr, middle, last, ptr);
                 n -= left + right;
             }
-            width = width <= half ? width << 1 : size;
+            width = width <= half ? width << 1 : length;
         }
         return head;
     }
