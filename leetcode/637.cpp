@@ -21,19 +21,18 @@ public:
         fifo.push(root);
 
         do {
+            const auto length{size(fifo)};
             auto sum{0LL};
-            auto count{0UZ};
-            for (auto length{size(fifo)}; length != 0; --length) {
+            for (auto i{0UZ}; i < length; ++i) {
                 const auto treeNode{fifo.front()};
                 fifo.pop();
                 sum += treeNode->val;
-                ++count;
                 if (treeNode->left)
                     fifo.push(treeNode->left);
                 if (treeNode->right)
                     fifo.push(treeNode->right);
             }
-            result.push_back(dbl(sum) / count);
+            result.push_back(dbl(sum) / length);
         } while (!empty(fifo));
 
         return result;
