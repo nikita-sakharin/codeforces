@@ -57,8 +57,8 @@ public:
             auto ptr{&head};
             while (n != 0) {
                 const auto left{min(step, n)}, right{min(step, n - left)};
-                const auto middle{nextNode(*ptr, left)},
-                    last{nextNode(middle, right)};
+                const auto middle{nthNode(*ptr, left)},
+                    last{nthNode(middle, right)};
                 ptr = merge(*ptr, middle, last, ptr);
                 n -= left + right;
             }
