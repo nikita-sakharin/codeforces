@@ -9,21 +9,28 @@
  * };
  */
 class Solution final {
+private:
+    static constexpr ListNode *nthNode(ListNode *listNode, size_t n) noexcept {
+        for (; n != 0; --n)
+            listNode = listNode->next;
+        return listNode;
+    }
+
 public:
     constexpr ListNode *removeNthFromEnd(
         ListNode * const head,
         int n
     ) const noexcept {
-        ListNode *nthPrev{head}, *current{head};
-        for (; n > 0; --n)
-            current = current->next;
+        ListNode *nthPrev{head}, *current{nthNode(head, n)};
         if (!current)
             return head->next;
+
         while (current->next) {
             current = current->next;
             nthPrev = nthPrev->next;
         }
         nthPrev->next = nthPrev->next->next;
+
         return head;
     }
 };
