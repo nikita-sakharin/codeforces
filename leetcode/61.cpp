@@ -21,10 +21,7 @@ private:
         return {listNode, size};
     }
 
-    static constexpr ListNode *nthNode(
-        ListNode *listNode,
-        size_t n
-    ) noexcept {
+    static constexpr ListNode *nthNode(ListNode *listNode, size_t n) noexcept {
         for (; n != 0; --n)
             listNode = listNode->next;
         return listNode;
