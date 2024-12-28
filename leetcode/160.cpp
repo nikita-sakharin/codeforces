@@ -9,15 +9,15 @@
 class Solution final {
 private:
     static constexpr size_t listSize(const ListNode *listNode) noexcept {
-        auto size{0UZ};
+        auto length{0UZ};
         while (listNode) {
             listNode = listNode->next;
-            ++size;
+            ++length;
         }
-        return size;
+        return length;
     }
 
-    static constexpr ListNode *nextNode(ListNode *listNode, size_t n) noexcept {
+    static constexpr ListNode *nthNode(ListNode *listNode, size_t n) noexcept {
         for (; n != 0; --n)
             listNode = listNode->next;
         return listNode;
