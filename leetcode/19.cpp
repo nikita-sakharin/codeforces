@@ -15,7 +15,7 @@ public:
         int n
     ) const noexcept {
         ListNode *nthPrev{head}, *current{head};
-        while (--n >= 0)
+        for (; n > 0; --n)
             current = current->next;
         if (!current)
             return head->next;
