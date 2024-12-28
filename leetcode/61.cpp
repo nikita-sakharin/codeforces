@@ -13,12 +13,12 @@ private:
     static constexpr pair<ListNode *, size_t> listTailAndSize(
         ListNode *listNode
     ) noexcept {
-        auto size{1UZ};
+        auto length{1UZ};
         while (listNode->next) {
             listNode = listNode->next;
-            ++size;
+            ++length;
         }
-        return {listNode, size};
+        return {listNode, length};
     }
 
     static constexpr ListNode *nthNode(ListNode *listNode, size_t n) noexcept {
@@ -32,11 +32,11 @@ public:
         if (!head)
             return nullptr;
 
-        auto [tail, size]{listTailAndSize(head)};
-        k %= int(size);
+        auto [tail, length]{listTailAndSize(head)};
+        k %= int(length);
         if (k != 0) {
             tail->next = head;
-            tail = nthNode(head, size - size_t(k) - 1);
+            tail = nthNode(head, length - size_t(k) - 1);
             head = tail->next;
             tail->next = nullptr;
         }
