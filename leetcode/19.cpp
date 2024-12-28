@@ -21,7 +21,7 @@ public:
         ListNode * const head,
         int n
     ) const noexcept {
-        ListNode *nthPrev{head}, *current{nthNode(head, n)};
+        ListNode *nthPrev{head}, *current{nthNode(head, size_t(n))};
         if (!current)
             return head->next;
 
