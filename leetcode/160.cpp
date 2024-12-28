@@ -30,9 +30,9 @@ public:
     ) const noexcept {
         const auto sizeA{listSize(headA)}, sizeB{listSize(headB)};
         if (sizeA < sizeB)
-            headB = nextNode(headB, sizeB - sizeA);
+            headB = nthNode(headB, sizeB - sizeA);
         else if (sizeB < sizeA)
-            headA = nextNode(headA, sizeA - sizeB);
+            headA = nthNode(headA, sizeA - sizeB);
         while (headA != headB) {
             headA = headA->next;
             headB = headB->next;
