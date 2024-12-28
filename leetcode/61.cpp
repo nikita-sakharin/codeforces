@@ -10,7 +10,7 @@
  */
 class Solution final {
 private:
-    static constexpr pair<ListNode *, size_t> tailElement(
+    static constexpr pair<ListNode *, size_t> listTailAndSize(
         ListNode *listNode
     ) noexcept {
         auto size{1UZ};
@@ -21,11 +21,11 @@ private:
         return {listNode, size};
     }
 
-    static constexpr ListNode *nthElement(
+    static constexpr ListNode *nthNode(
         ListNode *listNode,
-        size_t index
+        size_t n
     ) noexcept {
-        for (; index != 0; --index)
+        for (; n != 0; --n)
             listNode = listNode->next;
         return listNode;
     }
@@ -34,14 +34,16 @@ public:
     constexpr ListNode *rotateRight(ListNode *head, int k) const noexcept {
         if (!head)
             return nullptr;
-        auto [tail, size]{tailElement(head)};
+
+        auto [tail, size]{listTailAndSize(head)};
         k %= int(size);
         if (k != 0) {
             tail->next = head;
-            tail = nthElement(head, size - k - 1);
+            tail = nthNode(head, size - size_t(k) - 1);
             head = tail->next;
             tail->next = nullptr;
         }
+
         return head;
     }
 };
