@@ -11,12 +11,12 @@
 class Solution final {
 private:
     static constexpr size_t listSize(const ListNode *listNode) noexcept {
-        auto result{0UZ};
+        auto length{0UZ};
         while (listNode) {
             listNode = listNode->next;
-            ++result;
+            ++length;
         }
-        return result;
+        return length;
     }
 
     static constexpr ListNode **merge(
@@ -42,7 +42,7 @@ private:
         return ptr;
     }
 
-    static constexpr ListNode *nextNode(ListNode *listNode, size_t n) noexcept {
+    static constexpr ListNode *nthNode(ListNode *listNode, size_t n) noexcept {
         for (; n != 0; --n)
             listNode = listNode->next;
         return listNode;
