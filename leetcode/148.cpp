@@ -25,7 +25,7 @@ private:
         ListNode * const last,
         ListNode **ptr
     ) noexcept {
-        ListNode *second{middle};
+        auto second{middle};
         while (first != middle || second != last) {
             if (first == middle
                 || (second != last && second->val < first->val)
