@@ -14,7 +14,7 @@ private:
     template<class T>
     using Stack = stack<T, vector<T>>;
 
-    static constexpr void inorderFirst(
+    static constexpr void inorderInit(
         const TreeNode *treeNode,
         Stack<const TreeNode *> &lifo
     ) noexcept {
@@ -29,7 +29,7 @@ private:
     ) noexcept {
         const auto treeNode{lifo.top()};
         lifo.pop();
-        inorderFirst(treeNode->right, lifo);
+        inorderInit(treeNode->right, lifo);
         return treeNode;
     }
 
@@ -39,7 +39,7 @@ public:
     ) const noexcept {
         vector<int> result{};
         Stack<const TreeNode *> lifo{};
-        inorderFirst(root, lifo);
+        inorderInit(root, lifo);
 
         while (!empty(lifo)) {
             const auto treeNode{inorderNext(lifo)};
