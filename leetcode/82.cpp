@@ -11,7 +11,7 @@
 class Solution final {
 public:
     constexpr ListNode *deleteDuplicates(ListNode *head) const noexcept {
-        ListNode *current{head}, **ptr{&head};
+        auto current{head}, *ptr{&head};
         while (current) {
             if (current->next && current->val == current->next->val) {
                 do
