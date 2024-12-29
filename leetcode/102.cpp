@@ -22,13 +22,12 @@ public:
         fifo.push(root);
 
         do {
-            auto length{size(fifo)};
             auto &level{result.emplace_back()};
-            level.reserve(length);
-            for (; length != 0; --length) {
+            level.resize(size(fifo));
+            for (auto &value : level) {
                 const auto treeNode{fifo.front()};
                 fifo.pop();
-                level.push_back(treeNode->val);
+                value = treeNode->val;
                 if (treeNode->left)
                     fifo.push(treeNode->left);
                 if (treeNode->right)
