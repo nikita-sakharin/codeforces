@@ -28,7 +28,7 @@ public:
             for (auto i{0UZ}; i < length; ++i) {
                 const auto treeNode{fifo.front()};
                 fifo.pop();
-                level[(length & mask) + (mask ^ i)] = treeNode->val;
+                level[(length & mask) + (i ^ mask)] = treeNode->val;
                 if (treeNode->left)
                     fifo.push(treeNode->left);
                 if (treeNode->right)
