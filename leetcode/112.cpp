@@ -14,7 +14,7 @@ private:
     template<class T>
     using Stack = stack<T, vector<T>>;
 
-    static constexpr int firstLeaf(
+    static constexpr int initLeaf(
         const TreeNode *treeNode,
         Stack<const TreeNode *> &lifo
     ) noexcept {
@@ -50,7 +50,7 @@ private:
         } while (!empty(lifo) && !hasRightSibling(treeNode, lifo.top()));
 
         if (!empty(lifo))
-            sum += firstLeaf(lifo.top()->right, lifo);
+            sum += initLeaf(lifo.top()->right, lifo);
 
         return sum;
     }
@@ -61,7 +61,7 @@ public:
         int targetSum
     ) const noexcept {
         Stack<const TreeNode *> lifo{};
-        targetSum -= firstLeaf(root, lifo);
+        targetSum -= initLeaf(root, lifo);
 
         while (!empty(lifo)) {
             if (targetSum == 0)
