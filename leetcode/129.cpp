@@ -19,18 +19,18 @@ private:
     static constexpr int initLeaf(
         const TreeNode *treeNode,
         Stack<const TreeNode *> &lifo,
-        int sum
+        int number
     ) noexcept {
         do {
             lifo.push(treeNode);
-            sum = sum * radix + treeNode->val;
+            number = number * radix + treeNode->val;
             if (treeNode->left)
                 treeNode = treeNode->left;
             else
                 treeNode = treeNode->right;
         } while (treeNode);
 
-        return sum;
+        return number;
     }
 
     static constexpr bool hasRightSibling(
@@ -42,29 +42,29 @@ private:
 
     static constexpr int nextLeaf(
         Stack<const TreeNode *> &lifo,
-        int sum
+        int number
     ) noexcept {
         const TreeNode *treeNode{};
         do {
             treeNode = lifo.top();
             lifo.pop();
-            sum /= radix;
+            number /= radix;
         } while (!empty(lifo) && !hasRightSibling(treeNode, lifo.top()));
 
         if (!empty(lifo))
-            sum = initLeaf(lifo.top()->right, lifo, sum);
+            number = initLeaf(lifo.top()->right, lifo, number);
 
-        return sum;
+        return number;
     }
 
 public:
     constexpr int sumNumbers(const TreeNode * const root) const noexcept {
         Stack<const TreeNode *> lifo{};
-        auto sum{initLeaf(root, lifo, 0)}, result{sum};
+        auto number{initLeaf(root, lifo, 0)}, result{number};
 
         do {
-            sum = nextLeaf(lifo, sum);
-            result += sum;
+            number = nextLeaf(lifo, number);
+            result += number;
         } while (!empty(lifo));
 
         return result;
