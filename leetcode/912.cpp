@@ -211,10 +211,8 @@ private:
         const Iter last,
         const Merger &merger
     ) noexcept {
-        using Difference = iterator_traits<Iter>::difference_type;
-
         const auto length{distance(first, last)}, half{length >> 1};
-        Difference step{1};
+        Difference<Iter> step{1};
         while (step < length) {
             auto n{length};
             auto iter{first};
