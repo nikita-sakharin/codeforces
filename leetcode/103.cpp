@@ -23,7 +23,7 @@ public:
 
         do {
             const auto length{size(fifo)},
-                mask{-(result.size() & 1)}, shift{length & mask};
+                mask{-(result.size() & 0X1)}, shift{length & mask};
             auto &level{result.emplace_back()};
             level.resize(length);
             for (auto i{0UZ}; i < length; ++i) {
