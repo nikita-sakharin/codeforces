@@ -15,8 +15,8 @@ public:
         auto result{0UZ};
         auto odd{false};
         for (const auto c : count) {
-            result += c & ~1UZ;
-            odd = odd | (c & 1);
+            result += c & ~0X1UZ;
+            odd = odd | (c & 0X1);
         }
 
         return int(result) + odd;
