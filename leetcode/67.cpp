@@ -11,7 +11,7 @@ public:
                 left{*iterA - '0'},
                 right{iterB != lastB ? *iterB++ - '0' : 0},
                 sum{carry + left + right};
-            *iterA = '0' + (sum & 1);
+            *iterA = '0' + (sum & 0X1);
             carry = sum >> 1;
         }
         if (carry)
