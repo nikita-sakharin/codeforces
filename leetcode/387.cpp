@@ -10,16 +10,17 @@ private:
 
         list<Iter> unique{};
         unordered_map<Value, ConstIterator> index{};
-        while (first != last) {
+        const auto uniqueLast{cend(unique)};
+        const auto indexLast{cend(index)};
+        for (; first != last; ++first) {
             const auto &value{*first};
-            if (const auto iter{index.find(value)}; iter == cend(index)) {
+            if (const auto iter{index.find(value)}; iter == indexLast) {
                 unique.push_back(first);
-                index.emplace(value, --cend(unique));
-            } else if (iter->second != cend(unique)) {
+                index.emplace(value, prev(uniqueLast));
+            } else if (iter->second != uniqueLast) {
                 unique.erase(iter->second);
-                iter->second = cend(unique);
+                iter->second = uniqueLast;
             }
-            ++first;
         }
 
         return empty(unique) ? last : unique.front();
