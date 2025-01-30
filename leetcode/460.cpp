@@ -8,15 +8,16 @@ private:
         uint frequency{0};
     };
 
-    using ListIterator = list<Node>::iterator;
-    using UnorderedMapIterator = unordered_map<uint, list<Node>>::iterator;
+    using Bucket = list<Node>;
+    using ListIterator = Bucket::iterator;
+    using UnorderedMapIterator = unordered_map<uint, Bucket>::iterator;
 
-    unordered_map<uint, list<Node>> frequencies{};
+    unordered_map<uint, Bucket> frequencies{};
     unordered_map<int, ListIterator> index{};
     const size_t capacity{0};
     uint minFrequency{0};
 
-    constexpr list<Node> &bucket(const UnorderedMapIterator iter) noexcept {
+    constexpr Bucket &bucket(const UnorderedMapIterator iter) noexcept {
         auto &elements{iter->second};
         if (minFrequency == 1)
             return elements;
