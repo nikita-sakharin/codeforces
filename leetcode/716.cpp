@@ -11,7 +11,7 @@ public:
         index[value].push(--cend(values));
     }
 
-    inline int pop() noexcept {
+    constexpr int pop() noexcept {
         const auto value{values.back()};
         const auto iter{index.find(value)};
         auto &iterStack{iter->second};
@@ -27,11 +27,11 @@ public:
         return values.back();
     }
 
-    inline int peekMax() const noexcept {
+    constexpr int peekMax() const noexcept {
         return (--cend(index))->first;
     }
 
-    inline int popMax() noexcept {
+    constexpr int popMax() noexcept {
         const auto iter{--end(index)};
         const auto value{iter->first};
         auto &iterStack{iter->second};
