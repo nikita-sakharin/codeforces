@@ -15,6 +15,23 @@ private:
     const size_t capacity{0};
     uint minFrequency{0};
 
+    constexpr list<Node> &bucket(
+        const unordered_map<uint, list<Node>>::iterator iter
+    ) noexcept {
+        auto &elements{iter->second};
+        if (minFrequency == 1)
+            return elements;
+
+        if (size(elements) == 1 && !frequencies.contains(1)) {
+            auto nodeFrequencies{frequencies.extract(iter)};
+            nodeFrequencies.key() = 1;
+            frequencies.insert(move(nodeFrequencies));
+            return elements;
+        }
+
+        return frequencies[1];
+    }
+
     inline int &get(const Iterator nodeIter) noexcept {
         auto &[unused, value, frequency]{*nodeIter};
         const auto iter{frequencies.find(frequency)};
@@ -48,8 +65,7 @@ public:
 
         if (size(index) >= capacity) {
             const auto iter{frequencies.find(minFrequency)};
-            auto &elements{iter->second},
-                &newElements{minFrequency == 1 ? elements : frequencies[1]};
+            auto &elements{iter->second}, &newElements{bucket(iter)};
             auto node{index.extract(elements.front().key)};
             node.key() = key;
             index.insert(move(node));
