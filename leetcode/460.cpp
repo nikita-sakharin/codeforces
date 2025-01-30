@@ -32,7 +32,7 @@ private:
         return frequencies[1];
     }
 
-    inline int &get(const ListIterator nodeIter) noexcept {
+    constexpr int &get(const ListIterator nodeIter) noexcept {
         auto &[unused, value, frequency]{*nodeIter};
         const auto iter{frequencies.find(frequency)};
         auto &elements{iter->second}, &newElements{frequencies[frequency + 1]};
@@ -50,7 +50,7 @@ private:
 public:
     constexpr LFUCache(const int capacity) noexcept : capacity(capacity) {}
 
-    inline int get(const int key) noexcept {
+    constexpr int get(const int key) noexcept {
         const auto iter{index.find(key)};
         if (iter == cend(index))
             return -1;
@@ -58,7 +58,7 @@ public:
         return get(iter->second);
     }
 
-    inline void put(const int key, const int value) noexcept {
+    constexpr void put(const int key, const int value) noexcept {
         const auto iter{index.find(key)};
         if (iter != cend(index)) {
             get(iter->second) = value;
