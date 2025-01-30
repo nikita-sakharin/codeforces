@@ -1,13 +1,14 @@
 class LFUCache final {
 private:
     using uint = unsigned;
-    using Iterator = list<Node>::iterator;
 
     class Node final {
     public:
         int key{0}, value{0};
         uint frequency{0};
     };
+
+    using Iterator = list<Node>::iterator;
 
     unordered_map<uint, list<Node>> frequencies{};
     unordered_map<int, Iterator> index{};
