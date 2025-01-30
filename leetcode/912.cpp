@@ -74,7 +74,7 @@ private:
     template<class Iter, class Container = deque<Value<Iter>>>
     class DefaultMerger final {
     private:
-        mutable queue<Value<Iter>, Container> buffer{};
+        queue<Value<Iter>, Container> buffer{};
 
         constexpr void operator()(
             Iter first,
@@ -139,7 +139,7 @@ private:
     template<class Iter, class Container = vector<tuple<Iter, Iter, Iter>>>
     class RotateMerger final {
     private:
-        mutable stack<tuple<Iter, Iter, Iter>, Container> lifo{};
+        stack<tuple<Iter, Iter, Iter>, Container> lifo{};
 
     public:
         constexpr void operator()(
@@ -176,7 +176,7 @@ private:
     template<class Iter, class Container = vector<tuple<Iter, Iter, Iter>>>
     class RotatePartitionMerger final {
     private:
-        mutable stack<tuple<Iter, Iter, Iter>, Container> lifo{};
+        stack<tuple<Iter, Iter, Iter>, Container> lifo{};
 
     public:
         constexpr void operator()(
@@ -209,7 +209,7 @@ private:
     static constexpr void mergeSort(
         const Iter first,
         const Iter last,
-        const Merger &merger
+        Merger &&merger
     ) noexcept {
         const auto length{distance(first, last)}, half{length >> 1};
         Difference<Iter> step{1};
