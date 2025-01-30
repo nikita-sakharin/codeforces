@@ -1,6 +1,7 @@
 class LFUCache final {
 private:
     using uint = unsigned;
+    using Iterator = list<Node>::iterator;
 
     class Node final {
     public:
@@ -8,12 +9,12 @@ private:
         uint frequency{0};
     };
 
-    unordered_map<int, list<Node>::iterator> index{};
     unordered_map<uint, list<Node>> frequencies{};
+    unordered_map<int, Iterator> index{};
     const size_t capacity{0};
     uint minFrequency{0};
 
-    inline int &get(const list<Node>::iterator nodeIter) noexcept {
+    inline int &get(const Iterator nodeIter) noexcept {
         auto &[unused, value, frequency]{*nodeIter};
         const auto iter{frequencies.find(frequency)};
         auto &elements{iter->second}, &newElements{frequencies[frequency + 1]};
