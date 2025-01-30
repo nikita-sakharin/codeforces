@@ -48,7 +48,7 @@ private:
     }
 
 public:
-    inline LFUCache(const int capacity) noexcept : capacity(capacity) {}
+    constexpr LFUCache(const int capacity) noexcept : capacity(capacity) {}
 
     inline int get(const int key) noexcept {
         const auto iter{index.find(key)};
