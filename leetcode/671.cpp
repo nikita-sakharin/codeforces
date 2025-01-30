@@ -15,13 +15,13 @@ private:
     using Stack = stack<T, vector<T>>;
 
     template<class T>
-    static constexpr auto min{numeric_limits<T>::min()};
+    static constexpr auto minV{numeric_limits<T>::min()};
 
 public:
     constexpr int findSecondMinimumValue(
         const TreeNode * const root
     ) const noexcept {
-        auto result{min<int>};
+        auto result{minV<int>};
         Stack<const TreeNode *> lifo{};
         lifo.push(root);
 
@@ -38,6 +38,6 @@ public:
             }
         } while (!empty(lifo));
 
-        return result == min<int> ? -1 : -result;
+        return result == minV<int> ? -1 : -result;
     }
 };
