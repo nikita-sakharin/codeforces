@@ -8,16 +8,15 @@ private:
         uint frequency{0};
     };
 
-    using Iterator = list<Node>::iterator;
+    using ListIterator = list<Node>::iterator;
+    using UnorderedMapIterator = unordered_map<uint, list<Node>>::iterator;
 
     unordered_map<uint, list<Node>> frequencies{};
-    unordered_map<int, Iterator> index{};
+    unordered_map<int, ListIterator> index{};
     const size_t capacity{0};
     uint minFrequency{0};
 
-    constexpr list<Node> &bucket(
-        const unordered_map<uint, list<Node>>::iterator iter
-    ) noexcept {
+    constexpr list<Node> &bucket(const UnorderedMapIterator iter) noexcept {
         auto &elements{iter->second};
         if (minFrequency == 1)
             return elements;
@@ -32,7 +31,7 @@ private:
         return frequencies[1];
     }
 
-    inline int &get(const Iterator nodeIter) noexcept {
+    inline int &get(const ListIterator nodeIter) noexcept {
         auto &[unused, value, frequency]{*nodeIter};
         const auto iter{frequencies.find(frequency)};
         auto &elements{iter->second}, &newElements{frequencies[frequency + 1]};
