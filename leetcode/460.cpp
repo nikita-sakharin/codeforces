@@ -43,6 +43,7 @@ private:
                 minFrequency = frequency + 1;
         }
         ++frequency;
+
         return value;
     }
 
@@ -53,6 +54,7 @@ public:
         const auto iter{index.find(key)};
         if (iter == cend(index))
             return -1;
+
         return get(iter->second);
     }
 
