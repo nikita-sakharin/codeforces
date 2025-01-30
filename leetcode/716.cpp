@@ -1,7 +1,9 @@
 class MaxStack final {
 private:
-    map<int, stack<list<int>::const_iterator>> index{};
+    using ConstIterator = list<int>::const_iterator;
+
     list<int> values{};
+    map<int, stack<ConstIterator>> index{};
 
 public:
     constexpr void push(const int value) noexcept {
@@ -17,6 +19,7 @@ public:
         iterStack.pop();
         if (empty(iterStack))
             index.erase(iter);
+
         return value;
     }
 
@@ -36,6 +39,7 @@ public:
         iterStack.pop();
         if (empty(iterStack))
             index.erase(iter);
+
         return value;
     }
 };
