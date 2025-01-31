@@ -81,7 +81,7 @@ private:
             const Iter middle,
             const Iter last,
             const forward_iterator_tag
-        ) const noexcept {
+        ) noexcept {
             if (first == middle || middle == last)
                 return;
 
@@ -107,7 +107,7 @@ private:
             const Iter middle,
             const Iter last,
             const random_access_iterator_tag
-        ) const noexcept {
+        ) noexcept {
             if (first == middle || middle == last)
                 return;
 
@@ -131,7 +131,7 @@ private:
             Iter first,
             const Iter middle,
             const Iter last
-        ) const noexcept {
+        ) noexcept {
             (*this)(first, middle, last, category<Iter>);
         }
     };
@@ -146,7 +146,7 @@ private:
             Iter first,
             Iter middle,
             Iter last
-        ) const noexcept {
+        ) noexcept {
             lifo.emplace(first, middle, last);
             do {
                 tie(first, middle, last) = lifo.top();
@@ -183,7 +183,7 @@ private:
             Iter first,
             Iter middle,
             Iter last
-        ) const noexcept {
+        ) noexcept {
             lifo.emplace(first, middle, last);
             do {
                 tie(first, middle, last) = lifo.top();
