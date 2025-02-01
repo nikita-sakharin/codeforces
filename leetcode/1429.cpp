@@ -19,7 +19,7 @@ public:
         const auto uniqueLast{cend(unique)};
         const auto [iter, inserted](index.try_emplace(value, uniqueLast));
         if (inserted) {
-            unique.push_back(first);
+            unique.push_back(value);
             --iter->second;
         } else if (iter->second != uniqueLast) {
             unique.erase(iter->second);
