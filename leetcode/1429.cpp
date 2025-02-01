@@ -12,7 +12,7 @@ public:
     }
 
     constexpr int showFirstUnique() const noexcept {
-        return unique.front();
+        return empty(unique) ? -1 : unique.front();
     }
 
     constexpr void add(const int value) noexcept {
