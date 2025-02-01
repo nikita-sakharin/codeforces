@@ -11,12 +11,11 @@ private:
         list<Iter> unique{};
         unordered_map<Value, ConstIterator> index{};
         const auto uniqueLast{cend(unique)};
-        const auto indexLast{cend(index)};
         for (; first != last; ++first) {
-            const auto &value{*first};
-            if (const auto iter{index.find(value)}; iter == indexLast) {
+            const auto [iter, inserted](index.try_emplace(*first, uniqueLast));
+            if (inserted) {
                 unique.push_back(first);
-                index.emplace(value, prev(uniqueLast));
+                --iter->second;
             } else if (iter->second != uniqueLast) {
                 unique.erase(iter->second);
                 iter->second = uniqueLast;
@@ -30,6 +29,7 @@ public:
     constexpr int firstUniqChar(const string &s) const noexcept {
         const auto first{cbegin(s)}, last{cend(s)},
             iter{firstUnique(first, last)};
+
         return iter == last ? -1 : int(iter - first);
     }
 };
