@@ -4,7 +4,7 @@ private:
     static constexpr void findPalindromes(
         const Iter first,
         const Iter last,
-        Func func
+        Func &&func
     ) noexcept {
         using Difference = iterator_traits<Iter>::difference_type;
 
