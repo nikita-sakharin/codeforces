@@ -1,5 +1,7 @@
 class Solution final {
 private:
+    static constexpr auto dims{2UZ};
+
     struct Hash final {
     private:
         using llong = long long;
@@ -12,8 +14,8 @@ private:
         static constexpr hash<llong> hashCode{};
 
     public:
-        constexpr size_t operator()(const pair<int, int> &key) const noexcept {
-            return hashCode(llong{key.first} << shift ^ key.second);
+        constexpr size_t operator()(const array<int, dims> &key) const noexcept {
+            return hashCode(llong{key[0]} << shift ^ key[1]);
         }
     };
 
@@ -28,12 +30,12 @@ public:
         const vector<vector<int>> &points
     ) const noexcept {
         auto minX{maxV<int>}, maxX{minV<int>};
-        unordered_set<pair<int, int>, Hash> pointSet{};
+        unordered_set<array<int, dims>, Hash> pointSet{};
         for (const auto &point : points) {
             const auto x{point[0]};
             minX = min(minX, x);
             maxX = max(maxX, x);
-            pointSet.emplace(x, point[1]);
+            pointSet.insert({x, point[1]});
         }
 
         const auto doubleMiddle{minX + maxX};
