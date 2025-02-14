@@ -12,7 +12,9 @@ private:
         static constexpr hash<intmax_t> hasher{};
 
     public:
-        constexpr size_t operator()(const array<int, dims> &key) const noexcept {
+        constexpr size_t operator()(
+            const array<int, dims> &key
+        ) const noexcept {
             return hasher(intmax_t{key[1]} << shift ^ key[0]);
         }
     };
