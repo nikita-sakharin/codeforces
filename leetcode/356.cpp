@@ -4,18 +4,16 @@ private:
 
     struct Hash final {
     private:
-        using llong = long long;
-
         template<class T>
         static constexpr auto digits{numeric_limits<T>::digits};
 
         static constexpr auto
-            shift{min(digits<int> + 1, digits<llong> - digits<int>)};
-        static constexpr hash<llong> hashCode{};
+            shift{min(digits<int> + 1, digits<intmax_t> - digits<int>)};
+        static constexpr hash<intmax_t> hashCode{};
 
     public:
         constexpr size_t operator()(const array<int, dims> &key) const noexcept {
-            return hashCode(llong{key[0]} << shift ^ key[1]);
+            return hashCode(intmax_t{key[0]} << shift ^ key[1]);
         }
     };
 
