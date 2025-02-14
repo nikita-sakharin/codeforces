@@ -13,7 +13,7 @@ private:
 
     public:
         constexpr size_t operator()(const array<int, dims> &key) const noexcept {
-            return hashCode(intmax_t{key[0]} << shift ^ key[1]);
+            return hashCode(intmax_t{key[1]} << shift ^ key[0]);
         }
     };
 
