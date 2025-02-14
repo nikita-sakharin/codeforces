@@ -9,11 +9,11 @@ private:
 
         static constexpr auto
             shift{min(digits<int> + 1, digits<intmax_t> - digits<int>)};
-        static constexpr hash<intmax_t> hashCode{};
+        static constexpr hash<intmax_t> hasher{};
 
     public:
         constexpr size_t operator()(const array<int, dims> &key) const noexcept {
-            return hashCode(intmax_t{key[1]} << shift ^ key[0]);
+            return hasher(intmax_t{key[1]} << shift ^ key[0]);
         }
     };
 
