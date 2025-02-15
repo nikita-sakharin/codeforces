@@ -15,7 +15,8 @@ private:
         while (value % divider == T{0}) {
             value /= divider;
             ++result;
-        };
+        }
+
         return {value, result};
     }
 
@@ -65,6 +66,7 @@ public:
         auto result{0};
         for (auto i{0UZ}; i < length; ++i)
             result = (result + nums[i] * row[i]) % int{mod};
+
         return result;
     }
 };
