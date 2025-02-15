@@ -5,13 +5,13 @@ public:
             return addBinary(b, a);
 
         auto carry{false};
-        const auto lastA{crend(a)}, lastB{crend(b)};
-        for (auto iterA{rbegin(a)}, iterB{rbegin(b)}; iterA != lastA; ++iterA) {
+        const auto aLast{crend(a)}, bLast{crend(b)};
+        for (auto aIter{rbegin(a)}, bIter{rbegin(b)}; aIter != aLast; ++aIter) {
             const auto
-                left{*iterA - '0'},
-                right{iterB != lastB ? *iterB++ - '0' : 0},
+                left{*aIter - '0'},
+                right{bIter != bLast ? *bIter++ - '0' : 0},
                 sum{carry + left + right};
-            *iterA = '0' + (sum & 0X1);
+            *aIter = '0' + (sum & 0X1);
             carry = sum >> 1;
         }
         if (carry)
