@@ -4,10 +4,12 @@ private:
 
     struct Hash final {
     private:
+        using uint = unsigned;
+
         template<class T>
         static constexpr auto digits{numeric_limits<T>::digits};
 
-        static constexpr auto
+        static constexpr uint
             shift{min(digits<int> + 1, digits<intmax_t> - digits<int>)};
         static constexpr hash<intmax_t> hasher{};
 
