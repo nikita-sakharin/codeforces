@@ -1,6 +1,6 @@
 class Solution final {
 private:
-    static constexpr auto dims{2UZ};
+    static constexpr auto dim{2UZ};
 
     struct Hash final {
     private:
@@ -15,7 +15,7 @@ private:
 
     public:
         constexpr size_t operator()(
-            const array<int, dims> &key
+            const array<int, dim> &key
         ) const noexcept {
             return hasher(intmax_t{key[1]} << shift ^ key[0]);
         }
@@ -32,7 +32,7 @@ public:
         const vector<vector<int>> &points
     ) const noexcept {
         auto minX{maxV<int>}, maxX{minV<int>};
-        unordered_set<array<int, dims>, Hash> pointSet{};
+        unordered_set<array<int, dim>, Hash> pointSet{};
         for (const auto &point : points) {
             const auto x{point[0]};
             minX = min(minX, x);
