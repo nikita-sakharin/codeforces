@@ -14,29 +14,32 @@ private:
             listNode = listNode->next;
             ++length;
         }
+
         return length;
     }
 
     static constexpr ListNode *nthNode(ListNode *listNode, size_t n) noexcept {
         for (; n != 0; --n)
             listNode = listNode->next;
+
         return listNode;
     }
 
 public:
     constexpr ListNode *getIntersectionNode(
-        ListNode *headA,
-        ListNode *headB
+        ListNode *aHead,
+        ListNode *bHead
     ) const noexcept {
-        const auto sizeA{listSize(headA)}, sizeB{listSize(headB)};
-        if (sizeA < sizeB)
-            headB = nthNode(headB, sizeB - sizeA);
-        else if (sizeB < sizeA)
-            headA = nthNode(headA, sizeA - sizeB);
-        while (headA != headB) {
-            headA = headA->next;
-            headB = headB->next;
+        const auto aSize{listSize(aHead)}, bSize{listSize(bHead)};
+        if (aSize < bSize)
+            bHead = nthNode(bHead, bSize - aSize);
+        else if (bSize < aSize)
+            aHead = nthNode(aHead, aSize - bSize);
+        while (aHead != bHead) {
+            aHead = aHead->next;
+            bHead = bHead->next;
         }
-        return headA;
+
+        return aHead;
     }
 };
